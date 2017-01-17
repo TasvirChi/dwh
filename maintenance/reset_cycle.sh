@@ -26,7 +26,7 @@ do	case "$o" in
 	esac
 done
 
-SQL="UPDATE kalturadw_ds.cycles c, kalturadw_ds.processes p set c.status = 'GENERATED' where c.process_id = p.id and status='$CYCLE_STATUS' and (process_name='$PROCESS_NAME' or 'default'='$PROCESS_NAME') and (cycle_id='$CYCLE_ID' or 'default'='$CYCLE_ID')"
+SQL="UPDATE borhandw_ds.cycles c, borhandw_ds.processes p set c.status = 'GENERATED' where c.process_id = p.id and status='$CYCLE_STATUS' and (process_name='$PROCESS_NAME' or 'default'='$PROCESS_NAME') and (cycle_id='$CYCLE_ID' or 'default'='$CYCLE_ID')"
 
 
 mysql -u$USER -p$PASSWORD -h$HOSTNAME -P$PORT -e "$SQL"

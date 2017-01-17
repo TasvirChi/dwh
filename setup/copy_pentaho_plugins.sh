@@ -1,5 +1,5 @@
 #!/bin/bash
-. /etc/kaltura.d/system.ini
+. /etc/borhan.d/system.ini
 
 KITCHEN=$BASE_DIR/bin/pentaho
 ROOT_DIR=$BASE_DIR/dwh
@@ -18,6 +18,6 @@ rsync -av $ROOT_DIR/pentaho-plugins/MappingFieldRunner42/MappingFieldRunner $KIT
 rsync -av $ROOT_DIR/pentaho-plugins/GetFTPFileNames42/GetFTPFileNames $KITCHEN/plugins/steps/
 rsync -av $ROOT_DIR/pentaho-plugins/FetchFTPFile42/FetchFTPFile $KITCHEN/plugins/steps/
 rsync -av $ROOT_DIR/pentaho-plugins/DimLookup42/DimLookup $KITCHEN/plugins/steps/
-chown -R kaltura.kaltura $ROOT_DIR/pentaho-plugins/resources
+chown -R borhan.borhan $ROOT_DIR/pentaho-plugins/resources
 rsync -avpog $ROOT_DIR/pentaho-plugins/resources/* $KITCHEN/libext/
-chown -R kaltura.kaltura $KITCHEN/plugins
+chown -R borhan.borhan $KITCHEN/plugins

@@ -1,4 +1,4 @@
-﻿INSERT INTO kalturadw_ds.staging_areas
+﻿INSERT INTO borhandw_ds.staging_areas
         (id,
         process_id,
         source_table,

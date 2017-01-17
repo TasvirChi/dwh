@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 
@@ -14,10 +14,10 @@ BEGIN
 	
 	SELECT aggr_table, aggr_id_field, aggr_join_stmt
 	INTO  v_aggr_table, v_aggr_id_field, v_aggr_join_stmt
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;
-	-- SET aggr_table = kalturadw.resolve_aggr_name(aggr_name,'aggr_table');
-	-- SET aggr_id_field = kalturadw.resolve_aggr_name(aggr_name,'aggr_id_field');
+	-- SET aggr_table = borhandw.resolve_aggr_name(aggr_name,'aggr_table');
+	-- SET aggr_id_field = borhandw.resolve_aggr_name(aggr_name,'aggr_id_field');
 	
 	IF ( v_aggr_id_field <> "" ) THEN
 		SET v_aggr_id_field_str = CONCAT (',',v_aggr_id_field);
@@ -31,7 +31,7 @@ BEGIN
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
 	
-	SET @s = CONCAT('INSERT INTO kalturadw.',v_aggr_table,'
+	SET @s = CONCAT('INSERT INTO borhandw.',v_aggr_table,'
 		(partner_id
 		,date_id 
 		',v_aggr_id_field_str,' 
@@ -161,7 +161,7 @@ BEGIN
 			COUNT(IF(ev.event_type_id = 38, 1,NULL)) count_postroll_25 	, 
 			COUNT(IF(ev.event_type_id = 39, 1,NULL)) count_postroll_50 	, 
 			COUNT(IF(ev.event_type_id = 40, 1,NULL)) count_postroll_75 	
-		FROM kalturadw.dwh_fact_events as ev ',v_aggr_join_stmt,' 
+		FROM borhandw.dwh_fact_events as ev ',v_aggr_join_stmt,' 
 		WHERE ev.event_type_id BETWEEN 2 AND 40 /* processed event types %*/
 			AND ev.event_date_id = DATE(''',p_date_val,''')*1
 			AND ev.entry_media_type_id IN (1,5,6)  /* allow only video & audio & mix */

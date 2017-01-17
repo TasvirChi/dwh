@@ -1,4 +1,4 @@
-drop database kalturadw;
-drop database kalturadw_bisources;
-drop database kalturadw_ds;
-drop database kalturalog;
+drop database borhandw;
+drop database borhandw_bisources;
+drop database borhandw_ds;
+drop database borhanlog;

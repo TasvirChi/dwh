@@ -1,8 +1,8 @@
-USE `kalturadw`;
+USE `borhandw`;
 
-DROP TABLE IF EXISTS kalturadw.`dwh_hourly_events_devices`;
+DROP TABLE IF EXISTS borhandw.`dwh_hourly_events_devices`;
 
-CREATE TABLE kalturadw.`dwh_hourly_events_devices` (
+CREATE TABLE borhandw.`dwh_hourly_events_devices` (
   `partner_id` INT NOT NULL DEFAULT -1,
   `date_id` INT NOT NULL,
   `hour_id` INT NOT NULL,

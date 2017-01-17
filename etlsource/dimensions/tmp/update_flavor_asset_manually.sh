@@ -1,5 +1,5 @@
 #!/bin/bash
-. /etc/kaltura.d/system.ini
+. /etc/borhan.d/system.ini
 
 $BASE_DIR/bin/pentaho/kitchen.sh /file $BASE_DIR/dwh/etlsource/dimensions/tmp/update_flavor_asset_manually.kjb -param:ManualStartUpdateDaysInterval=550 -param:ManualEndUpdateDaysInterval=499 > /tmp/flavor_asset_sync_log.log 2>&1
 $BASE_DIR/bin/pentaho/kitchen.sh /file $BASE_DIR/dwh/etlsource/dimensions/tmp/update_flavor_asset_manually.kjb -param:ManualStartUpdateDaysInterval=500 -param:ManualEndUpdateDaysInterval=449 >> /tmp/flavor_asset_sync_log.log 2>&1

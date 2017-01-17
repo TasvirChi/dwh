@@ -1,5 +1,5 @@
-﻿DROP TABLE IF EXISTS `kalturadw_ds`.`fms_incomplete_sessions`;
-CREATE TABLE  `kalturadw_ds`.`fms_incomplete_sessions` (
+﻿DROP TABLE IF EXISTS `borhandw_ds`.`fms_incomplete_sessions`;
+CREATE TABLE  `borhandw_ds`.`fms_incomplete_sessions` (
   `session_id` varchar(20) DEFAULT NULL,
   `session_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,
@@ -11,8 +11,8 @@ CREATE TABLE  `kalturadw_ds`.`fms_incomplete_sessions` (
   `partner_id` int(10) unsigned DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-DROP TABLE IF EXISTS `kalturadw_ds`.`fms_stale_sessions`;
-CREATE TABLE  `kalturadw_ds`.`fms_stale_sessions` (
+DROP TABLE IF EXISTS `borhandw_ds`.`fms_stale_sessions`;
+CREATE TABLE  `borhandw_ds`.`fms_stale_sessions` (
   `session_id` varchar(20) DEFAULT NULL,
   `session_time` datetime DEFAULT NULL,
   `last_update_time` datetime DEFAULT NULL,
@@ -27,8 +27,8 @@ CREATE TABLE  `kalturadw_ds`.`fms_stale_sessions` (
 
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`fms_sessionize`$$
-CREATE PROCEDURE  `kalturadw_ds`.`fms_sessionize`(
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`fms_sessionize`$$
+CREATE PROCEDURE  `borhandw_ds`.`fms_sessionize`(
   partition_id INTEGER)
 BEGIN
   DECLARE SESSION_DATE_IDS VARCHAR(4000);
@@ -78,7 +78,7 @@ BEGIN
     sum(if(t.event_type='disconnect',server_to_client_bytes,0)) dis_sc_bytes,
     max(partner_id) partner_id # assuming there a max of 1 partnerid per session (i.e. no switching between partner in an fms session)
   from ods_fms_session_events e
- inner join kalturadw.dwh_dim_fms_event_type t on e.event_type_id = t.event_type_id
+ inner join borhandw.dwh_dim_fms_event_type t on e.event_type_id = t.event_type_id
   where file_id = partition_id
   group by session_id;
 
@@ -134,7 +134,7 @@ BEGIN
         greatest(session_time,updated_time) < FMS_STALE_SESSION_PURGE;
 
   # 7. add all new partner activities to dwh fact table
-  insert into kalturadw.dwh_fact_fms_sessions (session_id,session_time,session_date_id,session_partner_id,total_bytes)
+  insert into borhandw.dwh_fact_fms_sessions (session_id,session_time,session_date_id,session_partner_id,total_bytes)
   select session_id,session_time,session_date_id,session_partner_id,total_bytes
   from ods_temp_fms_sessions;
 
@@ -150,7 +150,7 @@ END $$
 
 DELIMITER ;
 
-use kalturadw_ds;
+use borhandw_ds;
 
 DROP TABLE IF EXISTS ods_temp_fms_session_aggr;
 DROP TABLE IF EXISTS ods_temp_fms_sessions;
@@ -183,8 +183,8 @@ select session_id,max(event_time),max(event_date_id),  #regarding the "max" aggr
   sum(if(t.event_type='disconnect',client_to_server_bytes,0)) dis_cs_bytes,
   sum(if(t.event_type='disconnect',server_to_client_bytes,0)) dis_sc_bytes,
   max(partner_id) partner_id # assuming there a max of 1 partnerid per session (i.e. no switching between partner in an fms session)
-from kalturadw.dwh_fact_fms_session_events e
-inner join kalturadw.dwh_dim_fms_event_type t on e.event_type_id = t.event_type_id
+from borhandw.dwh_fact_fms_session_events e
+inner join borhandw.dwh_dim_fms_event_type t on e.event_type_id = t.event_type_id
 where file_id = partition_id
 group by session_id;
 
@@ -240,7 +240,7 @@ where (partner_id is not null and dis_cs_bytes >0 and con_cs_bytes > 0) or
       greatest(session_time,updated_time) < FMS_STALE_SESSION_PURGE;
 
 # 7. add all new partner activities to dwh fact table
-insert into kalturadw.dwh_fact_fms_sessions (session_id,session_time,session_date_id,session_partner_id,total_bytes)
+insert into borhandw.dwh_fact_fms_sessions (session_id,session_time,session_date_id,session_partner_id,total_bytes)
 select session_id,session_time,session_date_id,session_partner_id,total_bytes
 from ods_temp_fms_sessions;
 

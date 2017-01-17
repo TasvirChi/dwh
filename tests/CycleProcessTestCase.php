@@ -3,9 +3,9 @@ require_once 'Configuration.php';
 require_once 'KettleRunner.php';
 require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
-require_once 'KalturaTestCase.php';
+require_once 'BorhanTestCase.php';
 
-abstract class CycleProcessTestCase extends KalturaTestCase
+abstract class CycleProcessTestCase extends BorhanTestCase
 {
 	const GENERATE_PARAM_FETCH_WILD_CARD = "FetchWildcard";
 	const GENERATE_PARAM_FETCH_LOGS_DIR = "FetchLogsDir";
@@ -133,7 +133,7 @@ abstract class CycleProcessTestCase extends KalturaTestCase
                 {
 			foreach (array_keys($dsTablesToFactTables) as $dsTable) 
 			{
-				$ds_lines[$fileID][$dsTable] = DWHInspector::countRows('kalturadw_ds.'.$dsTable,$fileID);
+				$ds_lines[$fileID][$dsTable] = DWHInspector::countRows('borhandw_ds.'.$dsTable,$fileID);
 			}
 		}
 	
@@ -151,9 +151,9 @@ abstract class CycleProcessTestCase extends KalturaTestCase
 			foreach ($dsTablesToFactTables as $dsTable => $factTable)
                         {
                         	// compare rows in ds_events and dwh_fact_events
-                        	$this->assertEquals($ds_lines[$fileID][$dsTable], DWHInspector::countRows('kalturadw.'.$factTable,$fileID));
+                        	$this->assertEquals($ds_lines[$fileID][$dsTable], DWHInspector::countRows('borhandw.'.$factTable,$fileID));
                         	// make sure ds_events was emptied
-                        	$this->assertEquals(0,DWHInspector::countRows('kalturadw_ds.'.$dsTable,$fileID));
+                        	$this->assertEquals(0,DWHInspector::countRows('borhandw_ds.'.$dsTable,$fileID));
 			}
                 }
 
@@ -168,7 +168,7 @@ abstract class CycleProcessTestCase extends KalturaTestCase
 					foreach ($postTransferAggregationTypes as $aggrType)
 					{
 						$filter = 'aggr_name = \'' . $aggrType . '\' and date_id = ' . $dateID . ' and hour_id = '. $hourID . ' and ifnull(start_time,date(19700101)) < data_insert_time';
-						$rowExists = DWHInspector::rowExists('kalturadw.aggr_managment',$filter);
+						$rowExists = DWHInspector::rowExists('borhandw.aggr_managment',$filter);
 						$this->assertEquals($dateID >= $minDateID, $rowExists, "Row Date: $dateID $hourID $aggrType . Min Date: $minDateID");
 					}
 				}

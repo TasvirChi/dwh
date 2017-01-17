@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 INSERT INTO ri_mapping (table_name, column_name, date_id_column_name, reference_table, reference_column, perform_check) VALUES ('dwh_dim_conversion_profile', 'creation_mode', 'dwh_update_date','dwh_dim_creation_mode','creation_mode_id',1);
 INSERT INTO ri_mapping (table_name, column_name, date_id_column_name, reference_table, reference_column, perform_check) VALUES ('dwh_dim_conversion_profile', 'partner_id', 'dwh_update_date','dwh_dim_partners','partner_id',1);

@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_fms_session_events_innodb`;
-CREATE TABLE `kalturadw`.`dwh_fact_fms_session_events_innodb` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_fact_fms_session_events_innodb`;
+CREATE TABLE `borhandw`.`dwh_fact_fms_session_events_innodb` (
   `file_id` INT(11) UNSIGNED NOT NULL,
   `event_type_id` TINYINT(3) UNSIGNED NOT NULL,
   `event_category_id` TINYINT(3) UNSIGNED NOT NULL,
@@ -60,4 +60,4 @@ PARTITION BY RANGE (event_date_id)
  PARTITION p_20101130 VALUES LESS THAN (20101201) ENGINE = INNODB,
  PARTITION p_20101231 VALUES LESS THAN (20110101) ENGINE = INNODB);
 
-call kalturadw.add_daily_partition_for_table('dwh_fact_fms_session_events');
+call borhandw.add_daily_partition_for_table('dwh_fact_fms_session_events');

@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_fms_sessions_innodb`;
-CREATE TABLE `kalturadw`.`dwh_fact_fms_sessions_innodb` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_fact_fms_sessions_innodb`;
+CREATE TABLE `borhandw`.`dwh_fact_fms_sessions_innodb` (
   `session_id` VARCHAR(20) NOT NULL,
   `session_time` DATETIME NOT NULL,
   `session_date_id` INT(11) UNSIGNED DEFAULT NULL,
@@ -19,4 +19,4 @@ CREATE TABLE `kalturadw`.`dwh_fact_fms_sessions_innodb` (
  PARTITION p_20101031 VALUES LESS THAN (20101101) ENGINE = INNODB,
  PARTITION p_20101130 VALUES LESS THAN (20101201) ENGINE = INNODB,
  PARTITION p_20101231 VALUES LESS THAN (20110101) ENGINE = INNODB);
-call kalturadw.add_daily_partition_for_table('dwh_fact_fms_sessions');
+call borhandw.add_daily_partition_for_table('dwh_fact_fms_sessions');

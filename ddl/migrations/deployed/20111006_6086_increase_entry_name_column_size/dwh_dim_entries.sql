@@ -1,4 +1,4 @@
-USE `kalturadw`;
+USE `borhandw`;
 
 DROP TABLE IF EXISTS `dwh_dim_entries_new`;
 
@@ -77,10 +77,10 @@ CREATE TABLE `dwh_dim_entries_new` (
   `end_hour_id` tinyint(4) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO kalturadw.dwh_dim_entries_new
-select * from kalturadw.dwh_dim_entries;
+INSERT INTO borhandw.dwh_dim_entries_new
+select * from borhandw.dwh_dim_entries;
 
-ALTER TABLE kalturadw.dwh_dim_entries_new
+ALTER TABLE borhandw.dwh_dim_entries_new
   ADD KEY `partner_id_created_media_type_source` (`partner_id`,`created_at`,`entry_media_type_id`,`entry_media_source_id`),
   ADD KEY `dwh_update_date` (`dwh_update_date`),
   ADD KEY `created_at` (`created_at`),
@@ -96,8 +96,8 @@ ALTER TABLE kalturadw.dwh_dim_entries_new
   ADD FULLTEXT KEY `admin_tags_text` (`admin_tags`),
   ADD FULLTEXT KEY `search_text_discrete_index` (`search_text_discrete`);
 
-DROP TABLE kalturadw.dwh_dim_entries;
-RENAME TABLE kalturadw.dwh_dim_entries_new TO kalturadw.dwh_dim_entries;
+DROP TABLE borhandw.dwh_dim_entries;
+RENAME TABLE borhandw.dwh_dim_entries_new TO borhandw.dwh_dim_entries;
 
 DELIMITER $$
 

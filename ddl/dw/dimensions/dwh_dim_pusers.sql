@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_pusers`;
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_pusers`;
 
-CREATE TABLE `kalturadw`.`dwh_dim_pusers` (
+CREATE TABLE `borhandw`.`dwh_dim_pusers` (
   `puser_id` INT AUTO_INCREMENT NOT NULL ,
   `name` VARCHAR(100) DEFAULT 'missing value',
   `partner_id` INT NOT NULL,
@@ -11,12 +11,12 @@ CREATE TABLE `kalturadw`.`dwh_dim_pusers` (
   KEY `partner_name_index` (`partner_id`,`name`)
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
 
-CREATE TRIGGER `kalturadw`.`dwh_dim_pusers_setcreationtime_oninsert` BEFORE INSERT
-    ON `kalturadw`.`dwh_dim_pusers`
+CREATE TRIGGER `borhandw`.`dwh_dim_pusers_setcreationtime_oninsert` BEFORE INSERT
+    ON `borhandw`.`dwh_dim_pusers`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();
 	
 	
-INSERT INTO kalturadw.dwh_dim_pusers(name, partner_id) VALUES ('Unknown',-99);
-UPDATE kalturadw.dwh_dim_pusers set puser_id = 0;
+INSERT INTO borhandw.dwh_dim_pusers(name, partner_id) VALUES ('Unknown',-99);
+UPDATE borhandw.dwh_dim_pusers set puser_id = 0;
 

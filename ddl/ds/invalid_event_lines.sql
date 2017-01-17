@@ -1,4 +1,4 @@
-CREATE TABLE kalturadw_ds.`invalid_event_lines` (    
+CREATE TABLE borhandw_ds.`invalid_event_lines` (    
   		  `line_id` INT NOT NULL AUTO_INCREMENT, 
 		  `line_number` INT DEFAULT NULL,
           `file_id` INT NOT NULL,

@@ -1,10 +1,10 @@
 /*
 SQLyog Community v8.7 
-MySQL - 5.1.47 : Database - kalturadw_bisources
+MySQL - 5.1.47 : Database - borhandw_bisources
 *********************************************************************
 */
 
-USE `kalturadw_bisources`;
+USE `borhandw_bisources`;
 
 DROP TABLE IF EXISTS `bisources_creation_mode`;
 
@@ -16,4 +16,4 @@ CREATE TABLE `bisources_creation_mode` (
 
 INSERT INTO `bisources_creation_mode`
 			(`creation_mode_id`,`creation_mode_name`) 
-VALUES 		(-1,''),(1,'MANUAL'),(2,'KMC'),(3,'AUTOMATIC'),(4,'AUTOMATIC_BYPASS_FLV');
+VALUES 		(-1,''),(1,'MANUAL'),(2,'BMC'),(3,'AUTOMATIC'),(4,'AUTOMATIC_BYPASS_FLV');

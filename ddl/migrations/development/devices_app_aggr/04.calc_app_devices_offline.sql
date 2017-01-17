@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_app_devices_offline`$$
 

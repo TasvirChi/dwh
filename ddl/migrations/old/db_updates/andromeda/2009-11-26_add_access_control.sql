@@ -1,4 +1,4 @@
-CREATE TABLE `kalturadw`.`dwh_dim_access_control` (
+CREATE TABLE `borhandw`.`dwh_dim_access_control` (
   `access_control_id` int(11) NOT NULL,
   `partner_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL default '',

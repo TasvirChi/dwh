@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_monthly_billing`$$
 
@@ -8,7 +8,7 @@ CREATE PROCEDURE `calc_monthly_billing`(p_month_id INT(11))
 BEGIN
 	SET @current_month_id=p_month_id;
 	
-	DELETE FROM kalturadw.dwh_billing
+	DELETE FROM borhandw.dwh_billing
 	WHERE month_id = @current_month_id;
 	
 	DROP TABLE IF EXISTS paying_partners;
@@ -22,14 +22,14 @@ BEGIN
 	SELECT 
 		dwh_dim_partners.partner_id, parent_partners.partner_id
 	FROM 
-		kalturadw.dwh_dim_partners USE INDEX (partner_package_indx)
-		LEFT OUTER JOIN kalturadw.dwh_dim_partners parent_partners
+		borhandw.dwh_dim_partners USE INDEX (partner_package_indx)
+		LEFT OUTER JOIN borhandw.dwh_dim_partners parent_partners
 		ON dwh_dim_partners.partner_parent_id = parent_partners.partner_id
 	WHERE 
 		dwh_dim_partners.partner_package>1 OR parent_partners.partner_id IS NOT NULL;
 	
 	/* Bandwidth, Streaming and plays*/
-	INSERT INTO kalturadw.dwh_billing (month_id, partner_id, partner_parent_id, bandwidth_gb, livestreaming_gb, plays)
+	INSERT INTO borhandw.dwh_billing (month_id, partner_id, partner_parent_id, bandwidth_gb, livestreaming_gb, plays)
 	SELECT
 		@current_month_id,
 		paying_partners.partner_id,
@@ -38,7 +38,7 @@ BEGIN
 		SUM(hourly_partner.count_streaming)/1024/1024/1024 /* in GB */,
 		SUM(hourly_partner.count_plays)
 	FROM 
-		kalturadw.dwh_hourly_partner hourly_partner,
+		borhandw.dwh_hourly_partner hourly_partner,
 		paying_partners
 	WHERE 
 		hourly_partner.partner_id=paying_partners.partner_id AND 
@@ -52,7 +52,7 @@ BEGIN
 	
 	/* Storage */
 	INSERT INTO 
-		kalturadw.dwh_billing (month_id, partner_id, partner_parent_id, storage_gb)
+		borhandw.dwh_billing (month_id, partner_id, partner_parent_id, storage_gb)
 	SELECT 
 		@current_month_id,
 		partner_id,
@@ -66,11 +66,11 @@ BEGIN
 	
 	/* Entries*/ 
 	INSERT INTO
-		kalturadw.dwh_billing (month_id, partner_id, partner_parent_id, entries)
+		borhandw.dwh_billing (month_id, partner_id, partner_parent_id, entries)
 	SELECT 
 		@current_month_id, paying_partners.partner_id, paying_partners.partner_parent_id, COUNT(*) 
 	FROM 
-		kalturadw.dwh_dim_entries, paying_partners
+		borhandw.dwh_dim_entries, paying_partners
 	WHERE 
 		dwh_dim_entries.partner_id = paying_partners.partner_id	AND 
 		entry_status_id <> 3 /* Remove deleted */ AND

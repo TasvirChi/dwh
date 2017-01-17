@@ -5,7 +5,7 @@
    description="Dimension Lookup/Update"
    tooltip="Concurrent safe dimension lookup/update"
    category="Lookup"
-   classname="org.kaltura.dimensionlookup.CombinationLookupMeta">
+   classname="org.borhan.dimensionlookup.CombinationLookupMeta">
    <libraries>
     <library name="lookup.jar"/>
     </libraries>

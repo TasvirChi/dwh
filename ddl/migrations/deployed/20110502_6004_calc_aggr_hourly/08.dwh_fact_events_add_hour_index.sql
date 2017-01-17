@@ -1,4 +1,4 @@
-ALTER TABLE kalturadw.dwh_fact_events
+ALTER TABLE borhandw.dwh_fact_events
 DROP KEY `partner_id_event_type_id_time`,
 DROP KEY `event_date_id`,
 DROP KEY `domain_id`,

@@ -1,4 +1,4 @@
-use kalturadw;
+use borhandw;
 
 DROP TABLE IF EXISTS dwh_hourly_partner_new;
 CREATE TABLE `dwh_hourly_partner_new` (
@@ -121,7 +121,7 @@ SELECT 	`partner_id`,
 	`count_postroll_50`, 
 	`count_postroll_75`
 	FROM 
-	`kalturadw`.`dwh_hourly_partner`;
+	`borhandw`.`dwh_hourly_partner`;
 
 drop table dwh_hourly_partner;
 rename table dwh_hourly_partner_new to dwh_hourly_partner;

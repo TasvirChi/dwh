@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_aggr_partner_20110325`$$
 
@@ -8,12 +8,12 @@ CREATE PROCEDURE `daily_procedure_dwh_aggr_partner`(date_val DATE,aggr_name VARC
 BEGIN
 	DECLARE aggr_table VARCHAR(100);
 	DECLARE aggr_id_field VARCHAR(100);
-	SET aggr_table = kalturadw.resolve_aggr_name(aggr_name,'aggr_table');
-	SET aggr_id_field = kalturadw.resolve_aggr_name(aggr_name,'aggr_id_field');
+	SET aggr_table = borhandw.resolve_aggr_name(aggr_name,'aggr_table');
+	SET aggr_id_field = borhandw.resolve_aggr_name(aggr_name,'aggr_id_field');
 	
 	 
 	SET @s = CONCAT('
-    	INSERT INTO kalturadw.',aggr_table,'
+    	INSERT INTO borhandw.',aggr_table,'
     		(partner_id, 
     		date_id, 
     		count_video, 
@@ -35,7 +35,7 @@ BEGIN
     			COUNT(IF(entry_media_type_id = 5, 1,NULL)) count_audio,
     			COUNT(IF(entry_media_type_id = 6, 1,NULL)) count_mix,
     			COUNT(IF(entry_type_id = 5, 1,NULL)) count_playlist
-    		FROM kalturadw.dwh_dim_entries  en 
+    		FROM borhandw.dwh_dim_entries  en 
     		WHERE (en.entry_media_type_id IN (1,2,5,6) OR en.entry_type_id IN (5) ) /*entry_media_type_id / entry_type_id %*/
     			AND en.created_date_id=DATE(''',date_val,''')*1
     		GROUP BY partner_id,en.created_date_id
@@ -54,7 +54,7 @@ BEGIN
 	
 	
 	SET @s = CONCAT('
-    	INSERT INTO kalturadw.',aggr_table,'
+    	INSERT INTO borhandw.',aggr_table,'
     		(partner_id, 
     		date_id, 
     		count_bandwidth, /* KB */
@@ -62,7 +62,7 @@ BEGIN
    		SELECT partner_id,pa.activity_date_id date_id,
 			SUM(IF(partner_activity_id = 1, amount ,NULL)) count_bandwidth, /* KB */
 			SUM(IF(partner_activity_id = 3 AND partner_sub_activity_id=301, amount,NULL)) count_storage /* MB */
-		FROM kalturadw.dwh_fact_partner_activities  pa 
+		FROM borhandw.dwh_fact_partner_activities  pa 
 		WHERE 
 			pa.activity_date_id=DATE(''',date_val,''')*1
 		GROUP BY partner_id,pa.activity_date_id
@@ -76,14 +76,14 @@ BEGIN
 	DEALLOCATE PREPARE stmt; 
  
 	SET @s = CONCAT('
-    	INSERT INTO kalturadw.',aggr_table,'
+    	INSERT INTO borhandw.',aggr_table,'
     		(partner_id, 
     		date_id, 
 		count_streaming) /* KB */
    		SELECT 	session_partner_id, 
 			session_date_id,
 			SUM(total_bytes) count_streaming /* KB */
-		FROM kalturadw.dwh_fact_fms_sessions 
+		FROM borhandw.dwh_fact_fms_sessions 
 		WHERE session_date_id=DATE(''',date_val,''')*1
 		GROUP BY session_partner_id, session_date_id
     	ON DUPLICATE KEY UPDATE
@@ -94,7 +94,7 @@ BEGIN
 	DEALLOCATE PREPARE stmt;	
 	
 	SET @s = CONCAT('
-    	INSERT INTO kalturadw.',aggr_table,'
+    	INSERT INTO borhandw.',aggr_table,'
     		(partner_id, 
     		date_id, 
     		aggr_storage ,   /* MB */
@@ -124,14 +124,14 @@ BEGIN
 	DEALLOCATE PREPARE stmt;	
 	 
 	SET @s = CONCAT('
-    	INSERT INTO kalturadw.',aggr_table,'
+    	INSERT INTO borhandw.',aggr_table,'
     		(partner_id, 
     		date_id, 
     		count_users)
     	SELECT  
     		partner_id,ku.created_date_id,
     		COUNT(1)
-    	FROM kalturadw.dwh_dim_kusers  ku
+    	FROM borhandw.dwh_dim_kusers  ku
     	WHERE 
     		ku.created_date_id=DATE(''',date_val,''')*1
    		GROUP BY partner_id,ku.created_date_id
@@ -143,14 +143,14 @@ BEGIN
 	DEALLOCATE PREPARE stmt;
 	 
 	SET @s = CONCAT('
-    	INSERT INTO kalturadw.',aggr_table,'
+    	INSERT INTO borhandw.',aggr_table,'
     		(partner_id, 
     		date_id, 
     		count_widgets)
     	SELECT  
     		partner_id,wd.created_date_id,
     		COUNT(1)
-    	FROM kalturadw.dwh_dim_widget  wd
+    	FROM borhandw.dwh_dim_widget  wd
     	WHERE 
     		wd.created_date_id=DATE(''',date_val,''')*1
    		GROUP BY partner_id,wd.created_date_id
@@ -169,7 +169,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_aggr_events_widget_20110325`$$
 
@@ -180,8 +180,8 @@ BEGIN
 	DECLARE aggr_id_field_str VARCHAR(100);
 
 
-	SET aggr_table = kalturadw.resolve_aggr_name(aggr_name,'aggr_table');
-	SET aggr_id_field = kalturadw.resolve_aggr_name(aggr_name,'aggr_id_field');
+	SET aggr_table = borhandw.resolve_aggr_name(aggr_name,'aggr_table');
+	SET aggr_id_field = borhandw.resolve_aggr_name(aggr_name,'aggr_id_field');
 	
 	IF ( aggr_id_field <> "" ) THEN
 		SET aggr_id_field_str = CONCAT (',',aggr_id_field);
@@ -191,7 +191,7 @@ BEGIN
 
 	 
 	SET @s = CONCAT('
-    	INSERT INTO kalturadw.',aggr_table,'
+    	INSERT INTO borhandw.',aggr_table,'
     		(partner_id, 
     		date_id, 
 			widget_id,
@@ -199,7 +199,7 @@ BEGIN
     	SELECT  
     		partner_id,event_date_id,widget_id,
     		SUM(IF(event_type_id=1,1,NULL)) count_widget_loads
-		FROM kalturadw.dwh_fact_events  ev
+		FROM borhandw.dwh_fact_events  ev
 		WHERE event_type_id IN (1) /*event types %*/
 			AND event_date_id = DATE(''',date_val,''')*1
 		GROUP BY partner_id,DATE(event_time)*1',aggr_id_field_str,'
@@ -215,7 +215,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_aggr_partner_daily_usage_20110325`$$
 
@@ -223,7 +223,7 @@ CREATE PROCEDURE `daily_procedure_dwh_aggr_partner_daily_usage`(date_val DATE)
 BEGIN
 	
 	SET @s = CONCAT('
-    	INSERT INTO kalturadw.dwh_aggr_partner_daily_usage
+    	INSERT INTO borhandw.dwh_aggr_partner_daily_usage
     		(partner_id, 
     		date_id, 
     		sum_storage_mb   , /* MB */
@@ -251,7 +251,7 @@ BEGIN
 
 	
 	
-	SET @prev_date_id=kalturadw.calc_prev_date_id(DATE(date_val)*1);
+	SET @prev_date_id=borhandw.calc_prev_date_id(DATE(date_val)*1);
 	SET @s = CONCAT('
         INSERT IGNORE INTO dwh_aggr_partner_daily_usage
         (partner_id,date_id,sum_storage_mb)
@@ -279,7 +279,7 @@ BEGIN
 
 	
 	SET @s = CONCAT('
-    	INSERT INTO kalturadw.dwh_aggr_partner_daily_usage
+    	INSERT INTO borhandw.dwh_aggr_partner_daily_usage
     		(partner_id, 
     		date_id, 
     		sum_monthly_bandwidth_mb   /* MB */
@@ -293,7 +293,7 @@ BEGIN
 			a.partner_id=b.partner_id AND
 			a.date_id=DATE(''',date_val,''')*1 AND
 			a.date_id>=b.date_id AND
-			kalturadw.calc_month_id(b.date_id)=kalturadw.calc_month_id(a.date_id)
+			borhandw.calc_month_id(b.date_id)=borhandw.calc_month_id(a.date_id)
 		GROUP BY 
 			b.partner_id	
 		/* added to fix a bug in MySQL < 5.1.39 for insert .. select out of same (empty) partition */
@@ -308,7 +308,7 @@ BEGIN
 
 	
 	SET @s = CONCAT('
-   		INSERT INTO kalturadw.dwh_aggr_partner_daily_usage
+   		INSERT INTO borhandw.dwh_aggr_partner_daily_usage
     		(partner_id, 
     		date_id, 
     		calculated_monthly_storage_mb   /* MB */
@@ -320,7 +320,7 @@ BEGIN
 		FROM 
 			dwh_aggr_partner_daily_usage du
 		WHERE
-			kalturadw.calc_month_id(du.date_id) = kalturadw.calc_month_id(DATE(''',date_val,''')*1)
+			borhandw.calc_month_id(du.date_id) = borhandw.calc_month_id(DATE(''',date_val,''')*1)
 			AND du.date_id<=DATE(''',date_val,''')*1
 		GROUP BY 
 			du.partner_id
@@ -335,7 +335,7 @@ BEGIN
 
 	
 	SET @s = CONCAT('
-   		INSERT INTO kalturadw.dwh_aggr_partner_daily_usage
+   		INSERT INTO borhandw.dwh_aggr_partner_daily_usage
     		(partner_id, 
     		date_id, 
     		calculated_storage_mb   /* MB */
@@ -366,7 +366,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_aggr_partner_daily_usage_loop_20110325`$$
 
@@ -383,7 +383,7 @@ DECLARE _current_date DATE;
 		END IF;
 		SET _count = _count + 1;
 
-		CALL kalturadw.daily_procedure_dwh_aggr_partner_daily_usage(_current_date);
+		CALL borhandw.daily_procedure_dwh_aggr_partner_daily_usage(_current_date);
     END LOOP increment;
     SELECT _count;
 

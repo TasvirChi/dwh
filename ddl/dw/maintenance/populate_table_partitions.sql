@@ -1,1 +1,1 @@
-CALL kalturadw.add_partitions();
+CALL borhandw.add_partitions();

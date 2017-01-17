@@ -114,11 +114,11 @@ Lookup country&#47;location</note>
     </notepad>
   </notepads>
   <connection>
-    <name>Kaltura</name>
+    <name>Borhan</name>
     <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -138,11 +138,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>kaltura_op_mon</name>
+    <name>borhan_op_mon</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura_op_mon</database>
+    <database>borhan_op_mon</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -163,11 +163,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writable</name>
+    <name>Borhan_Writable</name>
     <server>${OpWritableDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
@@ -188,11 +188,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writeable</name>
+    <name>Borhan_Writeable</name>
     <server>${OpWriteableDbHost}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpWriteableDbUser}</username>
     <password>${OpWriteableDbPassword}</password>
@@ -213,11 +213,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -237,11 +237,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_bisources</name>
+    <name>borhandw_bisources</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_bisources</database>
+    <database>borhandw_bisources</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -260,11 +260,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
+    <database>borhandw_ds</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -285,11 +285,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds2</name>
+    <name>borhandw_ds2</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
+    <database>borhandw_ds</database>
     <port>3306</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -308,11 +308,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ilrepl</name>
+    <name>borhandw_ilrepl</name>
     <server>ilrepl</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>3308</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -332,11 +332,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>KalturaLogs</name>
+    <name>BorhanLogs</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturalog</database>
+    <database>borhanlog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -357,11 +357,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>KalturaMonitoring</name>
+    <name>BorhanMonitoring</name>
     <server>${MonitoringDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${MonitoringDbPort}</port>
     <username>${MonitoringDbUser}</username>
     <password>${MonitoringDbPassword}</password>
@@ -381,11 +381,11 @@ Lookup country&#47;location</note>
     </attributes>
   </connection>
   <connection>
-    <name>KalturaReadDW</name>
+    <name>BorhanReadDW</name>
     <server>${DbReadHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbReadPort}</port>
     <username>${DbReadUser}</username>
     <password>${DbReadPassword}</password>
@@ -418,8 +418,8 @@ Lookup country&#47;location</note>
            </partitioning>
       <schema/>
       <table>dwh_dim_fms_adaptor</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
@@ -458,8 +458,8 @@ Lookup country&#47;location</note>
            </partitioning>
       <schema/>
       <table>dwh_dim_fms_app_instance</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
@@ -498,8 +498,8 @@ Lookup country&#47;location</note>
            </partitioning>
       <schema/>
       <table>dwh_dim_fms_app</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
@@ -632,8 +632,8 @@ Lookup country&#47;location</note>
            </partitioning>
       <schema/>
       <table>dwh_dim_fms_client_protocol</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
@@ -672,8 +672,8 @@ Lookup country&#47;location</note>
            </partitioning>
       <schema/>
       <table>dwh_dim_fms_event_category</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
@@ -712,8 +712,8 @@ Lookup country&#47;location</note>
            </partitioning>
       <schema/>
       <table>dwh_dim_fms_event_type</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
@@ -863,7 +863,7 @@ entry_partner_id = -1;
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <rowlimit>0</rowlimit>
     <sql>select 1 country_id, 2 location_id</sql>
     <outer_join>N</outer_join>
@@ -1244,8 +1244,8 @@ Alert(&quot;From position 6 for 7 long : &quot; + str3);
            </partitioning>
       <schema/>
       <table>dwh_dim_fms_status_description</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
@@ -1288,8 +1288,8 @@ Alert(&quot;From position 6 for 7 long : &quot; + str3);
            </partitioning>
       <schema/>
       <table>dwh_dim_fms_stream_type</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
@@ -2118,8 +2118,8 @@ c_proto = substr(c_proto, 0, 45);
            </partitioning>
       <schema/>
       <table>dwh_dim_fms_virtual_host</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
@@ -2251,7 +2251,7 @@ function ip2number (ip_address)
 	return numeric_ip;
 }
 
-var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + c_iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
+var ipLookupSQL = &quot;SELECT country_id, location_id FROM borhandw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM borhandw.dwh_dim_ip_ranges WHERE &quot; + c_iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>c_iplong</name>
         <rename>c_iplong</rename>
         <type>Integer</type>

@@ -12,7 +12,7 @@
  * and limitations.
  ***************************************************************************************/
  
-package org.kaltura.salesforceoutput;
+package org.borhan.salesforceoutput;
 
 import org.pentaho.di.core.row.ValueMeta;
 import org.pentaho.di.core.exception.KettleStepException;

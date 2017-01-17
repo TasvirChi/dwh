@@ -1,4 +1,4 @@
-USE `kalturadw`;
+USE `borhandw`;
 
 /*Table structure for table `dwh_dim_fms_adaptor` */
 

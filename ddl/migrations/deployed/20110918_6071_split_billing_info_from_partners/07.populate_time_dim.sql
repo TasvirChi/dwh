@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `populate_time_dim`$$
 
@@ -9,7 +9,7 @@ CREATE PROCEDURE `populate_time_dim`(start_date datetime, end_date datetime)
 BEGIN    
 
     WHILE start_date <= end_date DO
-        INSERT IGNORE INTO kalturadw.dwh_dim_time 
+        INSERT IGNORE INTO borhandw.dwh_dim_time 
         SELECT 1*DATE(d), d, YEAR(d), MONTH(d), DAYOFYEAR(d),DAYOFMONTH(d),DAYOFWEEK(d),WEEK(d),DAYNAME(d),DATE_FORMAT(d,'%a'),MONTHNAME(d), DATE_FORMAT(d, '%b'), QUARTER(d)
         FROM(SELECT start_date d) a;
         

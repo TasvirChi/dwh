@@ -1,6 +1,6 @@
-INSERT INTO kalturadw_ds.processes (id, process_name) VALUE (4, 'bandwidth_usage_AKAMAI');
+INSERT INTO borhandw_ds.processes (id, process_name) VALUE (4, 'bandwidth_usage_AKAMAI');
 
-INSERT INTO `kalturadw_ds`.`staging_areas` 
+INSERT INTO `borhandw_ds`.`staging_areas` 
 	(`id`, 
 	`process_id`, 
 	`source_table`, 
@@ -12,15 +12,15 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
 	VALUES
 	(4,	 4,
 	 'ds_bandwidth_usage',
-	 'kalturadw.dwh_fact_bandwidth_usage',
+	 'borhandw.dwh_fact_bandwidth_usage',
 	 NULL,
 	 'cycle_id',
 	 NULL
 	);
 
-INSERT INTO kalturadw_ds.processes (id, process_name) VALUE (5, 'bandwidth_usage_LLN');
+INSERT INTO borhandw_ds.processes (id, process_name) VALUE (5, 'bandwidth_usage_LLN');
 
-INSERT INTO `kalturadw_ds`.`staging_areas` 
+INSERT INTO `borhandw_ds`.`staging_areas` 
 	(`id`, 
 	`process_id`, 
 	`source_table`, 
@@ -32,15 +32,15 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
 	VALUES
 	(5,	 5,
 	 'ds_bandwidth_usage',
-	 'kalturadw.dwh_fact_bandwidth_usage',
+	 'borhandw.dwh_fact_bandwidth_usage',
 	 NULL,
 	 'cycle_id',
 	 NULL
 	);
 	
-INSERT INTO kalturadw_ds.processes (id, process_name) VALUE (6, 'bandwidth_usage_LEVEL3');
+INSERT INTO borhandw_ds.processes (id, process_name) VALUE (6, 'bandwidth_usage_LEVEL3');
 
-INSERT INTO `kalturadw_ds`.`staging_areas` 
+INSERT INTO `borhandw_ds`.`staging_areas` 
 	(`id`, 
 	`process_id`, 
 	`source_table`, 
@@ -52,15 +52,15 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
 	VALUES
 	(6,	 6,
 	 'ds_bandwidth_usage',
-	 'kalturadw.dwh_fact_bandwidth_usage',
+	 'borhandw.dwh_fact_bandwidth_usage',
 	 NULL,
 	 'cycle_id',
 	 NULL
 	);
 	
-INSERT INTO kalturadw_ds.processes (id, process_name) VALUE (7, 'bandwidth_usage_WWW');
+INSERT INTO borhandw_ds.processes (id, process_name) VALUE (7, 'bandwidth_usage_WWW');
 
-INSERT INTO `kalturadw_ds`.`staging_areas` 
+INSERT INTO `borhandw_ds`.`staging_areas` 
 	(`id`, 
 	`process_id`, 
 	`source_table`, 
@@ -72,7 +72,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
 	VALUES
 	(7,	 7,
 	 'ds_bandwidth_usage',
-	 'kalturadw.dwh_fact_bandwidth_usage',
+	 'borhandw.dwh_fact_bandwidth_usage',
 	 NULL,
 	 'cycle_id',
 	 NULL

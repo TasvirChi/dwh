@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 DROP TABLE IF EXISTS `dwh_hourly_partner_new`;
 
@@ -71,7 +71,7 @@ CREATE TABLE `dwh_hourly_partner_new` (
 
 CALL apply_table_partitions_to_target_table('dwh_hourly_partner');
 
-INSERT INTO kalturadw.dwh_hourly_partner_new
+INSERT INTO borhandw.dwh_hourly_partner_new
 	(partner_id, date_id, hour_id, sum_time_viewed, count_time_viewed, count_plays, 
 	count_loads, count_plays_25, count_plays_50, count_plays_75, count_plays_100, count_edit, 
 	count_viral, count_download, count_report, flag_active_site, flag_active_publisher, count_buf_start, 
@@ -90,7 +90,7 @@ SELECT 	partner_id, date_id, hour_id, sum_time_viewed, count_time_viewed, count_
 	count_overlay_started, count_preroll_clicked, count_midroll_clicked, count_postroll_clicked, 
 	count_overlay_clicked, count_preroll_25, count_preroll_50, count_preroll_75, count_midroll_25, 
 	count_midroll_50, count_midroll_75, count_postroll_25, count_postroll_50, count_postroll_75
-FROM 	kalturadw.dwh_hourly_partner;
+FROM 	borhandw.dwh_hourly_partner;
 
-RENAME TABLE kalturadw.dwh_hourly_partner to kalturadw.dwh_hourly_partner_old; 
-RENAME TABLE kalturadw.dwh_hourly_partner_new to kalturadw.dwh_hourly_partner; 
+RENAME TABLE borhandw.dwh_hourly_partner to borhandw.dwh_hourly_partner_old; 
+RENAME TABLE borhandw.dwh_hourly_partner_new to borhandw.dwh_hourly_partner; 

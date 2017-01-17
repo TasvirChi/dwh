@@ -1,4 +1,4 @@
-CREATE TABLE `kalturadw`.`dwh_dim_categories` (
+CREATE TABLE `borhandw`.`dwh_dim_categories` (
   `category_id` int(11) NOT NULL,
   `parent_id` int(11) NOT NULL,
   `depth` tinyint(4) NOT NULL,

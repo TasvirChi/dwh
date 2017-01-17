@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `kalturadw_ds`.`invalid_fms_event_lines`;
-CREATE TABLE  `kalturadw_ds`.`invalid_fms_event_lines` (
+DROP TABLE IF EXISTS `borhandw_ds`.`invalid_fms_event_lines`;
+CREATE TABLE  `borhandw_ds`.`invalid_fms_event_lines` (
   `line_id` int(11) NOT NULL AUTO_INCREMENT,
   `line_number` int(11) DEFAULT NULL,
   `file_id` int(11) NOT NULL,

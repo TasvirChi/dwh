@@ -1,6 +1,6 @@
 /*
 SQLyog Community Edition- MySQL GUI v8.12 
-MySQL - 5.1.47 : Database - kalturadw_ds
+MySQL - 5.1.47 : Database - borhandw_ds
 *********************************************************************
 */
 
@@ -13,7 +13,7 @@ MySQL - 5.1.47 : Database - kalturadw_ds
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
-USE `kalturadw_ds`;
+USE `borhandw_ds`;
 
 /*Table structure for table `files` */
 

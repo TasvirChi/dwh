@@ -1,11 +1,11 @@
-INSERT INTO kalturadw_ds.fact_tables
+INSERT INTO borhandw_ds.fact_tables
 		(fact_table_id,
 		fact_table_name)
 VALUES
-	(7,'kalturadw.dwh_fact_plays');
+	(7,'borhandw.dwh_fact_plays');
 	
 
-INSERT INTO kalturadw_ds.staging_areas
+INSERT INTO borhandw_ds.staging_areas
         (id,
         process_id,
         source_table,
@@ -27,10 +27,10 @@ VALUES
 	'play_date_id',
 	'play_hour_id');
 	
-INSERT INTO kalturadw_ds.retention_policy VALUES 
+INSERT INTO borhandw_ds.retention_policy VALUES 
 ('dwh_fact_plays', 30, 365, DATE('2013-11-01'));
 
-INSERT INTO kalturadw_ds.aggr_name_resolver
+INSERT INTO borhandw_ds.aggr_name_resolver
 		(aggr_name,
 		aggr_table,
 		aggr_id_field,
@@ -45,12 +45,12 @@ VALUES
 	('plays_devices','dwh_hourly_plays_devices','os_id, browser_id','','plays',NULL,NULL);
 
 	
-CREATE TABLE kalturadw_ds.aggr_type (
+CREATE TABLE borhandw_ds.aggr_type (
 	`aggr_name` varchar(20) NOT NULL,
     `aggr_order` int(6) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
-INSERT INTO kalturadw_ds.aggr_type 
+INSERT INTO borhandw_ds.aggr_type 
 	(aggr_name,
 	aggr_order)
 VALUES

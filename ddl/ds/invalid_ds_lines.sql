@@ -1,6 +1,6 @@
 /*
 SQLyog Community v8.7 
-MySQL - 5.1.47 : Database - kalturadw_ds
+MySQL - 5.1.47 : Database - borhandw_ds
 *********************************************************************
 */
 
@@ -12,7 +12,7 @@ MySQL - 5.1.47 : Database - kalturadw_ds
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-USE `kalturadw_ds`;
+USE `borhandw_ds`;
 
 /*Table structure for table `invalid_event_lines` */
 

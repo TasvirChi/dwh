@@ -1,9 +1,9 @@
 DELIMITER $$
 
-USE kalturadw$$
+USE borhandw$$
 
 DROP VIEW IF EXISTS dwh_view_partners_monthly_billing_last_updated_at$$
-CREATE VIEW `kalturadw`.`dwh_view_partners_monthly_billing_last_updated_at` AS (
+CREATE VIEW `borhandw`.`dwh_view_partners_monthly_billing_last_updated_at` AS (
 
 	SELECT  FLOOR(months.day_id / 100) AS month_id,
 		p.partner_id AS partner_id,

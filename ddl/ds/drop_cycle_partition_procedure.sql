@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw_ds`$$
+USE `borhandw_ds`$$
 
 DROP PROCEDURE IF EXISTS `drop_cycle_partition`$$
 
@@ -10,7 +10,7 @@ BEGIN
 	DECLARE p_exists INT;
 	DECLARE done INT DEFAULT 0;
 	DECLARE staging_areas_cursor CURSOR FOR SELECT source_table 
-						FROM kalturadw_ds.staging_areas, kalturadw_ds.cycles 
+						FROM borhandw_ds.staging_areas, borhandw_ds.cycles 
 						WHERE staging_areas.process_id = cycles.process_id AND cycles.cycle_id = p_cycle_id;
 	
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
@@ -25,10 +25,10 @@ BEGIN
 		FROM information_schema.PARTITIONS 
 		WHERE partition_name = CONCAT('p_',p_cycle_id)
 		AND table_name = table_name
-		AND table_schema = 'kalturadw_ds';
+		AND table_schema = 'borhandw_ds';
 		
 		IF(p_exists>0) THEN
-			SET @s = CONCAT('alter table kalturadw_ds.',table_name,' drop PARTITION  p_' ,p_cycle_id);
+			SET @s = CONCAT('alter table borhandw_ds.',table_name,' drop PARTITION  p_' ,p_cycle_id);
 			PREPARE stmt FROM  @s;
 			EXECUTE stmt;
 			DEALLOCATE PREPARE stmt;

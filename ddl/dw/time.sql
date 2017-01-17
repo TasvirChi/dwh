@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 CREATE TABLE `dwh_dim_time` (
   `day_id` int(11) NOT NULL DEFAULT '0',

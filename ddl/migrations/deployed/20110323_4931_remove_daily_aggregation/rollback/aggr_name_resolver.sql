@@ -1,6 +1,6 @@
-use kalturadw_ds;
+use borhandw_ds;
 alter table aggr_name_resolver add column hourly_aggr_table;
-UPDATE kalturadw_ds.aggr_name_resolver 
+UPDATE borhandw_ds.aggr_name_resolver 
 SET aggr_table = 
 	CASE (aggr_name)
 	WHEN ('entry') THEN 'dwh_aggr_events_entry' 

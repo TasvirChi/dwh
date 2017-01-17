@@ -56,7 +56,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://192.168.252.188:3306/kalturadw</property>
+            <property name="odaURL">jdbc:mysql://192.168.252.188:3306/borhandw</property>
             <property name="odaUser">etl</property>
             <encrypted-property name="odaPassword" encryptionID="base64">ZXRs</encrypted-property>
         </oda-data-source>
@@ -2542,7 +2542,7 @@ GROUP BY FLOOR(date_id/100)]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select p.partner_id, p.partner_name, SUM(if(date_id >= ?,ifnull(new_videos,0) + ifnull(new_audios,0), 0)) new_entries_this_month, SUM(if(date_id < ?,ifnull(new_videos,0) + ifnull(new_audios,0), 0)) new_entries_last_month
-from kalturadw.dwh_dim_partners p, kalturadw.dwh_hourly_partner e
+from borhandw.dwh_dim_partners p, borhandw.dwh_hourly_partner e
 where p.partner_id = e.partner_id
 and date_id between (DATE(?) - INTERVAL 1 MONTH)*1 and LAST_DAY(DATE(?))*1
 group by partner_id
@@ -2680,7 +2680,7 @@ limit 20;
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select p.partner_id, p.partner_name, sum(total_conversion_sec) conversion_time
-from kalturadw.dwh_dim_partners p, kalturadw.dwh_daily_partner_ingestion i
+from borhandw.dwh_dim_partners p, borhandw.dwh_daily_partner_ingestion i
 where p.partner_id = i.partner_id
 and date_id between ? and LAST_DAY(DATE(?))*1
 group by p.partner_id
@@ -2773,7 +2773,7 @@ limit 20;]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[select SUM(new_videos) + SUM(new_audios)
-from kalturadw.dwh_hourly_partner
+from borhandw.dwh_hourly_partner
 where date_id between ? and LAST_DAY(DATE(?))*1]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -3118,37 +3118,37 @@ where date_id between ? and LAST_DAY(DATE(?))*1]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 1 row_num, "0-50 MB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (1,4),1,NULL)) failures
-FROM kalturadw.dwh_dim_upload_token
+FROM borhandw.dwh_dim_upload_token
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND IFNULL(file_size,0) < 50*1024
 UNION
 SELECT 2 row_num, "50-100 MB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (1,4),1,NULL)) failures
-FROM kalturadw.dwh_dim_upload_token
+FROM borhandw.dwh_dim_upload_token
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND file_size BETWEEN 50*1024 AND 100*1024-1
 UNION
 SELECT 3 row_num, "100-250 MB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (1,4),1,NULL)) failures
-FROM kalturadw.dwh_dim_upload_token
+FROM borhandw.dwh_dim_upload_token
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND file_size BETWEEN 100*1024 AND 250*1024-1
 UNION
 SELECT 4 row_num, "250-500 MB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (1,4),1,NULL)) failures
-FROM kalturadw.dwh_dim_upload_token
+FROM borhandw.dwh_dim_upload_token
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND file_size BETWEEN 250*1024 AND 500*1024-1
 UNION
 SELECT 5 row_num, "500 MB-1 GB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (1,4),1,NULL)) failures
-FROM kalturadw.dwh_dim_upload_token
+FROM borhandw.dwh_dim_upload_token
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND file_size BETWEEN 500*1024 AND 1024*1024-1
 UNION
 SELECT 6 row_num, "1-2 GB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (1,4),1,NULL)) failures
-FROM kalturadw.dwh_dim_upload_token
+FROM borhandw.dwh_dim_upload_token
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND file_size BETWEEN 1024*1024 AND 2*1024*1024
@@ -3871,49 +3871,49 @@ AND file_size BETWEEN 1024*1024 AND 2*1024*1024
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 1 row_num, "0-50 MB" category, COUNT(*) attempts, COUNT(IF(status_id = 5,1,NULL)) successes, COUNT(IF(status_id IN (6,10),1,NULL)) failures
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1
 AND file_size between 0 and 50*1024
 UNION
 SELECT 2 row_num, "50-100 MB" category, COUNT(*) attempts, COUNT(IF(status_id = 5,1,NULL)) successes, COUNT(IF(status_id IN (6,10),1,NULL)) failures
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1
 AND file_size BETWEEN 50*1024 AND 100*1024-1
 UNION
 SELECT 3 row_num, "100-250 MB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (6,10),1,NULL)) failures
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1
 AND file_size BETWEEN 100*1024 AND 250*1024-1
 UNION
 SELECT 4 row_num, "250-500 MB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (6,10),1,NULL)) failures
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1
 AND file_size BETWEEN 250*1024 AND 500*1024-1
 UNION
 SELECT 5 row_num, "500 MB-1 GB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (6,10),1,NULL)) failures
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1
 AND file_size BETWEEN 500*1024 AND 1024*1024-1
 UNION
 SELECT 6 row_num, "1-2 GB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (6,10),1,NULL)) failures
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1
 AND file_size BETWEEN 1024*1024 AND 2*1024*1024
 UNION
 SELECT 7 row_num, "> 2 GB" category, COUNT(*) attempts, COUNT(IF(status_id IN (2,3),1,NULL)) successes, COUNT(IF(status_id IN (6,10),1,NULL)) failures
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1
@@ -4516,21 +4516,21 @@ AND file_size > 2*1024*1024
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT 1 row_num, "Success" category, COUNT(*) value
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1
 AND status_id = 5
 UNION
 SELECT 2 row_num, "URL Not Found" category, COUNT(*) value
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1
 AND file_size = -1 and status_id IN (6,10)
 UNION
 SELECT 3 row_num, "Failed While Downloading" category, COUNT(*) value
-FROM kalturadw.dwh_dim_batch_job_sep
+FROM borhandw.dwh_dim_batch_job_sep
 WHERE created_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND updated_date_id BETWEEN ? AND LAST_DAY(DATE(?))*1
 AND job_type_id = 1

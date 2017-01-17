@@ -1,4 +1,4 @@
-ALTER TABLE kalturadw.dwh_dim_partners 	ADD max_monthly_bandwidth_kb BIGINT(20),
+ALTER TABLE borhandw.dwh_dim_partners 	ADD max_monthly_bandwidth_kb BIGINT(20),
 					ADD charge_monthly_bandwidth_kb_usd DECIMAL(15,3),
 					ADD charge_monthly_bandwidth_kb_unit INT(11),
 					ADD max_monthly_storage_mb BIGINT(20),

@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 INSERT INTO ri_mapping (table_name, column_name, date_id_column_name, reference_table, reference_column, perform_check)
 VALUES ('dwh_dim_file_sync', 'object_type', 'dwh_update_date','dwh_dim_file_sync_object_type','file_sync_object_type_id',1);

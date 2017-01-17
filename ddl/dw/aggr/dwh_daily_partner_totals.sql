@@ -1,4 +1,4 @@
-USE `kalturadw`;
+USE `borhandw`;
 
 DROP TABLE IF EXISTS `dwh_daily_partner_totals`;
 
@@ -17,4 +17,4 @@ CREATE TABLE `dwh_daily_partner_totals` (
 PARTITION BY RANGE (date_id)
 (PARTITION p_201510 VALUES LESS THAN (20151101) ENGINE = InnoDB);
 
-CALL kalturadw.add_monthly_partition_for_table('dwh_daily_partner_totals');
+CALL borhandw.add_monthly_partition_for_table('dwh_daily_partner_totals');

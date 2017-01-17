@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 DROP TABLE IF EXISTS `dwh_fact_fms_sessions_new`;
 
@@ -27,4 +27,4 @@ CREATE TABLE `dwh_fact_fms_sessions_new` (
  PARTITION p_20101130 VALUES LESS THAN (20101201) ENGINE = InnoDB,
  PARTITION p_20101231 VALUES LESS THAN (20110101) ENGINE = InnoDB)*/;
 
-CALL kalturadw.add_daily_partition_for_table('dwh_fact_fms_sessions_new');
+CALL borhandw.add_daily_partition_for_table('dwh_fact_fms_sessions_new');

@@ -1,4 +1,4 @@
-CREATE TABLE kalturadw_ds.fact_stats
+CREATE TABLE borhandw_ds.fact_stats
 	(fact_table_id int not null,
 	date_id int not null,
 	hour_id int not null,

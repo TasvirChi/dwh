@@ -1,4 +1,4 @@
-CREATE TABLE kalturalog.`etl_log` (                         
+CREATE TABLE borhanlog.`etl_log` (                         
            `ID_JOB` INT(11) DEFAULT NULL,                 
            `JOBNAME` VARCHAR(255) DEFAULT NULL,           
            `STATUS` VARCHAR(15) DEFAULT NULL,             

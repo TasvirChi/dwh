@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw`.dwh_dim_partners;
+DROP TABLE IF EXISTS `borhandw`.dwh_dim_partners;
 
-CREATE TABLE `kalturadw`.`dwh_dim_partners` (
+CREATE TABLE `borhandw`.`dwh_dim_partners` (
   `partner_id` INT NOT NULL ,
   `partner_name` VARCHAR(256) DEFAULT 'missing value',
   `url1` VARCHAR(1024) DEFAULT NULL,
@@ -67,8 +67,8 @@ CREATE TABLE `kalturadw`.`dwh_dim_partners` (
     KEY `partner_package_indx` (`partner_package`,`partner_id`,`partner_name`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
-CREATE TRIGGER `kalturadw`.`dwh_dim_partners_setcreationtime_oninsert` BEFORE INSERT
-    ON `kalturadw`.`dwh_dim_partners`
+CREATE TRIGGER `borhandw`.`dwh_dim_partners_setcreationtime_oninsert` BEFORE INSERT
+    ON `borhandw`.`dwh_dim_partners`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();
 

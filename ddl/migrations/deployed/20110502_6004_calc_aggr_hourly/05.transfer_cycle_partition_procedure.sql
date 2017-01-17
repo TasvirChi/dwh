@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw_ds`$$
+USE `borhandw_ds`$$
 
 DROP PROCEDURE IF EXISTS `transfer_cycle_partition`$$
 
@@ -34,7 +34,7 @@ BEGIN
 		END IF;
 		
 		IF ((LENGTH(AGGR_DATE) > 0) && (LENGTH(aggr_names) > 0)) THEN
-			SELECT CONCAT(	'update kalturadw.aggr_managment a, (select distinct ',aggr_date, ',' ,aggr_hour,
+			SELECT CONCAT(	'update borhandw.aggr_managment a, (select distinct ',aggr_date, ',' ,aggr_hour,
 							' from ',src_table,
 							' where ',partition_field,' = ',p_cycle_id,') ds'
 							' set a.is_calculated=0 where a.aggr_day_int = ds.', aggr_date, ' and a.hour_id = ds.',aggr_hour,

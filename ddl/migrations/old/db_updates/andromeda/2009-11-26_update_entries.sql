@@ -1,4 +1,4 @@
-alter table `kalturadw`.`dwh_dim_entries`
+alter table `borhandw`.`dwh_dim_entries`
 add column `access_control_id` int(11) default NULL,
 add column `conversion_profile_id` int(11) default NULL,
 add column `categories` varchar(4096) default NULL,

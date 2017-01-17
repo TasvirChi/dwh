@@ -1,4 +1,4 @@
-USE `kalturadw`;
+USE `borhandw`;
 
 DROP TABLE IF EXISTS `dwh_fact_fms_sessions_new`;
 
@@ -50,10 +50,10 @@ PARTITION p_20101031 VALUES LESS THAN (20101101) ENGINE = INNODB,
 PARTITION p_20101130 VALUES LESS THAN (20101201) ENGINE = INNODB,
 PARTITION p_20101231 VALUES LESS THAN (20110101) ENGINE = INNODB ) */;
 
-call kalturadw.add_daily_partition_for_table('dwh_fact_fms_sessions_new');
+call borhandw.add_daily_partition_for_table('dwh_fact_fms_sessions_new');
 
-INSERT IGNORE INTO kalturadw.dwh_fact_fms_sessions_new (session_id, session_time, session_date_id, bandwidth_source_id, session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id, session_partner_id, total_bytes)
+INSERT IGNORE INTO borhandw.dwh_fact_fms_sessions_new (session_id, session_time, session_date_id, bandwidth_source_id, session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id, session_partner_id, total_bytes)
  select session_id, session_time, session_date_id, 5, session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id, session_partner_id, total_bytes from dwh_fact_fms_sessions;
 
-DROP TABLE kalturadw.dwh_fact_fms_sessions;
+DROP TABLE borhandw.dwh_fact_fms_sessions;
 RENAME TABLE dwh_fact_fms_sessions_new TO dwh_fact_fms_sessions;

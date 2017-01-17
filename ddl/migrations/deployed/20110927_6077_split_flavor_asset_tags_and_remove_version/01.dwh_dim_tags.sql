@@ -4,7 +4,7 @@ MySQL - 5.1.37-log
 *********************************************************************
 */
 
-use kalturadw;
+use borhandw;
 
 drop table if exists `dwh_dim_tags`;
 
@@ -16,8 +16,8 @@ create table `dwh_dim_tags` (
 	PRIMARY KEY (`tag_id`), UNIQUE KEY (tag_name)
 ) ENGINE=MYISAM; 
 
-CREATE TRIGGER `kalturadw`.`dwh_dim_tags_oninsert` BEFORE INSERT
-    ON `kalturadw`.`dwh_dim_tags`
+CREATE TRIGGER `borhandw`.`dwh_dim_tags_oninsert` BEFORE INSERT
+    ON `borhandw`.`dwh_dim_tags`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();
     

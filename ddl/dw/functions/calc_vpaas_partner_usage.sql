@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_vpaas_partner_usage`$$
 
@@ -20,12 +20,12 @@ BEGIN
 	
 	INSERT INTO tmp_vpaas_partner_usage (month_id) 
 	SELECT DISTINCT(month_id)
-	FROM kalturadw.dwh_dim_time
+	FROM borhandw.dwh_dim_time
 	WHERE day_id BETWEEN p_from_date_id AND p_to_date_id;
 		
 	UPDATE tmp_vpaas_partner_usage u
 	LEFT JOIN (SELECT FLOOR(date_id/100) month_id, SUM(count_plays) plays
-			FROM kalturadw.dwh_hourly_partner
+			FROM borhandw.dwh_hourly_partner
 			WHERE date_id BETWEEN IF(p_time_shift>0,(DATE(p_from_date_id) - INTERVAL 1 DAY)*1, p_from_date_id)  
     			AND     IF(p_time_shift<=0,(DATE(p_to_date_id) + INTERVAL 1 DAY)*1, p_to_date_id)
 			AND hour_id >= IF (date_id = IF(p_time_shift>0,(DATE(p_from_date_id) - INTERVAL 1 DAY)*1, p_from_date_id), IF(p_time_shift>0, 24 - p_time_shift, ABS(p_time_shift)), 0)
@@ -44,7 +44,7 @@ BEGIN
 	LEFT JOIN (SELECT FLOOR(date_id/100) month_id, 
 			SUM(count_bandwidth_kb)/1024/1024 bandwidth_gb,
 			SUM(count_transcoding_mb)/1024 transcoding_gb
-			FROM kalturadw.dwh_hourly_partner_usage
+			FROM borhandw.dwh_hourly_partner_usage
 			WHERE date_id BETWEEN p_from_date_id AND p_to_date_id
 			AND partner_id = p_partner_id
 			GROUP BY month_id
@@ -58,7 +58,7 @@ BEGIN
 	UPDATE tmp_vpaas_partner_usage u
 	LEFT JOIN (SELECT FLOOR(date_id/100) month_id, 
 			SUM(aggr_storage_mb)/COUNT(1)/1024 avg_storage
-			FROM kalturadw.dwh_hourly_partner_usage
+			FROM borhandw.dwh_hourly_partner_usage
 			WHERE date_id BETWEEN p_from_date_id AND p_to_date_id
 			AND bandwidth_source_id = 1
 			AND partner_id = p_partner_id
@@ -72,9 +72,9 @@ BEGIN
 	
 	UPDATE tmp_vpaas_partner_usage u
 	LEFT JOIN (SELECT month_id, total_entries, total_users
-			FROM kalturadw.dwh_daily_partner_totals t,
+			FROM borhandw.dwh_daily_partner_totals t,
 			(SELECT FLOOR(date_id/100) month_id, MAX(date_id) date_id
-			FROM kalturadw.dwh_daily_partner_totals
+			FROM borhandw.dwh_daily_partner_totals
 			WHERE date_id BETWEEN p_from_date_id AND p_to_date_id
 			AND partner_id = p_partner_id
 			GROUP BY month_id) eom_dates

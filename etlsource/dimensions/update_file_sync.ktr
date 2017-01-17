@@ -95,11 +95,11 @@ to the older version and its data.</note>
     </notepad>
   </notepads>
   <connection>
-    <name>Kaltura</name>
+    <name>Borhan</name>
     <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -119,11 +119,11 @@ to the older version and its data.</note>
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writable</name>
+    <name>Borhan_Writable</name>
     <server>${OpWritableDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
@@ -144,11 +144,11 @@ to the older version and its data.</note>
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -168,11 +168,11 @@ to the older version and its data.</note>
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_bisources</name>
+    <name>borhandw_bisources</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_bisources</database>
+    <database>borhandw_bisources</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -191,36 +191,11 @@ to the older version and its data.</note>
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
-    <port>${DbPort}</port>
-    <username>${DbUser}</username>
-    <password>${DbPassword}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>KalturaLogs</name>
-    <server>${DbHostName}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>kalturalog</database>
+    <database>borhandw_ds</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -241,11 +216,36 @@ to the older version and its data.</note>
     </attributes>
   </connection>
   <connection>
-    <name>KalturaMonitoring</name>
+    <name>BorhanLogs</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>borhanlog</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>BorhanMonitoring</name>
     <server>${MonitoringDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${MonitoringDbPort}</port>
     <username>${MonitoringDbUser}</username>
     <password>${MonitoringDbPassword}</password>
@@ -265,11 +265,11 @@ to the older version and its data.</note>
     </attributes>
   </connection>
   <connection>
-    <name>KalturaReadDW</name>
+    <name>BorhanReadDW</name>
     <server>${DbReadHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbReadPort}</port>
     <username>${DbReadUser}</username>
     <password>${DbReadPassword}</password>
@@ -354,7 +354,7 @@ to the older version and its data.</note>
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <schema/>
     <table>dwh_dim_flavor_asset</table>
     <commit>1000</commit>
@@ -604,7 +604,7 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Kaltura</connection>
+    <connection>Borhan</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -753,7 +753,7 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -857,7 +857,7 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -920,7 +920,7 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1056,7 +1056,7 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1192,7 +1192,7 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <commit>100</commit>
     <update_bypassed>Y</update_bypassed>
     <lookup>
@@ -1238,7 +1238,7 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -1719,7 +1719,7 @@ if (file_size &lt; 0)
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Kaltura</connection>
+    <connection>Borhan</connection>
     <sql>SELECT &#47;*! SQL_NO_CACHE *&#47;	id, 
 	partner_id, 
 	object_type, 
@@ -1740,7 +1740,7 @@ if (file_size &lt; 0)
 	file_path, 
 	file_size
 	FROM 
-	kaltura.file_sync 
+	borhan.file_sync 
 WHERE updated_at between STR_TO_DATE(&apos;${LastUpdatedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
 and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#47;%d %H:%i:%S.%f&apos;)
 and original = 1
@@ -1770,7 +1770,7 @@ and object_type in (1,4)</sql>
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <skip_lookup>N</skip_lookup>
     <commit>100</commit>
     <use_batch>N</use_batch>
@@ -2018,8 +2018,8 @@ and object_type in (1,4)</sql>
            </partitioning>
       <schema/>
       <table>dwh_dim_file_sync_object_type</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
@@ -2058,8 +2058,8 @@ and object_type in (1,4)</sql>
            </partitioning>
       <schema/>
       <table>dwh_dim_file_sync_status</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>

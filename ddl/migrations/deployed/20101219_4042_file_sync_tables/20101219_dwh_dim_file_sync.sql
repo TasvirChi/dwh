@@ -5,7 +5,7 @@ MySQL - 5.1.37-log
 */
 /*!40101 SET NAMES utf8 */;
 
-use kalturadw;
+use borhandw;
 
 drop table if exists `dwh_dim_file_sync`;
 

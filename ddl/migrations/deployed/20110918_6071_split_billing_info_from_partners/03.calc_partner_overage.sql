@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_partner_overage`$$
 
@@ -26,11 +26,11 @@ BEGIN
 			q.charge_monthly_entries_usd,
 			q.charge_monthly_entries_unit
 		FROM (SELECT partner_id, MAX(updated_at) max_date 		
-            FROM kalturadw.dwh_dim_partners_billing
+            FROM borhandw.dwh_dim_partners_billing
             WHERE updated_at < DATE(p_month_id * 100 + 1) + INTERVAL 1 MONTH
             GROUP BY partner_id) d 
-        LEFT JOIN kalturadw.dwh_dim_partners_billing q ON (q.updated_at = d.max_date AND q.partner_id = d.partner_id AND q.is_active = 1)
-		LEFT OUTER JOIN kalturadw.dwh_dim_partners p ON (q.partner_id = p.partner_parent_id AND q.partner_group_type_id = 3)
+        LEFT JOIN borhandw.dwh_dim_partners_billing q ON (q.updated_at = d.max_date AND q.partner_id = d.partner_id AND q.is_active = 1)
+		LEFT OUTER JOIN borhandw.dwh_dim_partners p ON (q.partner_id = p.partner_parent_id AND q.partner_group_type_id = 3)
         GROUP BY partner_id, usage_partner_id;
         
 
@@ -76,7 +76,7 @@ BEGIN
 				MAX(max_monthly_total_usage_mb) included_total_usage_mb,
 				MAX(charge_monthly_total_usage_mb_unit) charge_monthly_total_usage_mb_unit,
 				MAX(charge_monthly_total_usage_mb_usd) charge_monthly_total_usage_mb_usd
-			FROM partner_quotas pq LEFT OUTER JOIN kalturadw.dwh_hourly_partner_usage partner_usage 
+			FROM partner_quotas pq LEFT OUTER JOIN borhandw.dwh_hourly_partner_usage partner_usage 
 					ON (pq.usage_partner_id = partner_usage.partner_id AND partner_usage.date_id BETWEEN p_month_id*100 AND p_month_id*100+31)
 			GROUP BY pq.partner_id) inner_q
 			WHERE actual_bandwidth_kb > included_bandwidth_kb OR 
@@ -98,7 +98,7 @@ BEGIN
 				MAX(max_monthly_entries) included_entries,
 				COUNT(entries.entry_id) actual_entries,
 				get_overage_charge(MAX(max_monthly_entries), COUNT(entries.entry_id), MAX(charge_monthly_entries_unit), MAX(charge_monthly_entries_usd)) charge_overage_entries
-			FROM partner_quotas pq, kalturadw.dwh_dim_entries entries
+			FROM partner_quotas pq, borhandw.dwh_dim_entries entries
 			WHERE 	pq.usage_partner_id = entries.partner_id AND 
 				entries.created_at < LAST_DAY(DATE(p_month_id*100+1)) + INTERVAL 1 DAY AND
 				entries.entry_type_id IN (1,7) 
@@ -115,7 +115,7 @@ BEGIN
 				MAX(max_monthly_plays) included_plays,
 				SUM(count_plays) actual_plays,
 				get_overage_charge(MAX(max_monthly_plays), SUM(count_plays), MAX(charge_monthly_plays_unit), MAX(charge_monthly_plays_usd)) charge_overage_plays
-			FROM partner_quotas pq, kalturadw.dwh_hourly_partner plays
+			FROM partner_quotas pq, borhandw.dwh_hourly_partner plays
 			WHERE 	pq.usage_partner_id = plays.partner_id AND
 				date_id BETWEEN p_month_id*100 AND p_month_id*100+31
 			GROUP BY pq.partner_id
@@ -148,11 +148,11 @@ BEGIN
 			actual_plays, 
 			charge_overage_plays			
 		FROM partner_overages po 
-		INNER JOIN kalturadw.dwh_dim_partners children ON (po.partner_id = children.partner_id)
-		LEFT OUTER JOIN kalturadw.dwh_dim_partners parents ON (children.partner_parent_id = parents.partner_id)
-		INNER JOIN kalturadw.dwh_dim_partner_group_type group_types ON (IF(parents.partner_id IS NOT NULL, parents.partner_group_type_id,children.partner_group_type_id) = group_types.partner_group_type_id)
-		LEFT OUTER JOIN kalturadw.dwh_dim_partner_class_of_service d_cos ON (children.class_of_service_id = d_cos.partner_class_of_service_id)
-		LEFT OUTER JOIN kalturadw.dwh_dim_partner_vertical d_vertical ON (children.vertical_id = d_vertical.partner_vertical_id)
+		INNER JOIN borhandw.dwh_dim_partners children ON (po.partner_id = children.partner_id)
+		LEFT OUTER JOIN borhandw.dwh_dim_partners parents ON (children.partner_parent_id = parents.partner_id)
+		INNER JOIN borhandw.dwh_dim_partner_group_type group_types ON (IF(parents.partner_id IS NOT NULL, parents.partner_group_type_id,children.partner_group_type_id) = group_types.partner_group_type_id)
+		LEFT OUTER JOIN borhandw.dwh_dim_partner_class_of_service d_cos ON (children.class_of_service_id = d_cos.partner_class_of_service_id)
+		LEFT OUTER JOIN borhandw.dwh_dim_partner_vertical d_vertical ON (children.vertical_id = d_vertical.partner_vertical_id)
 		WHERE parents.partner_group_type_id <> 3 OR parents.partner_group_type_id IS NULL;
 END$$
 

@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 DROP TABLE IF EXISTS `dwh_dim_kusers`;
 
@@ -61,8 +61,8 @@ CREATE TABLE `dwh_dim_kusers` (
   KEY `operational_measures_updated_at` (`operational_measures_updated_at`)
 ) ENGINE=INNODB  DEFAULT CHARSET=utf8;
 
-CREATE TRIGGER `kalturadw`.`dwh_dim_kusers_setcreationtime_oninsert` BEFORE INSERT
-    ON `kalturadw`.`dwh_dim_kusers`
+CREATE TRIGGER `borhandw`.`dwh_dim_kusers_setcreationtime_oninsert` BEFORE INSERT
+    ON `borhandw`.`dwh_dim_kusers`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();
 

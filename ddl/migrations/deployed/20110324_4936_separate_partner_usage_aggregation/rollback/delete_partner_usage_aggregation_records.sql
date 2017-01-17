@@ -1,2 +1,2 @@
-delete from kalturadw.aggr_managment 
+delete from borhandw.aggr_managment 
 where aggr_name = 'partner_usage'

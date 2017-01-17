@@ -1,9 +1,9 @@
 #!/bin/bash
-. /etc/kaltura.d/system.ini
+. /etc/borhan.d/system.ini
 
 ROOT_DIR=$BASE_DIR/dwh
 MAIL_SUBJECT="Daily Usage Report"
-RECIPIENTS="orly.lampert@kaltura.com"
+RECIPIENTS="orly.lampert@borhan.com"
 ATTACH=/tmp/ingestion_dashboard.pdf
 REPORT=ingestion_monthly.rptdesign
 OUT=PDF
@@ -23,6 +23,6 @@ do      case "$o" in
 done
 
 res=0
-        export BIRT_HOME=/home/kaltura/birt-runtime-4_2_1/
+        export BIRT_HOME=/home/borhan/birt-runtime-4_2_1/
         sh $BIRT_HOME/ReportEngine/genReport.sh -m runrender -f $OUT -p "DateIDParam=$STARTDATE" -o $ATTACH $ROOT_DIR/reports/$REPORT 
 

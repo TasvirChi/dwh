@@ -1,4 +1,4 @@
-USE `kalturadw`;
+USE `borhandw`;
 
 CREATE TABLE `dwh_hourly_events_uid` (
   `partner_id` INT(11) NOT NULL DEFAULT '0',

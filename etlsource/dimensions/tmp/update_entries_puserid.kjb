@@ -23,11 +23,11 @@
         </parameter>
     </parameters>
   <connection>
-    <name>Kaltura</name>
+    <name>Borhan</name>
     <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -47,11 +47,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writable</name>
+    <name>Borhan_Writable</name>
     <server>${OpWritableDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
@@ -72,11 +72,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -96,11 +96,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_bisources</name>
+    <name>borhandw_bisources</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_bisources</database>
+    <database>borhandw_bisources</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -119,36 +119,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
-    <port>${DbPort}</port>
-    <username>${DbUser}</username>
-    <password>${DbPassword}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>KalturaLogs</name>
-    <server>${DbHostName}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>kalturalog</database>
+    <database>borhandw_ds</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -169,11 +144,36 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaMonitoring</name>
+    <name>BorhanLogs</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>borhanlog</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>BorhanMonitoring</name>
     <server>${MonitoringDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${MonitoringDbPort}</port>
     <username>${MonitoringDbUser}</username>
     <password>${MonitoringDbPassword}</password>
@@ -193,11 +193,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaReadDW</name>
+    <name>BorhanReadDW</name>
     <server>${DbReadHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbReadPort}</port>
     <username>${DbReadUser}</username>
     <password>${DbReadPassword}</password>
@@ -277,7 +277,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#47;opt&#47;kaltura&#47;dwh&#47;etlsource&#47;dimensions&#47;tmp&#47;update_entries_puserid.ktr</filename>
+      <filename>&#47;opt&#47;borhan&#47;dwh&#47;etlsource&#47;dimensions&#47;tmp&#47;update_entries_puserid.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>

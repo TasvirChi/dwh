@@ -13,11 +13,11 @@
     <parameters>
     </parameters>
   <connection>
-    <name>Kaltura</name>
+    <name>Borhan</name>
     <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -37,11 +37,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writable</name>
+    <name>Borhan_Writable</name>
     <server>${OpWritableDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
@@ -62,11 +62,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -86,11 +86,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_bisources</name>
+    <name>borhandw_bisources</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_bisources</database>
+    <database>borhandw_bisources</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -109,11 +109,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
+    <database>borhandw_ds</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -134,11 +134,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW_read</name>
+    <name>BorhanDW_read</name>
     <server>${ReadDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${ReadDbPort}</port>
     <username>${ReadDbUser}</username>
     <password>${ReadDbPassword}</password>
@@ -158,11 +158,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaLogs</name>
+    <name>BorhanLogs</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturalog</database>
+    <database>borhanlog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -183,11 +183,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaMonitoring</name>
+    <name>BorhanMonitoring</name>
     <server>${MonitoringDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${MonitoringDbPort}</port>
     <username>${MonitoringDbUser}</username>
     <password>${MonitoringDbPassword}</password>
@@ -207,11 +207,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaReadDW</name>
+    <name>BorhanReadDW</name>
     <server>${DbReadHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbReadPort}</port>
     <username>${DbReadUser}</username>
     <password>${DbReadPassword}</password>
@@ -407,7 +407,7 @@
       <name>Check if update_dims_lock is seized</name>
       <description>Evaluate rows number in a table</description>
       <type>EVAL_TABLE_CONTENT</type>
-      <connection>kalturadw_ds</connection>
+      <connection>borhandw_ds</connection>
       <schemaname/>
       <tablename>locks</tablename>
       <success_condition>rows_count_greater</success_condition>

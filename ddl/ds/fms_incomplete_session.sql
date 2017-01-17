@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw_ds`.`fms_incomplete_sessions`;
+DROP TABLE IF EXISTS `borhandw_ds`.`fms_incomplete_sessions`;
 
-CREATE TABLE `kalturadw_ds`.`fms_incomplete_sessions` (
+CREATE TABLE `borhandw_ds`.`fms_incomplete_sessions` (
   `session_id` varchar(20) DEFAULT NULL,
   `session_time` datetime DEFAULT NULL,
   `updated_time` datetime DEFAULT NULL,

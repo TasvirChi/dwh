@@ -9,7 +9,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or  implied. Please refer to 
  * the license for the specific language governing your rights and limitations.*/
 
-package org.kaltura.mysql;
+package org.borhan.mysql;
 
 import java.util.List;
 import java.util.Map;

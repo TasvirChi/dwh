@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_entries_sizes`$$
 
@@ -14,7 +14,7 @@ BEGIN
 	
 	CREATE TEMPORARY TABLE today_file_sync_subset AS
 	SELECT s.id, s.partner_id, IFNULL(a.entry_id, object_id) entry_id, object_id, object_type, object_sub_type, IFNULL(file_size, 0) file_size
-	FROM kalturadw.dwh_dim_file_sync s LEFT OUTER JOIN kalturadw.dwh_dim_flavor_asset a
+	FROM borhandw.dwh_dim_file_sync s LEFT OUTER JOIN borhandw.dwh_dim_flavor_asset a
 	ON (object_type = 4 AND s.object_id = a.id AND a.entry_id IS NOT NULL)
 	WHERE s.updated_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
 	AND object_type IN (1,4)
@@ -35,7 +35,7 @@ BEGIN
 	
 	CREATE TEMPORARY TABLE yesterday_file_sync_subset AS
 	SELECT f.id, f.partner_id, f.object_id, f.object_type, f.object_sub_type, IFNULL(f.file_size, 0) file_size
-	FROM today_file_sync_max_version_ids today, kalturadw.dwh_dim_file_sync f
+	FROM today_file_sync_max_version_ids today, borhandw.dwh_dim_file_sync f
 	USE INDEX (partner_id_object_id_object_type_index)
 	WHERE f.object_id = today.object_id
 	AND f.partner_id = today.partner_id
@@ -56,7 +56,7 @@ BEGIN
 	SELECT max_id.partner_id, max_id.object_id, max_id.object_type, max_id.object_sub_type, original.file_size 
 	FROM yesterday_file_sync_max_version_ids max_id, yesterday_file_sync_subset original
 	WHERE max_id.id = original.id;
-	INSERT INTO kalturadw.dwh_fact_entries_sizes (partner_id, entry_id, entry_additional_size_kb, entry_size_date, entry_size_date_id)
+	INSERT INTO borhandw.dwh_fact_entries_sizes (partner_id, entry_id, entry_additional_size_kb, entry_size_date, entry_size_date_id)
 	SELECT t.partner_id, t.entry_id, ROUND(SUM(t.file_size - IFNULL(Y.file_size, 0))/1024, 3) entry_additional_size_kb,v_date, p_date_id 
 	FROM today_sizes t LEFT OUTER JOIN yesterday_sizes Y
 	ON t.object_id = Y.object_id
@@ -70,9 +70,9 @@ BEGIN
 	
 	
 	
-	INSERT INTO kalturadw.dwh_fact_entries_sizes (partner_id, entry_id, entry_size_date, entry_size_date_id, entry_additional_size_kb)
+	INSERT INTO borhandw.dwh_fact_entries_sizes (partner_id, entry_id, entry_size_date, entry_size_date_id, entry_additional_size_kb)
 	SELECT es.partner_id, es.entry_id, v_date, p_date_id, -SUM(entry_additional_size_kb)
-		FROM kalturadw.dwh_dim_entries e INNER JOIN kalturadw.dwh_fact_entries_sizes es
+		FROM borhandw.dwh_dim_entries e INNER JOIN borhandw.dwh_fact_entries_sizes es
 		ON (e.entry_id = es.entry_id AND es.entry_size_date_id < p_date_id)
 		WHERE e.modified_at BETWEEN v_date AND v_date + INTERVAL 1 DAY
 		AND e.partner_id NOT IN (100 /*Default Partner*/ , -1 /*Batch Partner*/ , -2 /*Admin Console*/, 0/* Common Partner Content*/, 99/*Template Partner*/)

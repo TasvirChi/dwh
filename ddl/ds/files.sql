@@ -1,4 +1,4 @@
-﻿CREATE TABLE kalturadw_ds.`files` (
+﻿CREATE TABLE borhandw_ds.`files` (
           `file_id` DOUBLE NOT NULL AUTO_INCREMENT,              
           `file_name` VARCHAR(750) DEFAULT NULL,                 
           `file_status` VARCHAR(60) DEFAULT NULL,                

@@ -2,7 +2,7 @@
 /**
  * PHPMailer language file.  
  * Danish Version
- * Author: Mikael Stokkebro <info@stokkebro.dk>
+ * Author: Mibael Stokkebro <info@stokkebro.dk>
  * 
  * @package External
  * @subpackage PHPMailer

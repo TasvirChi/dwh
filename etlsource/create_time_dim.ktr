@@ -62,11 +62,11 @@ It determines the year, month, day, quarter, week, etc and adds the description 
     </notepad>
   </notepads>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaDW</database>
+    <database>borhanDW</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -85,11 +85,11 @@ It determines the year, month, day, quarter, week, etc and adds the description 
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
+    <database>borhandw_ds</database>
     <port>3306</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -1357,7 +1357,7 @@ It determines the year, month, day, quarter, week, etc and adds the description 
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <schema/>
     <table>Dwh_Dim_Time</table>
     <commit>100</commit>

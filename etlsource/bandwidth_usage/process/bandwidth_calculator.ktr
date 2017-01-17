@@ -69,11 +69,11 @@
   <notepads>
   </notepads>
   <connection>
-    <name>Kaltura</name>
+    <name>Borhan</name>
     <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -93,11 +93,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writable</name>
+    <name>Borhan_Writable</name>
     <server>${OpWritableDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
@@ -118,11 +118,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writeable</name>
+    <name>Borhan_Writeable</name>
     <server>${OpWriteableDbHost}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpWriteableDbUser}</username>
     <password>${OpWriteableDbPassword}</password>
@@ -143,11 +143,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -167,11 +167,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_bisources</name>
+    <name>borhandw_bisources</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_bisources</database>
+    <database>borhandw_bisources</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -190,36 +190,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
-    <port>${DbPort}</port>
-    <username>${DbUser}</username>
-    <password>${DbPassword}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>KalturaLogs</name>
-    <server>${DbHostName}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>kalturalog</database>
+    <database>borhandw_ds</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -240,11 +215,36 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaMonitoring</name>
+    <name>BorhanLogs</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>borhanlog</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>BorhanMonitoring</name>
     <server>${MonitoringDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${MonitoringDbPort}</port>
     <username>${MonitoringDbUser}</username>
     <password>${MonitoringDbPassword}</password>
@@ -264,11 +264,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaReadDW</name>
+    <name>BorhanReadDW</name>
     <server>${DbReadHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbReadPort}</port>
     <username>${DbReadUser}</username>
     <password>${DbReadPassword}</password>
@@ -623,7 +623,7 @@
         <jsScript_script>&#47;&#47;Script here
 var ignoredLine = false;
 if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai_vod_http&apos;) {
-	var junkData = [&quot;.kaltura.com&#47;flash&#47;kae&#47;&quot;,&quot;.kaltura.com&#47;crossdomain.xml&quot;,&quot;.kaltura.com&#47;content&#47;uiconf&quot;,&quot;.kaltura.com&#47;swf&#47;plugins&quot;];
+	var junkData = [&quot;.borhan.com&#47;flash&#47;bae&#47;&quot;,&quot;.borhan.com&#47;crossdomain.xml&quot;,&quot;.borhan.com&#47;content&#47;uiconf&quot;,&quot;.borhan.com&#47;swf&#47;plugins&quot;];
 	for (i=0;i&lt;junkData.length;i++) { 
 		if (indexOf(row, junkData[i]) &gt; -1) {
 			ignoredLine = true;
@@ -700,7 +700,7 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai_vo
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <rowlimit>0</rowlimit>
     <sql>select 1 country_id, 2 location_id</sql>
     <outer_join>N</outer_join>
@@ -781,7 +781,7 @@ if (getVariable(&apos;BandwidthSourceName&apos;,&apos;&apos;) == &apos;akamai_vo
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <rowlimit>0</rowlimit>
     <sql>select 1 bandwidth_source_id</sql>
     <outer_join>Y</outer_join>
@@ -921,7 +921,7 @@ function ip2number (ip_address)
 	return numeric_ip;
 }
 
-var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
+var ipLookupSQL = &quot;SELECT country_id, location_id FROM borhandw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM borhandw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>ipLookupSQL</name>
         <rename>ipLookupSQL</rename>
         <type>String</type>
@@ -1357,7 +1357,7 @@ var url = substr(url, 0, 200);</jsScript_script>
 
 var bandwidth_source_id_sql=null;
 
-var bandwidth_source_id_sql = &quot;SELECT bandwidth_source_id FROM kalturadw.dwh_dim_http_delivery_source where process_id = &quot; + process_id + &quot; AND &apos;&quot; + file_name + &quot;&apos; REGEXP file_regex&quot;;
+var bandwidth_source_id_sql = &quot;SELECT bandwidth_source_id FROM borhandw.dwh_dim_http_delivery_source where process_id = &quot; + process_id + &quot; AND &apos;&quot; + file_name + &quot;&apos; REGEXP file_regex&quot;;
 
 
 </jsScript_script>

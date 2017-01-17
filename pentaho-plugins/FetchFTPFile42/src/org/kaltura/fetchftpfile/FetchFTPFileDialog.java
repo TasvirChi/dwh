@@ -16,7 +16,7 @@
  *
  */
 
-package org.kaltura.fetchftpfile;
+package org.borhan.fetchftpfile;
 
 import java.util.ArrayList;
 import java.util.List;

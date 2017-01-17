@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 DROP TABLE IF EXISTS `dwh_hourly_events_widget_innodb`;
 
 CREATE TABLE `dwh_hourly_events_widget_innodb` (
@@ -52,4 +52,4 @@ CREATE TABLE `dwh_hourly_events_widget_innodb` (
 /*!50100 PARTITION BY RANGE (date_id)
 (PARTITION p_201001 VALUES LESS THAN (20100201) ENGINE = INNODB)*/;
 
-CALL kalturadw.add_monthly_partition_for_table('dwh_hourly_events_widget_innodb');
+CALL borhandw.add_monthly_partition_for_table('dwh_hourly_events_widget_innodb');

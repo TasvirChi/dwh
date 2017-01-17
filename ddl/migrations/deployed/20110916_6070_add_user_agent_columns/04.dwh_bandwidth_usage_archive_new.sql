@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 DROP TABLE IF EXISTS `dwh_fact_bandwidth_usage_archive_new`;
 CREATE TABLE `dwh_fact_bandwidth_usage_archive_new` (

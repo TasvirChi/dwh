@@ -1,4 +1,4 @@
-CREATE TABLE `kalturadw`.`dwh_dim_conversion_profiles_2` (
+CREATE TABLE `borhandw`.`dwh_dim_conversion_profiles_2` (
   `conversion_profile_id` int(11) NOT NULL auto_increment,
   `partner_id` int(11) NOT NULL,
   `name` varchar(128) NOT NULL default '',

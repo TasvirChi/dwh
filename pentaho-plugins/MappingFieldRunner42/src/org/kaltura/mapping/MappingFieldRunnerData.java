@@ -10,7 +10,7 @@
  * the license for the specific language governing your rights and limitations.*/
  
 
-package org.kaltura.mapping;
+package org.borhan.mapping;
 
 import java.util.ArrayList;
 import java.util.List;

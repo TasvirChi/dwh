@@ -4,6 +4,6 @@ MySQL - 5.1.37-log
 *********************************************************************
 */
 
-use kalturadw;
+use borhandw;
 
 ALTER TABLE `dwh_dim_flavor_asset` DROP COLUMN tags;

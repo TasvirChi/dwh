@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP FUNCTION IF EXISTS `calc_partner_monthly_storage`$$
 

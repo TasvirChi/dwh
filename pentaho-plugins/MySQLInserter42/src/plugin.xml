@@ -5,7 +5,7 @@
    description="MySQL Inserter Plugin"
    tooltip="This is table output plugin optimized for mysql"
    category="Output"
-   classname="org.kaltura.mysql.MySQLTableOutputMeta">
+   classname="org.borhan.mysql.MySQLTableOutputMeta">
    <libraries>
     <library name="mysqlinserter.jar"/>
     </libraries>

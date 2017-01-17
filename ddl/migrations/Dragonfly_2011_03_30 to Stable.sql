@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw_ds`$$
+USE `borhandw_ds`$$
 
 DROP PROCEDURE IF EXISTS `drop_ods_partition`$$
 
@@ -14,10 +14,10 @@ BEGIN
 	FROM information_schema.partitions 
 	WHERE partition_name = CONCAT('p_',partition_number)
 	AND table_name = p_table_name
-	AND table_schema = 'kalturadw_ds';
+	AND table_schema = 'borhandw_ds';
 	
 	IF(p_exists>0) THEN
-		SET @s = CONCAT('alter table kalturadw_ds.',p_table_name,' drop PARTITION  p_' ,
+		SET @s = CONCAT('alter table borhandw_ds.',p_table_name,' drop PARTITION  p_' ,
 				partition_number );
 		PREPARE stmt FROM  @s;
 		EXECUTE stmt;
@@ -29,7 +29,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 
@@ -43,7 +43,7 @@ BEGIN
 	
 	SELECT aggr_table, aggr_id_field, aggr_join_stmt
 	INTO  v_aggr_table, v_aggr_id_field, v_aggr_join_stmt
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;
 	
 	IF ( v_aggr_id_field <> "" ) THEN
@@ -204,7 +204,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `add_partitions`$$
 
@@ -226,8 +226,8 @@ END$$
 
 DELIMITER ;
 
-DROP TABLE IF EXISTS `kalturadw_ds`.`ds_bandwidth_usage`;
-CREATE TABLE `kalturadw_ds`.`ds_bandwidth_usage` (
+DROP TABLE IF EXISTS `borhandw_ds`.`ds_bandwidth_usage`;
+CREATE TABLE `borhandw_ds`.`ds_bandwidth_usage` (
   `cycle_id` INT(11) NOT NULL,
   `file_id` INT(11) NOT NULL,
   `partner_id` INT(11) NOT NULL DEFAULT -1,
@@ -240,8 +240,8 @@ CREATE TABLE `kalturadw_ds`.`ds_bandwidth_usage` (
 PARTITION BY LIST (cycle_id)
 (PARTITION p_0 VALUES IN (0) ENGINE = INNODB);
 
-DROP TABLE IF EXISTS `kalturadw_ds`.`ds_events`;
-CREATE TABLE `kalturadw_ds`.`ds_events`
+DROP TABLE IF EXISTS `borhandw_ds`.`ds_events`;
+CREATE TABLE `borhandw_ds`.`ds_events`
      (   file_id INT NOT NULL
 	, event_id INT  NOT NULL
 	, event_type_id SMALLINT  NOT NULL
@@ -272,8 +272,8 @@ CREATE TABLE `kalturadw_ds`.`ds_events`
 	, referrer_id INT(11)) ENGINE=INNODB  DEFAULT CHARSET=utf8  
      PARTITION BY LIST(file_id) (PARTITION p_0 VALUES IN (0));
 
-DROP TABLE IF EXISTS `kalturadw_ds`.`ods_fms_session_events`;
-CREATE TABLE `kalturadw_ds`.`ods_fms_session_events` (
+DROP TABLE IF EXISTS `borhandw_ds`.`ods_fms_session_events`;
+CREATE TABLE `borhandw_ds`.`ods_fms_session_events` (
   `file_id` INT(11) UNSIGNED NOT NULL,
   `event_type_id` TINYINT(3) UNSIGNED NOT NULL,
   `event_category_id` TINYINT(3) UNSIGNED NOT NULL,
@@ -323,13 +323,13 @@ CREATE TABLE `kalturadw_ds`.`ods_fms_session_events` (
  PARTITION BY LIST (file_id)
 (PARTITION p_0 VALUES IN (0) ENGINE = MYISAM);
 
-ALTER TABLE kalturadw_ds.invalid_ds_lines ENGINE = INNODB;
-ALTER TABLE kalturadw_ds.invalid_ds_lines_error_codes ENGINE = INNODB;
-ALTER TABLE kalturadw_ds.invalid_event_lines ENGINE = INNODB;
-ALTER TABLE kalturadw_ds.invalid_fms_event_lines ENGINE = INNODB;
+ALTER TABLE borhandw_ds.invalid_ds_lines ENGINE = INNODB;
+ALTER TABLE borhandw_ds.invalid_ds_lines_error_codes ENGINE = INNODB;
+ALTER TABLE borhandw_ds.invalid_event_lines ENGINE = INNODB;
+ALTER TABLE borhandw_ds.invalid_fms_event_lines ENGINE = INNODB;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_bandwidth_usage_innodb`;
-CREATE TABLE `kalturadw`.`dwh_fact_bandwidth_usage_innodb` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_fact_bandwidth_usage_innodb`;
+CREATE TABLE `borhandw`.`dwh_fact_bandwidth_usage_innodb` (
   `file_id` INT(11) NOT NULL,
   `partner_id` INT(11) NOT NULL DEFAULT '-1',
   `activity_date_id` INT(11) DEFAULT '-1',
@@ -481,8 +481,8 @@ CREATE TABLE `kalturadw`.`dwh_fact_bandwidth_usage_innodb` (
  PARTITION p_20110419 VALUES LESS THAN (20110420) ENGINE = INNODB,
  PARTITION p_20110420 VALUES LESS THAN (20110421) ENGINE = INNODB);
  
- DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_events_innodb`;
-CREATE TABLE `kalturadw`.`dwh_fact_events_innodb` (
+ DROP TABLE IF EXISTS `borhandw`.`dwh_fact_events_innodb`;
+CREATE TABLE `borhandw`.`dwh_fact_events_innodb` (
   `file_id` INT(11) NOT NULL,
   `event_id` INT(11) NOT NULL,
   `event_type_id` SMALLINT(6) NOT NULL,
@@ -641,8 +641,8 @@ CREATE TABLE `kalturadw`.`dwh_fact_events_innodb` (
  PARTITION p_20110419 VALUES LESS THAN (20110420) ENGINE = INNODB,
  PARTITION p_20110420 VALUES LESS THAN (20110421) ENGINE = INNODB);
  
- DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_fms_session_events_innodb`;
-CREATE TABLE `kalturadw`.`dwh_fact_fms_session_events_innodb` (
+ DROP TABLE IF EXISTS `borhandw`.`dwh_fact_fms_session_events_innodb`;
+CREATE TABLE `borhandw`.`dwh_fact_fms_session_events_innodb` (
   `file_id` INT(11) UNSIGNED NOT NULL,
   `event_type_id` TINYINT(3) UNSIGNED NOT NULL,
   `event_category_id` TINYINT(3) UNSIGNED NOT NULL,
@@ -812,8 +812,8 @@ PARTITION BY RANGE (event_date_id)
  PARTITION p_20110419 VALUES LESS THAN (20110420) ENGINE = INNODB,
  PARTITION p_20110420 VALUES LESS THAN (20110421) ENGINE = INNODB);
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_fms_sessions_innodb`;
-CREATE TABLE `kalturadw`.`dwh_fact_fms_sessions_innodb` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_fact_fms_sessions_innodb`;
+CREATE TABLE `borhandw`.`dwh_fact_fms_sessions_innodb` (
   `session_id` VARCHAR(20) NOT NULL,
   `session_time` DATETIME NOT NULL,
   `session_date_id` INT(11) UNSIGNED DEFAULT NULL,
@@ -945,7 +945,7 @@ CREATE TABLE `kalturadw`.`dwh_fact_fms_sessions_innodb` (
  
  DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `populate_new_facts`$$
 
@@ -954,7 +954,7 @@ BEGIN
 	DECLARE v_start_date_id INT;
 	DECLARE v_end_date_id INT;
 	DECLARE done INT DEFAULT 0;	
-	DECLARE populate_new_fact_cursor CURSOR FOR SELECT day_id start_date_id, (DATE(day_id) + INTERVAL 1 MONTH)*1 end_date_id FROM kalturadw.dwh_dim_time WHERE day_of_month = 1;
+	DECLARE populate_new_fact_cursor CURSOR FOR SELECT day_id start_date_id, (DATE(day_id) + INTERVAL 1 MONTH)*1 end_date_id FROM borhandw.dwh_dim_time WHERE day_of_month = 1;
 	DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
 	OPEN populate_new_fact_cursor;
 	
@@ -964,56 +964,56 @@ BEGIN
 			LEAVE read_loop;
 		END IF;
 		
-		INSERT INTO kalturadw.dwh_fact_events_innodb
+		INSERT INTO borhandw.dwh_fact_events_innodb
 		SELECT file_id, event_id, event_type_id, client_version, event_time, event_date_id, event_hour_id, session_id, 
 		partner_id, entry_id, unique_viewer, widget_id, ui_conf_id, uid, current_point, duration, user_ip, 
 		user_ip_number, country_id, location_id, process_duration, control_id, seek, new_point, domain_id, 
-		entry_media_type_id, entry_partner_id, referrer_id FROM kalturadw.dwh_fact_events
+		entry_media_type_id, entry_partner_id, referrer_id FROM borhandw.dwh_fact_events
 		WHERE event_time >= DATE(v_start_date_id) AND event_time < DATE(v_end_date_id);
 	
-		INSERT INTO kalturadw.dwh_fact_bandwidth_usage_innodb
-		SELECT * FROM kalturadw.dwh_fact_bandwidth_usage
+		INSERT INTO borhandw.dwh_fact_bandwidth_usage_innodb
+		SELECT * FROM borhandw.dwh_fact_bandwidth_usage
 		WHERE activity_date_id >= v_start_date_id AND activity_date_id < v_end_date_id;
 		
-		INSERT INTO kalturadw.dwh_fact_fms_session_events_innodb
-		SELECT * FROM kalturadw.dwh_fact_fms_session_events
+		INSERT INTO borhandw.dwh_fact_fms_session_events_innodb
+		SELECT * FROM borhandw.dwh_fact_fms_session_events
 		WHERE event_time >= DATE(v_start_date_id) AND event_time < DATE(v_end_date_id);
 	
-		INSERT INTO kalturadw.dwh_fact_fms_sessions_innodb
-		SELECT * FROM kalturadw.dwh_fact_fms_sessions
+		INSERT INTO borhandw.dwh_fact_fms_sessions_innodb
+		SELECT * FROM borhandw.dwh_fact_fms_sessions
 		WHERE session_time >= DATE(v_start_date_id) AND session_time < DATE(v_end_date_id);
 	END LOOP;
 	CLOSE populate_new_fact_cursor;
 	
-	ALTER TABLE kalturadw.dwh_fact_events_innodb
+	ALTER TABLE borhandw.dwh_fact_events_innodb
 		ADD PRIMARY KEY (`file_id`,`event_id`,`event_date_id`),
 		ADD KEY `Entry_id` (`entry_id`),
 		ADD KEY `partner_id_event_type_id_time` (`partner_id`,`event_type_id`,`event_time`),
 		ADD KEY `event_date_id` (`event_date_id`),
 		ADD KEY `domain_id` (`domain_id`);
 
-	ALTER TABLE kalturadw.dwh_fact_bandwidth_usage_innodb
+	ALTER TABLE borhandw.dwh_fact_bandwidth_usage_innodb
 		ADD KEY `partner_id` (`partner_id`),
 		ADD KEY `file_id` (`file_id`);
  
-	ALTER TABLE kalturadw.dwh_fact_fms_session_events_innodb
+	ALTER TABLE borhandw.dwh_fact_fms_session_events_innodb
 		ADD KEY `partner_id_event_type_id_time` (`partner_id`,`event_type_id`,`event_time`);
 	
-	RENAME TABLE kalturadw.dwh_fact_events TO kalturadw.dwh_fact_events_myisam;
-	RENAME TABLE kalturadw.dwh_fact_events_innodb TO kalturadw.dwh_fact_events;
-	RENAME TABLE kalturadw.dwh_fact_bandwidth_usage TO kalturadw.dwh_fact_bandwidth_usage_myisam;
-	RENAME TABLE kalturadw.dwh_fact_bandwidth_usage_innodb TO kalturadw.dwh_fact_bandwidth_usage;
-	RENAME TABLE kalturadw.dwh_fact_fms_session_events TO kalturadw.dwh_fact_fms_session_events_myisam;
-	RENAME TABLE kalturadw.dwh_fact_fms_session_events_innodb TO kalturadw.dwh_fact_fms_session_events;
-	RENAME TABLE kalturadw.dwh_fact_fms_sessions TO kalturadw.dwh_fact_fms_sessions_myisam;
-	RENAME TABLE kalturadw.dwh_fact_fms_sessions_innodb TO kalturadw.dwh_fact_fms_sessions;
+	RENAME TABLE borhandw.dwh_fact_events TO borhandw.dwh_fact_events_myisam;
+	RENAME TABLE borhandw.dwh_fact_events_innodb TO borhandw.dwh_fact_events;
+	RENAME TABLE borhandw.dwh_fact_bandwidth_usage TO borhandw.dwh_fact_bandwidth_usage_myisam;
+	RENAME TABLE borhandw.dwh_fact_bandwidth_usage_innodb TO borhandw.dwh_fact_bandwidth_usage;
+	RENAME TABLE borhandw.dwh_fact_fms_session_events TO borhandw.dwh_fact_fms_session_events_myisam;
+	RENAME TABLE borhandw.dwh_fact_fms_session_events_innodb TO borhandw.dwh_fact_fms_session_events;
+	RENAME TABLE borhandw.dwh_fact_fms_sessions TO borhandw.dwh_fact_fms_sessions_myisam;
+	RENAME TABLE borhandw.dwh_fact_fms_sessions_innodb TO borhandw.dwh_fact_fms_sessions;
     END$$
 
 DELIMITER ;
 
-CALL kalturadw.populate_new_facts();
+CALL borhandw.populate_new_facts();
 
-USE `kalturadw_ds`;
+USE `borhandw_ds`;
 
 CREATE TABLE version_management (
 	`version` INT(11),

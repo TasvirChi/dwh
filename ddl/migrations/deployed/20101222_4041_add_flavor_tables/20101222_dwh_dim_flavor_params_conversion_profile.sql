@@ -3,7 +3,7 @@ SQLyog Community v8.7
 MySQL - 5.1.37-log 
 *********************************************************************
 */
-use kalturadw;
+use borhandw;
 
 drop table if exists `dwh_dim_flavor_params_conversion_profile`;
 

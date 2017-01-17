@@ -1,4 +1,4 @@
-use kalturadw;
+use borhandw;
 
 DROP TABLE IF EXISTS `dwh_fact_events_archive`;
 CREATE TABLE `dwh_fact_events_archive` (

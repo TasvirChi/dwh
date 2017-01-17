@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_widget_security_policy`;
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_widget_security_policy`;
 
-CREATE TABLE `kalturadw`.`dwh_dim_widget_security_policy` (
+CREATE TABLE `borhandw`.`dwh_dim_widget_security_policy` (
   `widget_security_policy_id` SMALLINT NOT NULL ,
   `widget_security_policy_name` VARCHAR(50),
    dwh_creation_date TIMESTAMP NOT NULL DEFAULT 0,
@@ -11,8 +11,8 @@ CREATE TABLE `kalturadw`.`dwh_dim_widget_security_policy` (
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8; 
 
 
-create trigger `kalturadw`.`dwh_dim_widget_security_policy_setcreationtime_oninsert` before insert
-    on `kalturadw`.`dwh_dim_widget_security_policy`
+create trigger `borhandw`.`dwh_dim_widget_security_policy_setcreationtime_oninsert` before insert
+    on `borhandw`.`dwh_dim_widget_security_policy`
     for each row 
 	set new.dwh_creation_date = now();
 	

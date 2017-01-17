@@ -7,7 +7,7 @@ class DWHInspector
 {
 	public static function getCycle($status)
 	{
-		$res = MySQLRunner::execute("SELECT cycle_id FROM kalturadw_ds.cycles WHERE status = '?'",array(0=>$status));
+		$res = MySQLRunner::execute("SELECT cycle_id FROM borhandw_ds.cycles WHERE status = '?'",array(0=>$status));
 		
 		if(1!=count($res))
 		{
@@ -23,7 +23,7 @@ class DWHInspector
 	
 	public static function getFiles($cycleId)
 	{
-		$res = MySQLRunner::execute("SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ? AND file_status = 'IN_CYCLE'",array(0=>$cycleId));
+		$res = MySQLRunner::execute("SELECT file_id FROM borhandw_ds.files WHERE cycle_id = ? AND file_status = 'IN_CYCLE'",array(0=>$cycleId));
 		$files = array();
 		foreach ($res as $row)
 		{
@@ -34,7 +34,7 @@ class DWHInspector
 	
 	public static function getFileName($fileId)
 	{
-		$res = MySQLRunner::execute("SELECT file_name FROM kalturadw_ds.files WHERE file_id = ?",array(0=>$fileId));
+		$res = MySQLRunner::execute("SELECT file_name FROM borhandw_ds.files WHERE file_id = ?",array(0=>$fileId));
 		$files = array();
 		foreach ($res as $row)
 		{
@@ -77,13 +77,13 @@ class DWHInspector
 	
 	public static function markAllAsAggregated()
 	{
-		MySQLRunner::execute("UPDATE kalturadw.aggr_managment SET data_insert_time = date(19700101)");
-	        MySQLRunner::execute("UPDATE kalturadw_ds.parameters SET date_value = now() where id = 2");
+		MySQLRunner::execute("UPDATE borhandw.aggr_managment SET data_insert_time = date(19700101)");
+	        MySQLRunner::execute("UPDATE borhandw_ds.parameters SET date_value = now() where id = 2");
 	}
 	
 	public static function getAggregations($dateId, $hourId, $getAllAggregations = 0)
 	{
-		$rows = MySQLRunner::execute("SELECT DISTINCT aggr_name FROM kalturadw.aggr_managment WHERE date_id = ? AND hour_id = ? AND (1 = ? or ifnull(start_time,date(19700101) < data_insert_time))", 
+		$rows = MySQLRunner::execute("SELECT DISTINCT aggr_name FROM borhandw.aggr_managment WHERE date_id = ? AND hour_id = ? AND (1 = ? or ifnull(start_time,date(19700101) < data_insert_time))", 
 																					array(0=>$dateId,1=>$hourId, 2=>$getAllAggregations));
 		$res = array();
 		foreach ($rows as $row)
@@ -96,14 +96,14 @@ class DWHInspector
 	public static function getAggrDatesAndHours($cycleId)
 	{
 		$res = array();
-		$staging_areas = MySQLRunner::execute("SELECT fact_table_name, aggr_date_field, hour_id_field FROM kalturadw_ds.cycles c, kalturadw_ds.staging_areas s, kalturadw_ds.fact_tables f WHERE cycle_id = ? and c.process_id = s.process_id and s.target_table_id = f.fact_table_id", array(0=>$cycleId));
+		$staging_areas = MySQLRunner::execute("SELECT fact_table_name, aggr_date_field, hour_id_field FROM borhandw_ds.cycles c, borhandw_ds.staging_areas s, borhandw_ds.fact_tables f WHERE cycle_id = ? and c.process_id = s.process_id and s.target_table_id = f.fact_table_id", array(0=>$cycleId));
 		foreach ($staging_areas as $staging_area)
 		{
 			$date_id_column = $staging_area["aggr_date_field"];
 			$hour_id_column = $staging_area["hour_id_field"];
 			$table_name = $staging_area["fact_table_name"];
 			
-			$rows = MySQLRunner::execute("SELECT DISTINCT ?, ? FROM ? WHERE file_id in (SELECT file_id FROM kalturadw_ds.files WHERE cycle_id = ? AND file_status = 'IN_CYCLE')",array(0=>$date_id_column, 1=>$hour_id_column, 2=>$table_name, 3=>$cycleId));
+			$rows = MySQLRunner::execute("SELECT DISTINCT ?, ? FROM ? WHERE file_id in (SELECT file_id FROM borhandw_ds.files WHERE cycle_id = ? AND file_status = 'IN_CYCLE')",array(0=>$date_id_column, 1=>$hour_id_column, 2=>$table_name, 3=>$cycleId));
 		
 			$res[$table_name] = array();
 			foreach ($rows as $row)
@@ -122,7 +122,7 @@ class DWHInspector
 
 	public static function getPostTransferAggregationTypes($processID, $factTable = '')
 	{
-		$rows = MySQLRunner::execute("SELECT post_transfer_aggregations FROM kalturadw_ds.staging_areas s, kalturadw_ds.fact_tables f WHERE s.target_table_id = f.fact_table_id and process_id = ? and ('' = '?' or fact_table_name = '?') ", array(0=>$processID, 1=>$factTable, 2=>$factTable));
+		$rows = MySQLRunner::execute("SELECT post_transfer_aggregations FROM borhandw_ds.staging_areas s, borhandw_ds.fact_tables f WHERE s.target_table_id = f.fact_table_id and process_id = ? and ('' = '?' or fact_table_name = '?') ", array(0=>$processID, 1=>$factTable, 2=>$factTable));
 		$aggrTypes = array();
 		foreach ($rows as $row)
 		{
@@ -169,14 +169,14 @@ class DWHInspector
 	
 	public static function createEntriesFromFact()
 	{
-		MySQLRunner::execute('INSERT INTO kalturadw.dwh_dim_entries (entry_id, entry_media_type_id)
-				SELECT DISTINCT entry_id, 1 FROM kalturadw.dwh_fact_events',array());
+		MySQLRunner::execute('INSERT INTO borhandw.dwh_dim_entries (entry_id, entry_media_type_id)
+				SELECT DISTINCT entry_id, 1 FROM borhandw.dwh_fact_events',array());
 	}
 
 	public static function purgeCycles($purgeData=true)
 	{
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.files', array());		
-		MySQLRunner::execute('TRUNCATE TABLE kalturadw_ds.cycles', array());
+		MySQLRunner::execute('TRUNCATE TABLE borhandw_ds.files', array());		
+		MySQLRunner::execute('TRUNCATE TABLE borhandw_ds.cycles', array());
 		if ($purgeData)
 		{
 			self::purgeData();
@@ -185,42 +185,42 @@ class DWHInspector
 
 	private static function purgeData()
 	{
-		MySQLRunner::execute('DELETE FROM kalturadw_ds.ds_events', array());
-                self::dropTablePartitions('kalturadw_ds','ds_events');
-                MySQLRunner::execute('DELETE FROM kalturadw_ds.ds_bandwidth_usage', array());
-                self::dropTablePartitions('kalturadw_ds','ds_bandwidth_usage');
-                MySQLRunner::execute('DELETE FROM kalturadw_ds.ds_fms_session_events', array());
-                self::dropTablePartitions('kalturadw_ds','ds_fms_session_events');
-                MySQLRunner::execute('DELETE FROM kalturadw_ds.invalid_ds_lines', array());
-                MySQLRunner::execute('DELETE FROM kalturadw_ds.invalid_event_lines', array());
-                MySQLRunner::execute('DELETE FROM kalturadw_ds.invalid_fms_event_lines', array());
-				MySQLRunner::execute('DELETE FROM kalturadw_ds.fact_stats', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_dim_entries', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_events', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_bandwidth_usage', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_fms_session_events', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_fact_fms_sessions', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_entry', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_entry_plays_views', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_country', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_domain', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_domain_referrer', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_uid', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_widget', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_events_devices', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_partner', array());
-                MySQLRunner::execute('DELETE FROM kalturadw.dwh_hourly_partner_usage', array());
-                MySQLRunner::execute('UPDATE kalturadw_ds.retention_policy SET archive_start_days_back = 2000 where archive_start_days_back < 180 ', array());
+		MySQLRunner::execute('DELETE FROM borhandw_ds.ds_events', array());
+                self::dropTablePartitions('borhandw_ds','ds_events');
+                MySQLRunner::execute('DELETE FROM borhandw_ds.ds_bandwidth_usage', array());
+                self::dropTablePartitions('borhandw_ds','ds_bandwidth_usage');
+                MySQLRunner::execute('DELETE FROM borhandw_ds.ds_fms_session_events', array());
+                self::dropTablePartitions('borhandw_ds','ds_fms_session_events');
+                MySQLRunner::execute('DELETE FROM borhandw_ds.invalid_ds_lines', array());
+                MySQLRunner::execute('DELETE FROM borhandw_ds.invalid_event_lines', array());
+                MySQLRunner::execute('DELETE FROM borhandw_ds.invalid_fms_event_lines', array());
+				MySQLRunner::execute('DELETE FROM borhandw_ds.fact_stats', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_dim_entries', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_fact_events', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_fact_bandwidth_usage', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_fact_fms_session_events', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_fact_fms_sessions', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_hourly_events_entry', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_entry_plays_views', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_hourly_events_country', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_hourly_events_domain', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_hourly_events_domain_referrer', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_hourly_events_uid', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_hourly_events_widget', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_hourly_events_devices', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_hourly_partner', array());
+                MySQLRunner::execute('DELETE FROM borhandw.dwh_hourly_partner_usage', array());
+                MySQLRunner::execute('UPDATE borhandw_ds.retention_policy SET archive_start_days_back = 2000 where archive_start_days_back < 180 ', array());
 	}
 
 	public static function cleanEtlServers()
 	{
-		MySQLRunner::execute("TRUNCATE TABLE kalturadw_ds.etl_servers");
+		MySQLRunner::execute("TRUNCATE TABLE borhandw_ds.etl_servers");
 	}
 	
 	public static function getEntryIDByFlavorID($flavorID)
 	{
-		$rows = MySQLRunner::execute("select entry_id from kalturadw.dwh_dim_flavor_asset where id = '?' limit 1", array(0=>$flavorID));
+		$rows = MySQLRunner::execute("select entry_id from borhandw.dwh_dim_flavor_asset where id = '?' limit 1", array(0=>$flavorID));
 		if (count($rows) > 0)
 		{
 			return $rows[0]["entry_id"];
@@ -229,7 +229,7 @@ class DWHInspector
 
 	public static function getPartnerIDByEntryID($entryID)
         {
-                $rows = MySQLRunner::execute("select partner_id from kalturadw.dwh_dim_entries where entry_id = '?' limit 1", array(0=>$entryID));
+                $rows = MySQLRunner::execute("select partner_id from borhandw.dwh_dim_entries where entry_id = '?' limit 1", array(0=>$entryID));
                 if (count($rows) > 0)
                 {
                         return $rows[0]["partner_id"];
@@ -244,7 +244,7 @@ class DWHInspector
 						"SUM(IF(event_type='disconnect', client_to_server_bytes, 0)) cs_dis_bytes, ".
 						"SUM(IF(event_type='connect', server_to_client_bytes, 0)) sc_con_bytes, ".
 						"SUM(IF(event_type='disconnect', server_to_client_bytes, 0)) sc_dis_bytes ".
-						"FROM kalturadw_ds.ds_fms_session_events f, kalturadw.dwh_dim_fms_event_type dim ".
+						"FROM borhandw_ds.ds_fms_session_events f, borhandw.dwh_dim_fms_event_type dim ".
 						"WHERE f.event_type_id = dim.event_type_id and file_id = ? ".
 						"GROUP BY session_id ".
 						"HAVING MAX(IF(event_type = 'connect', 1, 0))+MAX(IF(event_type = 'disconnect', 1, 0))+MAX(IF(partner_id NOT IN (?),1,0))=3) a ".
@@ -261,7 +261,7 @@ class DWHInspector
 	public static function getFactFMSSessions($fileID)
 	{
 		$rows = MySQLRunner::execute("SELECT DISTINCT s.session_id, s.session_partner_id, s.total_bytes ".
-					     "FROM kalturadw.dwh_fact_fms_session_events e, kalturadw.dwh_fact_fms_sessions s ".
+					     "FROM borhandw.dwh_fact_fms_session_events e, borhandw.dwh_fact_fms_sessions s ".
 					     "WHERE e.session_id = s.session_id AND file_id = ?", array(0=>$fileID));
 		$res = array();
                 foreach ($rows as $row)
@@ -274,16 +274,16 @@ class DWHInspector
 
 	public static function createNewPartner()
     	{
-		$rows = MySQLRunner::execute("SELECT ifnull(MIN(partner_id),0) - 10 as id FROM kalturadw.dwh_dim_partners;");
+		$rows = MySQLRunner::execute("SELECT ifnull(MIN(partner_id),0) - 10 as id FROM borhandw.dwh_dim_partners;");
 		$partnerId = $rows[0]["id"];
-		MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_partners (partner_id, partner_name) VALUES(?, 'TEST_PARTNER') ", array(0=>$partnerId));
+		MySQLRunner::execute("INSERT INTO borhandw.dwh_dim_partners (partner_id, partner_name) VALUES(?, 'TEST_PARTNER') ", array(0=>$partnerId));
 		return $partnerId;
     	}
 
 	public static function createNewEntry($partnerId, $entryIndex, $dateId)
 	{
 		$entryId = "TEST_".$partnerId."_".$entryIndex;
-		MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_entries (partner_id, entry_id, entry_name, entry_status_id, entry_type_id, created_at, updated_at) VALUES(?,'?','?',2, 1, DATE(?), DATE(?))", 
+		MySQLRunner::execute("INSERT INTO borhandw.dwh_dim_entries (partner_id, entry_id, entry_name, entry_status_id, entry_type_id, created_at, updated_at) VALUES(?,'?','?',2, 1, DATE(?), DATE(?))", 
 					array(0=>$partnerId,1=>$entryId,2=>$entryId,3=>$dateId, 4=>$dateId));
 		return $entryId;
 	}
@@ -292,7 +292,7 @@ class DWHInspector
 	{
 		$errornousFilter = $onlyErrornousCalls ? 'AND IFNULL(ds.error_code_id,f.error_code_id) IS NOT NULL' : '';
 
-		$rows = MySQLRunner::execute("SELECT ds.session_id, ds.request_index, ds.user_ip FROM kalturadw_ds.ds_incomplete_api_calls ds, kalturadw.dwh_fact_incomplete_api_calls f ".
+		$rows = MySQLRunner::execute("SELECT ds.session_id, ds.request_index, ds.user_ip FROM borhandw_ds.ds_incomplete_api_calls ds, borhandw.dwh_fact_incomplete_api_calls f ".
 				     "WHERE ds.session_id = f.session_id ".
 				     "AND ds.request_index = f.request_index ".
 				     "AND ds.user_ip = f.user_ip ".
@@ -317,7 +317,7 @@ class DWHInspector
 	public static function getResetAggregationsMinDateID($cycleID, $factTable = '')
 	{
 		$sql= "SELECT min(reset_aggregations_min_date)*1 min_date_id " . 
-						"FROM kalturadw_ds.staging_areas s, kalturadw_ds.cycles c, kalturadw_ds.fact_tables f ". 
+						"FROM borhandw_ds.staging_areas s, borhandw_ds.cycles c, borhandw_ds.fact_tables f ". 
 						"WHERE s.process_id = c.process_id and s.target_table_id = f.fact_table_id ".
 						"AND c.cycle_id = $cycleID and (fact_table_name = '$factTable' or '' = '$factTable')";
 		$rows = MySQLRunner::execute($sql);
@@ -333,18 +333,18 @@ class DWHInspector
 
 	public static function registerFile($fileName, $processId, $fileSizeKb, $compressionSuffix = '', $subdir = '.')
 	{
-		$sql = "CALL kalturadw_ds.register_file('$fileName', $processId, $fileSizeKb, '$compressionSuffix', '$subdir')";
+		$sql = "CALL borhandw_ds.register_file('$fileName', $processId, $fileSizeKb, '$compressionSuffix', '$subdir')";
 		MySQLRunner::execute($sql);
 	}
 
 	public static function registerEtlServer($etlServerName, $lbConstant=1)
 	{
-		MySQLRunner::execute("INSERT INTO kalturadw_ds.etl_servers (etl_server_name, lb_constant) VALUES ('$etlServerName', $lbConstant)");
+		MySQLRunner::execute("INSERT INTO borhandw_ds.etl_servers (etl_server_name, lb_constant) VALUES ('$etlServerName', $lbConstant)");
 	}
 
 	public static function isFileRegistered($fileName, $processId, $fileSize, $compressionSuffix, $subdir, $etlServerName)
 	{
-		$sql = "SELECT * FROM kalturadw_ds.files f, kalturadw_ds.cycles c, kalturadw_ds.etl_servers es ".
+		$sql = "SELECT * FROM borhandw_ds.files f, borhandw_ds.cycles c, borhandw_ds.etl_servers es ".
 			"WHERE f.cycle_id = c.cycle_id and c.assigned_server_id = es.etl_server_id ".
 			"AND f.file_name = '$fileName' and f.process_id = $processId and f.file_size_kb = $fileSize and compression_suffix = '$compressionSuffix' and subdir = '$subdir' and etl_server_name = '$etlServerName'";
 		$rows = MySQLRunner::execute($sql);

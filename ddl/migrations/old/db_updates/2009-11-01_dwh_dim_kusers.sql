@@ -1,4 +1,4 @@
-ALTER TABLE kalturadw.dwh_dim_kusers   
+ALTER TABLE borhandw.dwh_dim_kusers   
     ADD storage_size INT,
     ADD puser_id VARCHAR(64),
     ADD admin_tags TEXT,

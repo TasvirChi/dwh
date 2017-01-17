@@ -1,6 +1,6 @@
 /*
 SQLyog Community v8.3 
-MySQL - 5.1.41-3ubuntu12.6 : Database - kalturadw
+MySQL - 5.1.41-3ubuntu12.6 : Database - borhandw
 *********************************************************************
 */
 
@@ -13,7 +13,7 @@ MySQL - 5.1.41-3ubuntu12.6 : Database - kalturadw
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
-USE `kalturadw_ds`;
+USE `borhandw_ds`;
 
 CREATE TABLE `ds_bandwidth_usage` (
   `cycle_id` INT(11) NOT NULL,

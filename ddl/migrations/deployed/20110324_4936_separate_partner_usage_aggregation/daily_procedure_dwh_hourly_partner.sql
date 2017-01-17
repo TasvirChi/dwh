@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_partner`$$
 
@@ -9,7 +9,7 @@ BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
 	
 	SELECT aggr_table INTO v_aggr_table
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;
 	SET @s = CONCAT('
     	INSERT INTO ',v_aggr_table,'

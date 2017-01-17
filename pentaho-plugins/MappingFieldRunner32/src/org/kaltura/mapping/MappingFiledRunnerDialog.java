@@ -14,7 +14,7 @@
  *
  */
 
-package org.kaltura.mapping;
+package org.borhan.mapping;
 
 import java.util.ArrayList;
 import java.util.List;

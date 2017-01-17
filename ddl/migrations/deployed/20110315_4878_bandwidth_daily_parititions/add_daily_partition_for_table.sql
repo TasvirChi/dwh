@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `add_daily_partition_for_table`$$
 
@@ -21,7 +21,7 @@ BEGIN
 		FROM `information_schema`.`partitions` 
 		WHERE `partitions`.`TABLE_NAME` = table_name;
 		IF (_current_date > p_date - INTERVAL 7 DAY AND p_name IS NOT NULL) THEN
-			SET @s = CONCAT('alter table kalturadw.' , table_name , ' ADD PARTITION (partition p_' ,p_name ,' values less than (', p_value ,'))');
+			SET @s = CONCAT('alter table borhandw.' , table_name , ' ADD PARTITION (partition p_' ,p_name ,' values less than (', p_value ,'))');
 			PREPARE stmt FROM  @s;
 			EXECUTE stmt;
 			DEALLOCATE PREPARE stmt;

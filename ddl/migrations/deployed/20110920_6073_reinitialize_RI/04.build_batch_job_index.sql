@@ -1,4 +1,4 @@
-ALTER TABLE kalturadw.dwh_dim_batch_job 
+ALTER TABLE borhandw.dwh_dim_batch_job 
 	ADD KEY (dwh_update_date),
 	DROP KEY entry_id_index_id,
 	DROP KEY status_job_type_index,

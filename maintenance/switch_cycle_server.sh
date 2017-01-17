@@ -30,9 +30,9 @@ then
     exit
 fi
 
-ASSIGN_CYCLE_SQL="UPDATE kalturadw_ds.cycles c, (SELECT etl_server_id FROM kalturadw_ds.etl_servers WHERE etl_server_name = '$ETL_SERVER') e SET c.assigned_server_id = e.etl_server_id,STATUS='REGISTERED' WHERE cycle_id=$CYCLE_ID"
-DELETED_SPLITTED_CYCLE="DELETE kalturadw_ds.files FROM kalturadw_ds.files,  (SELECT file_name FROM kalturadw_ds.files WHERE cycle_id = $CYCLE_ID AND file_status = 'SPLITTED') splitted_files WHERE SUBSTR(files.file_name,1,6) = 'split_' AND SUBSTR(files.file_name,7,LENGTH(files.file_name) - 9) = splitted_files.file_name  AND files.cycle_id = $CYCLE_ID"
-SET_IN_CYCLE_STATUS="UPDATE kalturadw_ds.files SET file_status = 'IN_CYCLE' where cycle_id = $CYCLE_ID"
+ASSIGN_CYCLE_SQL="UPDATE borhandw_ds.cycles c, (SELECT etl_server_id FROM borhandw_ds.etl_servers WHERE etl_server_name = '$ETL_SERVER') e SET c.assigned_server_id = e.etl_server_id,STATUS='REGISTERED' WHERE cycle_id=$CYCLE_ID"
+DELETED_SPLITTED_CYCLE="DELETE borhandw_ds.files FROM borhandw_ds.files,  (SELECT file_name FROM borhandw_ds.files WHERE cycle_id = $CYCLE_ID AND file_status = 'SPLITTED') splitted_files WHERE SUBSTR(files.file_name,1,6) = 'split_' AND SUBSTR(files.file_name,7,LENGTH(files.file_name) - 9) = splitted_files.file_name  AND files.cycle_id = $CYCLE_ID"
+SET_IN_CYCLE_STATUS="UPDATE borhandw_ds.files SET file_status = 'IN_CYCLE' where cycle_id = $CYCLE_ID"
 
 mysql -u$USER -p$PASSWORD -h$HOSTNAME -P$PORT -e "$ASSIGN_CYCLE_SQL"
 mysql -u$USER -p$PASSWORD -h$HOSTNAME -P$PORT -e "$DELETED_SPLITTED_CYCLE"

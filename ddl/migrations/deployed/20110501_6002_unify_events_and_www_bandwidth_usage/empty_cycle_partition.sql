@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw_ds`$$
+USE `borhandw_ds`$$
 
 DROP PROCEDURE IF EXISTS `empty_cycle_partition`$$
 

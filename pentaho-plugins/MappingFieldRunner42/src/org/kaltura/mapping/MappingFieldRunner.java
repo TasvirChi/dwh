@@ -9,7 +9,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or  implied. Please refer to 
  * the license for the specific language governing your rights and limitations.*/
 
-package org.kaltura.mapping;
+package org.borhan.mapping;
 
 import java.util.Hashtable;
 import java.util.List;

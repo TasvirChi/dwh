@@ -3,9 +3,9 @@ require_once 'Configuration.php';
 require_once 'KettleRunner.php';
 require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
-require_once 'KalturaTestCase.php';
+require_once 'BorhanTestCase.php';
 
-class BillingTest extends KalturaTestCase
+class BillingTest extends BorhanTestCase
 {
 	const BW_MONTH = 20110101;
 	const ST_MONTH = 20110201;
@@ -25,7 +25,7 @@ class BillingTest extends KalturaTestCase
 
 	private function createBilling()
 	{
-		MySQLRunner::execute("INSERT INTO kalturadw.dwh_dim_partners_billing (partner_id, 
+		MySQLRunner::execute("INSERT INTO borhandw.dwh_dim_partners_billing (partner_id, 
 					updated_at,					
 					max_monthly_bandwidth_kb,
 					charge_monthly_bandwidth_kb_usd,
@@ -49,18 +49,18 @@ class BillingTest extends KalturaTestCase
 	public function simulateUsage()
 	{
 		# Month with overage  bandwidth
-		MySQLRunner::execute("INSERT INTO kalturadw.dwh_hourly_partner_usage (partner_id, 
+		MySQLRunner::execute("INSERT INTO borhandw.dwh_hourly_partner_usage (partner_id, 
 			date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , aggr_storage_mb)
 			VALUES(?, ?,0,8,250,0)",array(0=>$this->partnerId, 1=>self::BW_MONTH));
 
-		MySQLRunner::execute("INSERT INTO kalturadw.dwh_hourly_partner_usage (partner_id, 
+		MySQLRunner::execute("INSERT INTO borhandw.dwh_hourly_partner_usage (partner_id, 
 			date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , aggr_storage_mb)
 			VALUES(?, ?,0,9,250,0)",array(0=>$this->partnerId, 1=>self::BW_MONTH));
 
 		# Month with overage storage
         for($i=0;$i<28;$i++)
         {
-            MySQLRunner::execute("INSERT INTO kalturadw.dwh_hourly_partner_usage (partner_id, 
+            MySQLRunner::execute("INSERT INTO borhandw.dwh_hourly_partner_usage (partner_id, 
                 date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , aggr_storage_mb)
                 VALUES(?, ?,0,8,0,500)",array(0=>$this->partnerId, 1=>self::ST_MONTH+$i));
         }
@@ -68,13 +68,13 @@ class BillingTest extends KalturaTestCase
         # Month with overage storage + bandwidth
 		for($i=0;$i<31;$i++)
         {
-            MySQLRunner::execute("INSERT INTO kalturadw.dwh_hourly_partner_usage (partner_id, 
+            MySQLRunner::execute("INSERT INTO borhandw.dwh_hourly_partner_usage (partner_id, 
                 date_id, hour_id, bandwidth_source_id, count_bandwidth_kb , aggr_storage_mb)
                 VALUES(?, ?,0,8,290*1024/31,290)",array(0=>$this->partnerId, 1=>self::BW_ST_MONTH+$i));
         }
     
 		# Month with overage plays
-		MySQLRunner::execute("INSERT INTO kalturadw.dwh_hourly_partner (partner_id, 
+		MySQLRunner::execute("INSERT INTO borhandw.dwh_hourly_partner (partner_id, 
 			date_id, hour_id, count_plays)
 			VALUES(?, ?,0,500)",array(0=>$this->partnerId, 1=>self::PLAY_MONTH));
  
@@ -102,7 +102,7 @@ class BillingTest extends KalturaTestCase
 			$includedPlay, $usedPlay, $overagePlay)
 	{
 		$monthId = intval($dateId/100);
-		$rows = MySQLRunner::execute("CALL kalturadw.calc_partner_overage(?)", array(0=>$monthId));
+		$rows = MySQLRunner::execute("CALL borhandw.calc_partner_overage(?)", array(0=>$monthId));
 		$this->assertGreaterThan(0,count($rows));
 	
 		for($i=0;$i<count($rows);$i++)

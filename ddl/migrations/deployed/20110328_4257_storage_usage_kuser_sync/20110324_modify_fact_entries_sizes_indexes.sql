@@ -1,6 +1,6 @@
 /*
 SQLyog Community v8.7 
-MySQL - 5.1.37-log : Database - kalturadw
+MySQL - 5.1.37-log : Database - borhandw
 *********************************************************************
 */
 
@@ -12,7 +12,7 @@ MySQL - 5.1.37-log : Database - kalturadw
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-USE `kalturadw`;
+USE `borhandw`;
 
 /*Table structure for table `dwh_fact_entries_sizes` */
 
@@ -49,9 +49,9 @@ CREATE TABLE `dwh_fact_entries_sizes_new` (
 
 CALL add_partition_for_table('dwh_fact_entries_sizes_new');
 
-INSERT INTO kalturadw.dwh_fact_entries_sizes_new
-SELECT * FROM kalturadw.dwh_fact_entries_sizes;
+INSERT INTO borhandw.dwh_fact_entries_sizes_new
+SELECT * FROM borhandw.dwh_fact_entries_sizes;
 
-RENAME TABLE kalturadw.dwh_fact_entries_sizes to kalturadw.dwh_fact_entries_sizes_old;
-RENAME TABLE kalturadw.dwh_fact_entries_sizes_new to kalturadw.dwh_fact_entries_sizes;
-DROP TABLE kalturadw.dwh_fact_entries_sizes_old;
+RENAME TABLE borhandw.dwh_fact_entries_sizes to borhandw.dwh_fact_entries_sizes_old;
+RENAME TABLE borhandw.dwh_fact_entries_sizes_new to borhandw.dwh_fact_entries_sizes;
+DROP TABLE borhandw.dwh_fact_entries_sizes_old;

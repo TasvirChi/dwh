@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 INSERT INTO ri_mapping (table_name, column_name, date_id_column_name, reference_table, reference_column, perform_check)
 VALUES ('dwh_dim_batch_job', 'job_type_id', 'dwh_update_date','dwh_dim_batch_job_type','batch_job_type_id',1);

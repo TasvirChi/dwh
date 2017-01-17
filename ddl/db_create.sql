@@ -1,4 +1,4 @@
-create database if not exists kalturadw;
-create database if not exists kalturadw_bisources;
-create database if not exists kalturadw_ds;
-create database if not exists kalturalog;
+create database if not exists borhandw;
+create database if not exists borhandw_bisources;
+create database if not exists borhandw_ds;
+create database if not exists borhanlog;

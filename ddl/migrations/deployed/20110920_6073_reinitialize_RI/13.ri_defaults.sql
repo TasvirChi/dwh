@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 UPDATE ri_defaults 
 SET 	default_value = CONCAT('"',default_value,'"'),

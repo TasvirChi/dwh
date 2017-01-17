@@ -1,4 +1,4 @@
-﻿CREATE TABLE  `kalturadw_ds`.`processes` (
+﻿CREATE TABLE  `borhandw_ds`.`processes` (
 `id` int(10) unsigned NOT NULL,
 `process_name` varchar(45) NOT NULL,
 `max_files_per_cycle` INT(11),

@@ -1,4 +1,4 @@
-CREATE TABLE `kalturadw`.`dwh_dim_flavor_params_outputs` (
+CREATE TABLE `borhandw`.`dwh_dim_flavor_params_outputs` (
   `flavor_params_output_id` int(11) NOT NULL,
   `flavor_params_id` int(11) NOT NULL,
   `flavor_params_version` int(11) NOT NULL,

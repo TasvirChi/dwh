@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 DELETE FROM aggr_managment where aggr_name = 'devices';
 

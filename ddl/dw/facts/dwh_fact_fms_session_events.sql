@@ -1,4 +1,4 @@
-CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
+CREATE TABLE  `borhandw`.`dwh_fact_fms_session_events` (
   `file_id` INT(11) UNSIGNED NOT NULL,
   `line_number` INT(11),
   `event_type_id` TINYINT(3) UNSIGNED NOT NULL,

@@ -1,4 +1,4 @@
-USE `kalturadw_ds`;
+USE `borhandw_ds`;
 
 CREATE TABLE version_management (
 	`version` INT(11),

@@ -1,5 +1,5 @@
 #!/bin/bash
-. /etc/kaltura.d/system.ini
+. /etc/borhan.d/system.ini
 
 $BASE_DIR/bin/pentaho/kitchen.sh /file $BASE_DIR/dwh/etlsource/dimensions/tmp/update_batch_job_manually.kjb -param:ManualStartUpdateDaysInterval=1000 -param:ManualEndUpdateDaysInterval=949
 $BASE_DIR/bin/pentaho/kitchen.sh /file $BASE_DIR/dwh/etlsource/dimensions/tmp/update_batch_job_manually.kjb -param:ManualStartUpdateDaysInterval=950 -param:ManualEndUpdateDaysInterval=899

@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kaltura`$$
+USE `borhan`$$
 
 DROP PROCEDURE IF EXISTS `update_entries`$$
 

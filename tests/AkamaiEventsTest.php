@@ -3,7 +3,7 @@ require_once 'Configuration.php';
 require_once 'KettleRunner.php';
 require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
-require_once 'KalturaTestCase.php';
+require_once 'BorhanTestCase.php';
 require_once 'CycleProcessTestCase.php';
 require_once 'EventTestCase.php';
 

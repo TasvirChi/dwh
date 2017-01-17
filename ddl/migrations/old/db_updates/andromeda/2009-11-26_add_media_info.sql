@@ -1,4 +1,4 @@
-CREATE TABLE `kalturadw`.`dwh_dim_media_info` (
+CREATE TABLE `borhandw`.`dwh_dim_media_info` (
   `media_info_id` int(11) NOT NULL,
   `created_at` datetime default NULL,
   `created_date_id` int(11),

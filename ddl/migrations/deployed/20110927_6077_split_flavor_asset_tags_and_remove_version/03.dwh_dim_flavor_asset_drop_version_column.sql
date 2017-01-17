@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 DROP TABLE IF EXISTS dwh_dim_flavor_asset_new; 
 
@@ -32,15 +32,15 @@ CREATE TABLE `dwh_dim_flavor_asset_new` (
   KEY `dwh_update_date` (`dwh_update_date`)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
-INSERT IGNORE INTO kalturadw.dwh_dim_flavor_asset_new
+INSERT IGNORE INTO borhandw.dwh_dim_flavor_asset_new
 SELECT 	id, int_id, partner_id, tags, created_at, 
 	updated_at, deleted_at, entry_id, flavor_params_id, 
 	STATUS, VERSION, description, width, height, 
 	bitrate, frame_rate, size, is_original, file_ext_id, 
 	container_format_id, video_codec_id, dwh_creation_date, 
 	dwh_update_date, ri_ind	 FROM 
-	kalturadw.dwh_dim_flavor_asset 
+	borhandw.dwh_dim_flavor_asset 
 WHERE ri_ind = 0 ORDER BY id, VERSION DESC;
 
-DROP TABLE kalturadw.dwh_dim_flavor_asset;
-RENAME TABLE kalturadw.dwh_dim_flavor_asset_new TO kalturadw.dwh_dim_flavor_asset;
+DROP TABLE borhandw.dwh_dim_flavor_asset;
+RENAME TABLE borhandw.dwh_dim_flavor_asset_new TO borhandw.dwh_dim_flavor_asset;

@@ -1,4 +1,4 @@
-CREATE TABLE kalturadw.`dwh_dim_ip_ranges_raw` (                                         
+CREATE TABLE borhandw.`dwh_dim_ip_ranges_raw` (                                         
  `IP_FROM`  INT UNSIGNED DEFAULT NULL,                                       
  `IP_TO`  INT UNSIGNED DEFAULT NULL,                                         
  `COUNTRY_CODE` VARCHAR(2) DEFAULT NULL,                                 
@@ -9,12 +9,12 @@ CREATE TABLE kalturadw.`dwh_dim_ip_ranges_raw` (
  `DOMAIN_NAME` VARCHAR(128) DEFAULT NULL
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
                    
-CREATE TABLE kalturadw.`ip_ranges_last_update` (  
+CREATE TABLE borhandw.`ip_ranges_last_update` (  
                          `last_update` DATETIME DEFAULT NULL   
                        ) ENGINE=MYISAM DEFAULT CHARSET=latin1;
-INSERT INTO kalturadw.`ip_ranges_last_update` VALUES('1999-01-01');
+INSERT INTO borhandw.`ip_ranges_last_update` VALUES('1999-01-01');
 
-CREATE TABLE kalturadw.`dwh_dim_ip_ranges` (                                         
+CREATE TABLE borhandw.`dwh_dim_ip_ranges` (                                         
      `IP_FROM`  INT UNSIGNED DEFAULT NULL,                                       
      `IP_TO`  INT UNSIGNED DEFAULT NULL,                                         
      `COUNTRY_CODE` VARCHAR(2) DEFAULT NULL,                                 

@@ -24,7 +24,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
+            <property name="odaURL">jdbc:mysql://192.168.252.222:3306/borhandw</property>
             <property name="odaUser">etl</property>
             <encrypted-property name="odaPassword" encryptionID="base64">ZXRs</encrypted-property>
         </oda-data-source>
@@ -121,7 +121,7 @@ SELECT 	u.partner_id,
 	ROUND(date_id/100), 
 	SUM(aggr_storage_mb)/DAY(LAST_DAY(date_id))/1024 + SUM(count_bandwidth_kb)/1024/1024 usage_gb,
 	SUM(count_bandwidth_kb)/1024/1024 bw_gb
-FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_partners p
+FROM borhandw.dwh_hourly_partner_usage u, borhandw.dwh_dim_partners p
 WHERE u.partner_id = p.partner_id AND partner_package = 1 AND partner_status_id NOT IN (2,3)
 AND p.partner_id NOT IN (0)
 AND date_id BETWEEN DATE(NOW() - INTERVAL 8 DAY)*1 AND DATE(NOW() - INTERVAL 1 DAY)*1
@@ -400,18 +400,18 @@ u_storage.aggr_storage_mb/1024
 FROM (SELECT p.partner_id, partner_name, admin_email, created_at, 
 SUM(new_videos) new_videos,
 SUM(new_videos+new_images+new_audios+new_livestreams+new_playlists+new_documents+new_other_entries) new_assets
-FROM kalturadw.dwh_hourly_partner hp, kalturadw.dwh_dim_partners p
+FROM borhandw.dwh_hourly_partner hp, borhandw.dwh_dim_partners p
 WHERE date_id >= DATE(NOW() - INTERVAL 7 DAY)*1
 AND hp.partner_id = p.partner_id
 AND partner_package = 1 and partner_status_id not in (2,3)
 AND created_at > DATE(NOW() - INTERVAL 14 DAY)
 GROUP BY hp.partner_id
 HAVING SUM(new_videos) > 0) new_
-INNER JOIN kalturadw.dwh_hourly_partner p
+INNER JOIN borhandw.dwh_hourly_partner p
 ON new_.partner_id = p.partner_id
-LEFT OUTER JOIN kalturadw.dwh_hourly_partner_usage u
+LEFT OUTER JOIN borhandw.dwh_hourly_partner_usage u
 ON new_.partner_id = u.partner_id
-LEFT OUTER JOIN kalturadw.dwh_hourly_partner_usage u_storage
+LEFT OUTER JOIN borhandw.dwh_hourly_partner_usage u_storage
 ON new_.partner_id = u_storage.partner_id AND u_storage.date_id = DATE(NOW() - INTERVAL 1 DAY)*1
 GROUP BY p.partner_id
 ]]></xml-property>

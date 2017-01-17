@@ -69,11 +69,11 @@
   <notepads>
   </notepads>
   <connection>
-    <name>Kaltura</name>
+    <name>Borhan</name>
     <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -93,11 +93,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writable</name>
+    <name>Borhan_Writable</name>
     <server>${OpWritableDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
@@ -118,11 +118,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -142,11 +142,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_bisources</name>
+    <name>borhandw_bisources</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_bisources</database>
+    <database>borhandw_bisources</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -165,36 +165,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
-    <port>${DbPort}</port>
-    <username>${DbUser}</username>
-    <password>${DbPassword}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>KalturaLogs</name>
-    <server>${DbHostName}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>kalturalog</database>
+    <database>borhandw_ds</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -215,11 +190,36 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaMonitoring</name>
+    <name>BorhanLogs</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>borhanlog</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>BorhanMonitoring</name>
     <server>${MonitoringDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${MonitoringDbPort}</port>
     <username>${MonitoringDbUser}</username>
     <password>${MonitoringDbPassword}</password>
@@ -239,11 +239,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaReadDW</name>
+    <name>BorhanReadDW</name>
     <server>${DbReadHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbReadPort}</port>
     <username>${DbReadUser}</username>
     <password>${DbReadPassword}</password>
@@ -488,9 +488,9 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <schema>kalturadw</schema>
+      <schema>borhandw</schema>
       <table>dwh_dim_applications</table>
-      <connection>KalturaDW</connection>
+      <connection>BorhanDW</connection>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
@@ -793,7 +793,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <cache>Y</cache>
     <cache_load_all>Y</cache_load_all>
     <cache_size>0</cache_size>
@@ -1896,7 +1896,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaReadDW</connection>
+    <connection>BorhanReadDW</connection>
     <rowlimit>0</rowlimit>
     <sql>select 1 country_id, 2 location_id</sql>
     <outer_join>N</outer_join>
@@ -1921,7 +1921,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaReadDW</connection>
+    <connection>BorhanReadDW</connection>
     <rowlimit>0</rowlimit>
     <sql>select 1 country_id, 2 location_id</sql>
     <outer_join>N</outer_join>
@@ -1946,7 +1946,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaReadDW</connection>
+    <connection>BorhanReadDW</connection>
     <rowlimit>0</rowlimit>
     <sql>select 1 country_id, 2 location_id</sql>
     <outer_join>N</outer_join>
@@ -2038,7 +2038,7 @@
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47; if X-KALTURA-F5-REMOTE-ADDR is set use this IP address
+        <jsScript_script>&#47;&#47; if X-BORHAN-F5-REMOTE-ADDR is set use this IP address
 if (isValidIpAddress(remote_ip)) 
 {
 	user_ip = remote_ip;
@@ -2073,7 +2073,7 @@ function isValidIpAddress(ip_address) {
 	return false;
 }
 
-var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
+var ipLookupSQL = &quot;SELECT country_id, location_id FROM borhandw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM borhandw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>ipLookupSQL</name>
         <rename>ipLookupSQL</rename>
         <type>String</type>
@@ -2114,7 +2114,7 @@ var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47; if X-KALTURA-F5-REMOTE-ADDR is set use this IP address
+        <jsScript_script>&#47;&#47; if X-BORHAN-F5-REMOTE-ADDR is set use this IP address
 if (isValidIpAddress(remote_ip)) 
 {
 	user_ip = remote_ip;
@@ -2149,7 +2149,7 @@ function isValidIpAddress(ip_address) {
 	return false;
 }
 
-var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
+var ipLookupSQL = &quot;SELECT country_id, location_id FROM borhandw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM borhandw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;</jsScript_script>
       </jsScript>    </jsScripts>    <fields>      <field>        <name>ipLookupSQL</name>
         <rename>ipLookupSQL</rename>
         <type>String</type>
@@ -3063,8 +3063,8 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
            </partitioning>
       <schema/>
       <table>dwh_dim_client_tag</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
@@ -3105,7 +3105,7 @@ var referrer = substr(unescape(referrer), 0, 200);</jsScript_script>
     <optimizationLevel>9</optimizationLevel>
     <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>&#47;&#47; if X-KALTURA-F5-REMOTE-ADDR is set use this IP address
+        <jsScript_script>&#47;&#47; if X-BORHAN-F5-REMOTE-ADDR is set use this IP address
 if (isValidIpAddress(remote_ip)) 
 {
 	user_ip = remote_ip;
@@ -3134,7 +3134,7 @@ function ip2number (ip_address)
 var referrer = referrer ? unescape(referrer) : referrer;
 referrer = referrer ? referrer.replace(&#47;\r?\n|\r&#47;g, &quot;&quot;) : referrer;
 
-var ipLookupSQL = &quot;SELECT country_id, location_id FROM kalturadw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM kalturadw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;
+var ipLookupSQL = &quot;SELECT country_id, location_id FROM borhandw.dwh_dim_ip_ranges WHERE ip_from = (SELECT MAX(ip_from) FROM borhandw.dwh_dim_ip_ranges WHERE &quot; + iplong + &quot;&gt;= ip_from)&quot;;
 
 
 
@@ -3361,8 +3361,8 @@ Alert(&quot;index of &apos;o&apos;, search from position 7 : &quot; + str3);
            </partitioning>
       <schema/>
       <table>dwh_dim_domain</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>Y</replace>
@@ -4410,7 +4410,7 @@ var parnterRegex = &quot;GET &#47;p&#47;([0-9]+)&#47;sp&#47;[0-9]+&#47;playManif
 
 resArr = str2RegExp(http_string, parnterRegex);
 
-if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; host != &apos;cdnapi.kaltura.com&apos; &amp;&amp; host != &apos;cdnapisec.kaltura.com&apos;)
+if (resArr!=null &amp;&amp; resArr.length &gt; 0 &amp;&amp; host != &apos;cdnapi.borhan.com&apos; &amp;&amp; host != &apos;cdnapisec.borhan.com&apos;)
 {
 	playDate = str2date(substr(raw_datetime,1),&apos;dd&#47;MMM&#47;yyyy:HH:mm:ss&apos;);
 	partnerIDStr = resArr[0];
@@ -4522,8 +4522,8 @@ function is_not_numeric(s) {
            </partitioning>
       <schema/>
       <table>dwh_dim_domain_referrer</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>

@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw`.dwh_dim_ui_conf;
+DROP TABLE IF EXISTS `borhandw`.dwh_dim_ui_conf;
 
-CREATE TABLE kalturadw.`dwh_dim_ui_conf` (                                      
+CREATE TABLE borhandw.`dwh_dim_ui_conf` (                                      
            `ui_conf_id` INT NOT NULL ,                       
            `ui_conf_type_id` SMALLINT DEFAULT -1,                        
            `partner_id` INT DEFAULT -1,                          
@@ -37,7 +37,7 @@ CREATE TABLE kalturadw.`dwh_dim_ui_conf` (
 	  KEY `dwh_update_date` (`dwh_update_date`)                                               
          ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
          
-CREATE TRIGGER `kalturadw`.`dwh_dim_ui_conf_setcreationtime_oninsert` BEFORE INSERT
-    ON `kalturadw`.`dwh_dim_ui_conf`
+CREATE TRIGGER `borhandw`.`dwh_dim_ui_conf_setcreationtime_oninsert` BEFORE INSERT
+    ON `borhandw`.`dwh_dim_ui_conf`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();  

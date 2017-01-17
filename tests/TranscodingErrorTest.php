@@ -3,9 +3,9 @@ require_once 'Configuration.php';
 require_once 'KettleRunner.php';
 require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
-require_once 'KalturaTestCase.php';
+require_once 'BorhanTestCase.php';
 
-class TranscodingErrorTest extends KalturaTestCase
+class TranscodingErrorTest extends BorhanTestCase
 {
 public function testTranscodingErrors()
     {
@@ -27,7 +27,7 @@ public function testTranscodingErrors()
 		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM monmon.monitor_entry where updated_at>='".$start->format('Y-m-d')."' and updated_at<='".$before->format('Y-m-d')."'");
 		
 		$targetDB = new MySQLRunner($CONF->DbHostName,$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
-		$targetRows = $targetDB->run("SELECT count(*) amount FROM kalturadw.dwh_fact_errors e, kalturadw.dwh_dim_error_object_types t where error_time>='".$start->format('Y-m-d')."' and error_time<='".$before->format('Y-m-d')."' and e.error_object_type_id = t.error_object_type_id and t.error_object_type_name = 'Transcoding'");		
+		$targetRows = $targetDB->run("SELECT count(*) amount FROM borhandw.dwh_fact_errors e, borhandw.dwh_dim_error_object_types t where error_time>='".$start->format('Y-m-d')."' and error_time<='".$before->format('Y-m-d')."' and e.error_object_type_id = t.error_object_type_id and t.error_object_type_name = 'Transcoding'");		
 
 		#$this->assertGreaterThan(0, $targetRows[0]['amount']);
 		$this->assertEquals($sourceRows[0]['amount'], $targetRows[0]['amount']);

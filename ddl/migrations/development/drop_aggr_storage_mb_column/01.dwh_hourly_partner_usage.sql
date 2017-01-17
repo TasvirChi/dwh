@@ -1,4 +1,4 @@
-USE `kalturadw`;
+USE `borhandw`;
 
-ALTER TABLE kalturadw.`dwh_hourly_partner_usage`
+ALTER TABLE borhandw.`dwh_hourly_partner_usage`
 DROP COLUMN aggr_storage_mb;

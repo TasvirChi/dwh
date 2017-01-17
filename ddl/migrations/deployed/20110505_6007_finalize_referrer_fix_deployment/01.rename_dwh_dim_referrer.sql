@@ -1,1 +1,1 @@
-rename table kalturadw.dwh_dim_referrer to kalturadw.dwh_dim_referrer_20110505;
+rename table borhandw.dwh_dim_referrer to borhandw.dwh_dim_referrer_20110505;

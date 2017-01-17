@@ -6,7 +6,7 @@ SELECT 	aggr_name,
 	end_time
 	 
 	FROM 
-	kalturadw.aggr_managment 
+	borhandw.aggr_managment 
 	WHERE  date_id < DATE(NOW())*1
 			AND start_time < NOW() - INTERVAL 1 HOUR
 			AND IFNULL(end_time,DATE(19700101)) < start_time

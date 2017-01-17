@@ -1,5 +1,5 @@
 #!/bin/bash
-. /etc/kaltura.d/system.ini
+. /etc/borhan.d/system.ini
 
 USER="etl"
 ROOT_DIR=$BASE_DIR/dwh
@@ -44,18 +44,18 @@ function updatedir {
 	for file_name in $(ls $ROOT_DIR/ddl/migrations/deployed/$1 | sort)
 	do
 		if [ -z "$PW" ]; then
-			file_ver=$(mysql -u$USER -h$HOST -P$PORT -se"SELECT count(version) FROM kalturadw_ds.version_management WHERE version = $2 AND filename = '$file_name'" | head -2 | tail -1)
+			file_ver=$(mysql -u$USER -h$HOST -P$PORT -se"SELECT count(version) FROM borhandw_ds.version_management WHERE version = $2 AND filename = '$file_name'" | head -2 | tail -1)
 		else
-			file_ver=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT count(version) FROM kalturadw_ds.version_management WHERE version = $2 AND filename = '$file_name'" | head -2 | tail -1)
+			file_ver=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT count(version) FROM borhandw_ds.version_management WHERE version = $2 AND filename = '$file_name'" | head -2 | tail -1)
 		fi
 		if [ $file_ver -eq 0 ];then
 			if [ $REGISTER_ONLY -eq 0 ]; then
 				mysqlexec $ROOT_DIR/ddl/migrations/deployed/$1/$file_name
 			fi
 			if [ -z "$PW" ]; then
-				mysql -u$USER -h$HOST -P$PORT -e"INSERT INTO kalturadw_ds.version_management(version, filename) VALUES ($2, '$file_name')"
+				mysql -u$USER -h$HOST -P$PORT -e"INSERT INTO borhandw_ds.version_management(version, filename) VALUES ($2, '$file_name')"
 			else
-				mysql -u$USER -p$PW -h$HOST -P$PORT -e"INSERT INTO kalturadw_ds.version_management(version, filename) VALUES ($2, '$file_name')"
+				mysql -u$USER -p$PW -h$HOST -P$PORT -e"INSERT INTO borhandw_ds.version_management(version, filename) VALUES ($2, '$file_name')"
 			fi
 		fi
 	done
@@ -90,9 +90,9 @@ fi
 
 # get ver
 if [ -z "$PW" ]; then	
-	version=$(mysql -u$USER -h$HOST -P$PORT -se"SELECT max(version) version FROM kalturadw_ds.version_management" | head -2 | tail -1)
+	version=$(mysql -u$USER -h$HOST -P$PORT -se"SELECT max(version) version FROM borhandw_ds.version_management" | head -2 | tail -1)
 else
-	version=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT max(version) version FROM kalturadw_ds.version_management" | head -2 | tail -1)
+	version=$(mysql -u$USER -p$PW -h$HOST -P$PORT -se"SELECT max(version) version FROM borhandw_ds.version_management" | head -2 | tail -1)
 fi
 
 echo "current version $version"

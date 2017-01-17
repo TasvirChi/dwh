@@ -1,3 +1,3 @@
-use kalturadw;
+use borhandw;
 rename table dwh_aggr_partner_daily_usage_20110325 to dwh_aggr_partner_daily_usage;
 rename table dwh_aggr_monthly_partner_20110325 to dwh_aggr_monthly_partner;

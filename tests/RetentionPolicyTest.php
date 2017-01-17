@@ -3,9 +3,9 @@ require_once 'Configuration.php';
 require_once 'KettleRunner.php';
 require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
-require_once 'KalturaTestCase.php';
+require_once 'BorhanTestCase.php';
 
-class RetentionPolicyTest extends KalturaTestCase
+class RetentionPolicyTest extends BorhanTestCase
 {
     const COUNT = 10;
 
@@ -19,16 +19,16 @@ class RetentionPolicyTest extends KalturaTestCase
 
     private function createFactAndArchiveTables($table_name)
     {
-        MySQLRunner::execute("DROP TABLE IF EXISTS kalturadw.".$table_name);
-        MySQLRunner::execute("DROP TABLE IF EXISTS kalturadw.".$table_name."_archive");
+        MySQLRunner::execute("DROP TABLE IF EXISTS borhandw.".$table_name);
+        MySQLRunner::execute("DROP TABLE IF EXISTS borhandw.".$table_name."_archive");
     
-        MySQLRunner::execute("CREATE TABLE kalturadw.".$table_name." (date_id int, value int) 
+        MySQLRunner::execute("CREATE TABLE borhandw.".$table_name." (date_id int, value int) 
                             ENGINE=InnoDB
                             PARTITION BY RANGE (date_id) (
                                 PARTITION p0 VALUES LESS THAN (0)
                             )");
 
-        MySQLRunner::execute("CREATE TABLE kalturadw.".$table_name."_archive (date_id int, value int) 
+        MySQLRunner::execute("CREATE TABLE borhandw.".$table_name."_archive (date_id int, value int) 
                             ENGINE=Archive
                             PARTITION BY RANGE (date_id) (
                                 PARTITION p0 VALUES LESS THAN (0)
@@ -39,23 +39,23 @@ class RetentionPolicyTest extends KalturaTestCase
     {
 	$limit = new DateTime($date->format("Y-m-d"));
 	$limit->add(new DateInterval('P1D'));
-        MySQLRunner::execute("ALTER TABLE kalturadw.".$table_name." ADD PARTITION (PARTITION p".$date->format("Ymd")." VALUES LESS THAN (".$limit->format("Ymd")."))");
+        MySQLRunner::execute("ALTER TABLE borhandw.".$table_name." ADD PARTITION (PARTITION p".$date->format("Ymd")." VALUES LESS THAN (".$limit->format("Ymd")."))");
 
 	for($i=0;$i<self::COUNT;$i++)
 	{
-		MySQLRunner::execute("INSERT INTO kalturadw.".$table_name." VALUES(".$date->format("Ymd").",".$i.")");
+		MySQLRunner::execute("INSERT INTO borhandw.".$table_name." VALUES(".$date->format("Ymd").",".$i.")");
 	}
     }         
 
     private function executeArchive()
     {
-        MySQLRunner::execute("CALL kalturadw.move_innodb_to_archive");
+        MySQLRunner::execute("CALL borhandw.move_innodb_to_archive");
     }
 
     private function updateRetentionPolicy($table_name, $archive, $delete)
     {
-        MySQLRunner::execute("DELETE FROM kalturadw_ds.retention_policy WHERE table_name='".$table_name."'");
-        MySQLRunner::execute("INSERT INTO kalturadw_ds.retention_policy (table_name, archive_start_days_back, archive_delete_days_back) 
+        MySQLRunner::execute("DELETE FROM borhandw_ds.retention_policy WHERE table_name='".$table_name."'");
+        MySQLRunner::execute("INSERT INTO borhandw_ds.retention_policy (table_name, archive_start_days_back, archive_delete_days_back) 
                             VALUES ('".$table_name."',".$archive.",".$delete.")");
     }
 
@@ -68,7 +68,7 @@ class RetentionPolicyTest extends KalturaTestCase
 
     private function countRows($table_name,$date)
     {
-	$rows = MySQLRunner::execute("SELECT * FROM kalturadw.".$table_name." WHERE date_id = ".$date->format("Ymd"));
+	$rows = MySQLRunner::execute("SELECT * FROM borhandw.".$table_name." WHERE date_id = ".$date->format("Ymd"));
 	return count($rows);
     }
 

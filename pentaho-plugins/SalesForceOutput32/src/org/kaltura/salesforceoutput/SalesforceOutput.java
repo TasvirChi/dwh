@@ -1,4 +1,4 @@
-package org.kaltura.salesforceoutput;
+package org.borhan.salesforceoutput;
 
 /*************************************************************************************** 
  * Copyright (C) 2007 Samatar.  All rights reserved. 

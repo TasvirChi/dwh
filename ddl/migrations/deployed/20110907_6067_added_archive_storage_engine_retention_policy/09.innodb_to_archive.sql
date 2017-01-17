@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `move_innodb_to_archive`$$
 
@@ -17,7 +17,7 @@ BEGIN
 	DECLARE c_partitions 
 	CURSOR FOR 
 	SELECT partition_name, p.table_name, CONCAT(p.table_name,'_archive') archive_name, partition_expression column_name, DATE(partition_description)*1 date_val
-	FROM information_schema.PARTITIONS p, kalturadw_ds.retention_policy r
+	FROM information_schema.PARTITIONS p, borhandw_ds.retention_policy r
 	WHERE partition_description <= DATE(NOW() - INTERVAL r.archive_start_days_back DAY)*1
 	AND p.table_name = r.table_name
 	ORDER BY date_val;
@@ -63,7 +63,7 @@ BEGIN
 		EXECUTE stmt;
 		DEALLOCATE PREPARE stmt;
 		
-		UPDATE kalturadw_ds.retention_policy
+		UPDATE borhandw_ds.retention_policy
 		SET archive_last_partition = DATE(v_date_val)
 		WHERE table_name = v_table_name;
 		

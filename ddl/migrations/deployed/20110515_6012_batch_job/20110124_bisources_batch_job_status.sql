@@ -1,10 +1,10 @@
 /*
 SQLyog Community v8.7 
-MySQL - 5.1.47 : Database - kalturadw_bisources
+MySQL - 5.1.47 : Database - borhandw_bisources
 *********************************************************************
 */
 
-USE `kalturadw_bisources`;
+USE `borhandw_bisources`;
 
 DROP TABLE IF EXISTS `bisources_batch_job_status`;
 
@@ -20,5 +20,5 @@ VALUES 	(0, 'APP'),
 		(1, 'RUNTIME'),
 		(2, 'HTTP'),
 		(3, 'CURL'),
-		(4, 'KALTURA_API'),
-		(5, 'KALTURA_CLIENT');
+		(4, 'BORHAN_API'),
+		(5, 'BORHAN_CLIENT');

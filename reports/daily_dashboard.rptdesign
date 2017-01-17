@@ -40,7 +40,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">com.mysql.jdbc.Driver</property>
-            <property name="odaURL">jdbc:mysql://192.168.252.222:3306/kalturadw</property>
+            <property name="odaURL">jdbc:mysql://192.168.252.222:3306/borhandw</property>
             <property name="odaUser">etl</property>
             <encrypted-property name="odaPassword" encryptionID="base64">ZXRs</encrypted-property>
         </oda-data-source>
@@ -143,8 +143,8 @@ SELECT 	DATE_ID,
 		SUM(IF(d.is_live=0,COUNT_BANDWIDTH_KB,0)) AS VOD_KB, 
 		SUM(IF(d.is_live=1,COUNT_BANDWIDTH_KB,0)) AS LIVESTREAM_KB,
 		SUM(added_storage_mb - deleted_storage_mb) AS STOR_MB
-FROM 		kalturadw.DWH_HOURLY_PARTNER_USAGE u, 
-		kalturadw.dwh_dim_bandwidth_source d
+FROM 		borhandw.DWH_HOURLY_PARTNER_USAGE u, 
+		borhandw.dwh_dim_bandwidth_source d
 WHERE 		u.bandwidth_source_id = d.bandwidth_source_id AND 
 		DATE_ID BETWEEN DATE(NOW()-INTERVAL 31 DAY)*1 AND DATE(NOW()-INTERVAL 2 DAY)*1
 GROUP BY 	DATE_ID
@@ -153,8 +153,8 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Data Set" version="1.0">&#13;
-&lt;SQLStatement>SELECT DATE_ID, SUM(COUNT_BANDWIDTH) AS BW, SUM(COUNT_STREAMING) AS STREAM,&amp;#x0A;  SUM(COUNT_STORAGE) AS STOR&amp;#x0A;  FROM `kalturadw`.DWH_HOURLY_PARTNER&amp;#x0A;  WHERE DATE_ID &amp;gt; DATE(NOW()) * 1&amp;#x0A;  GROUP BY DATE_ID&amp;#x0A;  ORDER BY DATE_ID DESC&amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;SQLStatement>SELECT DATE_ID, SUM(COUNT_BANDWIDTH) AS BW, SUM(COUNT_STREAMING) AS STREAM,&amp;#x0A;  SUM(COUNT_STORAGE) AS STOR&amp;#x0A;  FROM `borhandw`.DWH_HOURLY_PARTNER&amp;#x0A;  WHERE DATE_ID &amp;gt; DATE(NOW()) * 1&amp;#x0A;  GROUP BY DATE_ID&amp;#x0A;  ORDER BY DATE_ID DESC&amp;#x0A;&lt;/SQLStatement>&#13;
+&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="522" version="1.0" width="556">&#13;
@@ -456,7 +456,7 @@ ORDER BY 	DATE_ID DESC]]></xml-property>
 	SUM(IF (bandwidth_source_name='WWW',count_bandwidth_kb,0)) WWW,
 	SUM(IF (bandwidth_source_name='akamai_vod_fms_HD',count_bandwidth_kb,0)) akamai_vod_fms_HD,
 	SUM(count_bandwidth_kb) total
-FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d
+FROM borhandw.dwh_hourly_partner_usage u, borhandw.dwh_dim_bandwidth_source d
 WHERE u.bandwidth_source_id = d.bandwidth_source_id
 AND date_id BETWEEN (DATE(NOW()) - INTERVAL 31 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY date_id desc]]></xml-property>
@@ -464,8 +464,8 @@ GROUP BY date_id desc]]></xml-property>
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Data Set" version="1.0">&#13;
-&lt;SQLStatement>SELECT DATE_ID, SUM(COUNT_BANDWIDTH) AS BW, SUM(COUNT_STREAMING) AS STREAM,&amp;#x0A;  SUM(COUNT_STORAGE) AS STOR&amp;#x0A;  FROM `kalturadw`.DWH_HOURLY_PARTNER&amp;#x0A;  WHERE DATE_ID &amp;gt; DATE(NOW()) * 1&amp;#x0A;  GROUP BY DATE_ID&amp;#x0A;  ORDER BY DATE_ID DESC&amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;SQLStatement>SELECT DATE_ID, SUM(COUNT_BANDWIDTH) AS BW, SUM(COUNT_STREAMING) AS STREAM,&amp;#x0A;  SUM(COUNT_STORAGE) AS STOR&amp;#x0A;  FROM `borhandw`.DWH_HOURLY_PARTNER&amp;#x0A;  WHERE DATE_ID &amp;gt; DATE(NOW()) * 1&amp;#x0A;  GROUP BY DATE_ID&amp;#x0A;  ORDER BY DATE_ID DESC&amp;#x0A;&lt;/SQLStatement>&#13;
+&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="522" version="1.0" width="556">&#13;
@@ -764,7 +764,7 @@ GROUP BY date_id desc]]></xml-property>
 		SUM(new_other_entries) other, 
 		SUM(new_livestreams) livestream,
 		SUM(new_videos)+ SUM(new_images)+ SUM(new_audios)+ SUM(new_documents)+ SUM(new_playlists) + SUM(new_other_entries) + SUM(new_livestreams) total 
-		FROM kalturadw.dwh_hourly_partner
+		FROM borhandw.dwh_hourly_partner
 WHERE date_id BETWEEN (DATE(NOW()) - INTERVAL 31 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY date_id]]></xml-property>
             <structure name="designerState">
@@ -772,7 +772,7 @@ GROUP BY date_id]]></xml-property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Data Set" version="1.0">&#13;
 &lt;SQLStatement>SELECT *&amp;#x0A;  FROM &amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="478" version="1.0" width="687">&#13;
@@ -803,7 +803,7 @@ GROUP BY date_id]]></xml-property>
                     <property name="dataType">integer</property>
                 </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT count(*) deleted FROM kalturadw.dwh_dim_entries 
+            <xml-property name="queryText"><![CDATA[SELECT count(*) deleted FROM borhandw.dwh_dim_entries 
 		WHERE modified_at BETWEEN DATE(now()) - interval 2 day and date(now()) - interval 1 day
 		AND entry_status_id = 3
 ]]></xml-property>
@@ -812,7 +812,7 @@ GROUP BY date_id]]></xml-property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Deleted" version="1.0">&#13;
 &lt;SQLStatement>SELECT *&amp;#x0A;  FROM &amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="478" version="1.0" width="687">&#13;
@@ -932,7 +932,7 @@ COUNT(IF(entry_media_source_id NOT IN (1,2),1,NULL)) imported,
 count(*) total
 FROM (SELECT  DATE(created_at) date_id, 
 entry_media_source_id
-FROM kalturadw.dwh_dim_entries
+FROM borhandw.dwh_dim_entries
 WHERE created_at BETWEEN DATE(NOW()-INTERVAL 31 DAY) AND DATE(NOW()) - INTERVAL 1 DAY) p
 GROUP BY date_id]]></xml-property>
             <structure name="designerState">
@@ -940,7 +940,7 @@ GROUP BY date_id]]></xml-property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Ingestion" version="1.0">&#13;
 &lt;SQLStatement>SELECT *&amp;#x0A;  FROM &amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;connInfo>MySql_5.1:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="478" version="1.0" width="687">&#13;
@@ -1018,7 +1018,7 @@ GROUP BY date_id]]></xml-property>
                 </structure>
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT DATE_ID, SUM(COUNT_PLAYS) AS PLAYS, SUM(COUNT_LOADS) AS LOADS
-  FROM `kalturadw`.DWH_HOURLY_PARTNER
+  FROM `borhandw`.DWH_HOURLY_PARTNER
   WHERE 		DATE_ID BETWEEN DATE(NOW()-INTERVAL 31 DAY)*1 AND DATE(NOW()-INTERVAL 2 DAY)*1
 GROUP BY 	DATE_ID
 ORDER BY 	DATE_ID DESC
@@ -1027,8 +1027,8 @@ ORDER BY 	DATE_ID DESC
                 <property name="version">1.0</property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Plays" version="1.0">&#13;
-&lt;SQLStatement>SELECT DATE_ID, COUNT_PLAYS AS PLAYS&amp;#x0A;  FROM `kalturadw`.DWH_HOURLY_PARTNER&amp;#x0A;  WHERE DATE_ID = 20110111&amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;SQLStatement>SELECT DATE_ID, COUNT_PLAYS AS PLAYS&amp;#x0A;  FROM `borhandw`.DWH_HOURLY_PARTNER&amp;#x0A;  WHERE DATE_ID = 20110111&amp;#x0A;&lt;/SQLStatement>&#13;
+&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="623" version="1.0" width="990">&#13;
@@ -1221,8 +1221,8 @@ SELECT partner_id, avg_count_bandwidth_kb, 2_days_ago_count_bandwidth_kb,count_b
 SELECT u.partner_id, SUM(count_bandwidth_kb)/7 avg_count_bandwidth_kb, 
 SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,count_bandwidth_kb,0)) 2_days_ago_count_bandwidth_kb, 
 SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_bandwidth_kb,0)) count_bandwidth_kb,
-p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p, 
-(SELECT SUM(count_bandwidth_kb) total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d WHERE (DATE(NOW()) - INTERVAL 1 DAY)*1=date_id
+p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM borhandw.dwh_hourly_partner_usage u, borhandw.dwh_dim_bandwidth_source d, borhandw.dwh_dim_partners p, 
+(SELECT SUM(count_bandwidth_kb) total FROM borhandw.dwh_hourly_partner_usage u, borhandw.dwh_dim_bandwidth_source d WHERE (DATE(NOW()) - INTERVAL 1 DAY)*1=date_id
 AND u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 0) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 0
 AND u.partner_id = p.partner_id
@@ -1237,7 +1237,7 @@ ORDER BY count_bandwidth_kb DESC]]></xml-property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Top10Storage" version="1.0">&#13;
 &lt;SQLStatement>SELECT *&amp;#x0A;  FROM &amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="478" version="1.0" width="687">&#13;
@@ -1430,8 +1430,8 @@ SELECT partner_id, avg_count_bandwidth_kb, 2_days_ago_count_bandwidth_kb,count_b
 SELECT u.partner_id, SUM(count_bandwidth_kb)/7 avg_count_bandwidth_kb, 
 SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,count_bandwidth_kb,0)) 2_days_ago_count_bandwidth_kb, 
 SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_bandwidth_kb,0)) count_bandwidth_kb,
-p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p,
-(SELECT SUM(count_bandwidth_kb) total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d WHERE (DATE(NOW()) - INTERVAL 1 DAY)*1=date_id
+p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM borhandw.dwh_hourly_partner_usage u, borhandw.dwh_dim_bandwidth_source d, borhandw.dwh_dim_partners p,
+(SELECT SUM(count_bandwidth_kb) total FROM borhandw.dwh_hourly_partner_usage u, borhandw.dwh_dim_bandwidth_source d WHERE (DATE(NOW()) - INTERVAL 1 DAY)*1=date_id
 AND u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 1) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id AND d.is_live = 1
 AND u.partner_id = p.partner_id
@@ -1445,7 +1445,7 @@ ORDER BY count_bandwidth_kb DESC]]></xml-property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Top10Storage" version="1.0">&#13;
 &lt;SQLStatement>SELECT *&amp;#x0A;  FROM &amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="478" version="1.0" width="687">&#13;
@@ -1636,8 +1636,8 @@ SELECT partner_id, partner_name, avg_count_plays, 2_days_ago_count_plays,count_p
 SELECT u.partner_id, SUM(count_plays)/7 avg_count_plays, 
 SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,count_plays,0)) 2_days_ago_count_plays, 
 SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_plays,0)) count_plays,
-p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM kalturadw.dwh_hourly_partner u, kalturadw.dwh_dim_partners p,
-(SELECT SUM(count_plays) total FROM kalturadw.dwh_hourly_partner WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
+p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM borhandw.dwh_hourly_partner u, borhandw.dwh_dim_partners p,
+(SELECT SUM(count_plays) total FROM borhandw.dwh_hourly_partner WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
 WHERE u.partner_id = p.partner_id
 AND date_id BETWEEN (DATE(NOW()) - INTERVAL 8 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY partner_id
@@ -1649,7 +1649,7 @@ ORDER BY count_plays DESC]]></xml-property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Top10Storage" version="1.0">&#13;
 &lt;SQLStatement>SELECT *&amp;#x0A;  FROM &amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="478" version="1.0" width="687">&#13;
@@ -1840,8 +1840,8 @@ SELECT partner_id, partner_name, avg_count_loads, 2_days_ago_count_loads,count_l
 SELECT u.partner_id, SUM(count_loads)/7 avg_count_loads, 
 SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,count_loads,0)) 2_days_ago_count_loads, 
 SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,count_loads,0)) count_loads,
-p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM kalturadw.dwh_hourly_partner u, kalturadw.dwh_dim_partners p,
-(SELECT SUM(count_loads) total FROM kalturadw.dwh_hourly_partner WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
+p.partner_name, IF(partner_package>1,'yes','no') is_paying,total FROM borhandw.dwh_hourly_partner u, borhandw.dwh_dim_partners p,
+(SELECT SUM(count_loads) total FROM borhandw.dwh_hourly_partner WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
 WHERE u.partner_id = p.partner_id
 AND date_id BETWEEN (DATE(NOW()) - INTERVAL 8 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
 GROUP BY partner_id
@@ -1853,7 +1853,7 @@ ORDER BY count_loads DESC]]></xml-property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Top10Storage" version="1.0">&#13;
 &lt;SQLStatement>SELECT *&amp;#x0A;  FROM &amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="478" version="1.0" width="687">&#13;
@@ -1980,8 +1980,8 @@ SELECT partner_id, partner_name, avg_count_storage_mb, 2_days_ago_count_storage_
 SELECT u.partner_id, SUM(added_storage_mb - deleted_storage_mb)/7 avg_count_storage_mb, 
 SUM(IF((DATE(NOW()) - INTERVAL 3 DAY)*1=date_id,added_storage_mb - deleted_storage_mb,0)) 2_days_ago_count_storage_mb, 
 SUM(IF((DATE(NOW()) - INTERVAL 2 DAY)*1=date_id,added_storage_mb - deleted_storage_mb,0)) count_storage_mb,
-p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM kalturadw.dwh_hourly_partner_usage u, kalturadw.dwh_dim_bandwidth_source d, kalturadw.dwh_dim_partners p,
-(SELECT SUM(added_storage_mb - deleted_storage_mb) total FROM kalturadw.dwh_hourly_partner_usage WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
+p.partner_name, IF(partner_package>1,'yes','no') is_paying, total FROM borhandw.dwh_hourly_partner_usage u, borhandw.dwh_dim_bandwidth_source d, borhandw.dwh_dim_partners p,
+(SELECT SUM(added_storage_mb - deleted_storage_mb) total FROM borhandw.dwh_hourly_partner_usage WHERE date_id=(DATE(NOW()) - INTERVAL 1 DAY)*1) total
 WHERE u.bandwidth_source_id = d.bandwidth_source_id
 AND u.partner_id = p.partner_id
 AND date_id BETWEEN (DATE(NOW()) - INTERVAL 8 DAY)*1 AND (DATE(NOW()) - INTERVAL 2 DAY)*1
@@ -1994,7 +1994,7 @@ ORDER BY count_storage_mb DESC]]></xml-property>
                 <property name="stateContentAsString">&lt;?xml version="1.0" encoding="UTF-8"?>&#13;
 &lt;SQLQueryBuilder editorInputType="SQLBuilderStorageEditorInput" name="Top10Storage" version="1.0">&#13;
 &lt;SQLStatement>SELECT *&amp;#x0A;  FROM &amp;#x0A;&lt;/SQLStatement>&#13;
-&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:kalturadw:kaltura_read&lt;/connInfo>&#13;
+&lt;connInfo>Undefined:Transient.org.eclipse.datatools.enablement.mysql.connectionProfile:borhandw:borhan_read&lt;/connInfo>&#13;
 &lt;omitSchemaInfo>false:true:&lt;/omitSchemaInfo>&#13;
 &lt;editorInputUsageOptions>useWindowState=true&lt;/editorInputUsageOptions>&#13;
 &lt;windowState height="478" version="1.0" width="687">&#13;
@@ -2188,7 +2188,7 @@ ORDER BY count_storage_mb DESC]]></xml-property>
 		SUM(new_other_entries) other, 
 		SUM(new_livestreams) livestream,
 		SUM(new_videos)+ SUM(new_images)+ SUM(new_audios)+ SUM(new_documents)+ SUM(new_playlists) + SUM(new_other_entries) + SUM(new_livestreams) total 
-		FROM kalturadw.dwh_hourly_partner
+		FROM borhandw.dwh_hourly_partner
 WHERE date_id = (DATE(NOW()) - INTERVAL 2 DAY)*1
 ]]></xml-property>
         </oda-data-set>

@@ -1,4 +1,4 @@
-CREATE TABLE kalturadw.dwh_fact_events
+CREATE TABLE borhandw.dwh_fact_events
      (
 	  file_id INT NOT NULL
 	, event_id INT  NOT NULL

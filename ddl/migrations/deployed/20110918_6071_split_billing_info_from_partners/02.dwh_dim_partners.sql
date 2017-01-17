@@ -1,4 +1,4 @@
-INSERT INTO kalturadw.dwh_dim_partners_billing 
+INSERT INTO borhandw.dwh_dim_partners_billing 
 (`partner_id` ,
     `partner_group_type_id`,
     updated_at,
@@ -57,7 +57,7 @@ SELECT   `partner_id` ,
     charge_end_users_unit ,
     class_of_service_id ,
     vertical_id
-    FROM `kalturadw`.dwh_dim_partners
+    FROM `borhandw`.dwh_dim_partners
     WHERE (max_monthly_bandwidth_kb IS NOT NULL AND charge_monthly_bandwidth_kb_usd IS NOT NULL AND charge_monthly_bandwidth_kb_unit IS NOT NULL)
         OR (max_monthly_storage_mb IS NOT NULL AND charge_monthly_storage_mb_usd IS NOT NULL AND charge_monthly_storage_mb_unit IS NOT NULL)
         OR (max_monthly_total_usage_mb IS NOT NULL AND charge_monthly_total_usage_mb_usd IS NOT NULL AND charge_monthly_total_usage_mb_unit IS NOT NULL)
@@ -65,7 +65,7 @@ SELECT   `partner_id` ,
         OR (max_monthly_plays IS NOT NULL AND charge_monthly_plays_usd IS NOT NULL AND charge_monthly_plays_unit IS NOT NULL);
     
  
-ALTER TABLE `kalturadw`.dwh_dim_partners
+ALTER TABLE `borhandw`.dwh_dim_partners
 DROP COLUMN    max_monthly_bandwidth_kb ,
 DROP COLUMN    charge_monthly_bandwidth_kb_usd ,
 DROP COLUMN    charge_monthly_bandwidth_kb_unit,

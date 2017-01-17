@@ -1,1 +1,1 @@
-DELETE FROM kalturadw_ds.parameters where id = 1;
+DELETE FROM borhandw_ds.parameters where id = 1;

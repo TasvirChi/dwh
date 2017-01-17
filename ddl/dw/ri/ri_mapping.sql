@@ -6,7 +6,7 @@ MySQL - 5.1.34-community
 */
 /*!40101 SET NAMES utf8 */;
 
-CREATE TABLE kalturadw.`ri_mapping` (
+CREATE TABLE borhandw.`ri_mapping` (
 	`table_name` VARCHAR (300),
 	`column_name` VARCHAR (300),
 	`date_id_column_name` VARCHAR (300),
@@ -17,7 +17,7 @@ CREATE TABLE kalturadw.`ri_mapping` (
 	UNIQUE KEY `table_name` (`table_name`,`column_name`)
 ) CHARSET='latin1';
 
-INSERT INTO kalturadw.`ri_mapping` (`table_name`, `column_name`, `date_id_column_name`, `date_column_name`, `reference_table`, `reference_column`, `perform_check`) 
+INSERT INTO borhandw.`ri_mapping` (`table_name`, `column_name`, `date_id_column_name`, `date_column_name`, `reference_table`, `reference_column`, `perform_check`) 
 	VALUES
 	('dwh_dim_kusers','partner_id', '', 'dwh_update_date', 'dwh_dim_partners','partner_id','1'),
 	('dwh_dim_ui_conf','partner_id', '', 'dwh_update_date','dwh_dim_partners','partner_id','1'),

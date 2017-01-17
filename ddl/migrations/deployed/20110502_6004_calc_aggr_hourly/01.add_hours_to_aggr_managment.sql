@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 ALTER TABLE aggr_managment 
 ADD COLUMN hour_id INT(11) UNSIGNED NOT NULL DEFAULT '0',

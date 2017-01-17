@@ -1,8 +1,8 @@
 DELIMITER $$
 
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`set_file_status_full`$$
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`set_file_status_full`$$
 
-CREATE PROCEDURE kalturadw_ds.`set_file_status_full`(
+CREATE PROCEDURE borhandw_ds.`set_file_status_full`(
 	pfile_id INT(20),
 	new_file_status VARCHAR(20),
 	override_safety_check INT
@@ -12,7 +12,7 @@ BEGIN
 	IF override_safety_check = 1 THEN
 		SELECT f.file_status
 		INTO cur_status
-		FROM kalturadw_ds.files f
+		FROM borhandw_ds.files f
 		WHERE f.file_id = pfile_id;
 		IF  new_file_status NOT IN ('WAITING','RUNNING','PROCESSED','TRANSFERING','DONE','FAILED')
 		 OR new_file_status = 'RUNNING' AND cur_status <> 'WAITING'
@@ -28,18 +28,18 @@ BEGIN
 		END IF;
 	END IF;
 	
-	UPDATE kalturadw_ds.files f
+	UPDATE borhandw_ds.files f
 	SET f.prev_status = f.file_status
 	    ,f.file_status = new_file_status
 	WHERE f.file_id = pfile_id;
 	IF new_file_status = 'RUNNING'
 	THEN 
-		UPDATE kalturadw_ds.files f
+		UPDATE borhandw_ds.files f
 		SET f.run_time = NOW()
 		WHERE f.file_id = pfile_id;
 	ELSEIF new_file_status = 'TRANSFERING'
 	THEN 
-		UPDATE kalturadw_ds.files f
+		UPDATE borhandw_ds.files f
 		SET f.transfer_time = NOW()
 		WHERE f.file_id = pfile_id;
 	END IF;

@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw`.dwh_dim_batch_jobs;
+DROP TABLE IF EXISTS `borhandw`.dwh_dim_batch_jobs;
 
-CREATE TABLE `kalturadw`.dwh_dim_batch_jobs (
+CREATE TABLE `borhandw`.dwh_dim_batch_jobs (
   `batch_job_id` int(11) NOT NULL ,
   `batch_job_type_id` smallint(6) DEFAULT NULL,
   `batch_job_sub_type_id` smallint(6) DEFAULT NULL,

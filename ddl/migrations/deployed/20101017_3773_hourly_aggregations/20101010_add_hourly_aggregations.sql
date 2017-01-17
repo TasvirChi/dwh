@@ -1,7 +1,7 @@
 
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `add_partitions`$$
 
@@ -30,7 +30,7 @@ END$$
 
 DELIMITER ;
 
-USE `kalturadw_ds`;
+USE `borhandw_ds`;
 
 /* Add hourly aggregation table name */
 
@@ -40,9 +40,9 @@ ADD COLUMN `hourly_aggr_table` VARCHAR(100) DEFAULT NULL;
 UPDATE `aggr_name_resolver`
 SET `hourly_aggr_table` = CONCAT(SUBSTR(aggr_table,1,4),'hourly',SUBSTR(aggr_table,9));
 
-USE `kalturadw`;
+USE `borhandw`;
  /* create tables */
-CREATE TABLE kalturadw.`dwh_hourly_events_country` (
+CREATE TABLE borhandw.`dwh_hourly_events_country` (
   `partner_id` INT DEFAULT NULL,
   `date_id` INT DEFAULT NULL,
   `hour_id` INT DEFAULT NULL,
@@ -108,7 +108,7 @@ PARTITION BY RANGE (date_id)
  
 
 
-CREATE TABLE kalturadw.`dwh_hourly_events_domain` (
+CREATE TABLE borhandw.`dwh_hourly_events_domain` (
   `partner_id` INT DEFAULT NULL,
   `date_id` INT DEFAULT NULL,
   `hour_id` INT DEFAULT NULL,
@@ -172,7 +172,7 @@ PARTITION BY RANGE (date_id)
  PARTITION p_201011 VALUES LESS THAN (20101201) ENGINE = MYISAM);
  
 
-CREATE TABLE kalturadw.`dwh_hourly_events_entry` (
+CREATE TABLE borhandw.`dwh_hourly_events_entry` (
   `partner_id` INT DEFAULT NULL,
   `date_id` INT DEFAULT NULL,
   `hour_id` INT DEFAULT NULL,
@@ -302,7 +302,7 @@ PARTITION BY RANGE (date_id)
 
 
 
-CREATE TABLE kalturadw.`dwh_hourly_events_widget` (
+CREATE TABLE borhandw.`dwh_hourly_events_widget` (
   `partner_id` INT DEFAULT NULL,
   `date_id` INT DEFAULT NULL,
   `hour_id`  INT DEFAULT NULL,
@@ -368,7 +368,7 @@ PARTITION BY RANGE (date_id)
         
 
 
-CREATE TABLE kalturadw.`dwh_hourly_partner` (
+CREATE TABLE borhandw.`dwh_hourly_partner` (
   `partner_id` INT DEFAULT NULL,
   `date_id` INT DEFAULT NULL,
   `hour_id` INT DEFAULT NULL,
@@ -452,7 +452,7 @@ PARTITION BY RANGE (date_id)
     
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 
@@ -467,7 +467,7 @@ BEGIN
 	
 	SELECT aggr_table,hourly_aggr_table, aggr_id_field, aggr_join_stmt
 	INTO  v_aggr_table,v_hourly_aggr_table, v_aggr_id_field, v_aggr_join_stmt
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;
 	
 	IF ( v_aggr_id_field <> "" ) THEN
@@ -482,7 +482,7 @@ BEGIN
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
 	
-    # Old aggregate (delete when KMC don't need)
+    # Old aggregate (delete when BMC don't need)
 	SET @s = CONCAT('INSERT INTO ',v_aggr_table,'
 		(partner_id
 		,date_id 
@@ -802,7 +802,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_events_widget`$$
 
@@ -814,7 +814,7 @@ BEGIN
 
     SELECT hourly_aggr_table, aggr_id_field
 	INTO  v_aggr_table, v_aggr_id_field
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;
 	
 	IF ( v_aggr_id_field <> "" ) THEN
@@ -849,7 +849,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_partner`$$
 
@@ -862,7 +862,7 @@ BEGIN
 
     SELECT hourly_aggr_table, aggr_id_field
 	INTO  v_aggr_table, v_aggr_id_field
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;
 	
 	IF ( v_aggr_id_field <> "" ) THEN
@@ -1018,7 +1018,7 @@ DELIMITER ;
 
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `recalc_aggr_day`$$
 
@@ -1030,7 +1030,7 @@ BEGIN
 
 	SELECT aggr_table,hourly_aggr_table, aggr_id_field
 	INTO  v_aggr_table,v_hourly_aggr_table, v_aggr_id_field
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;	
 	
 	# Old aggregation

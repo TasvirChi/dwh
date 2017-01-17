@@ -18,11 +18,11 @@
         </parameter>
     </parameters>
   <connection>
-    <name>Kaltura</name>
+    <name>Borhan</name>
     <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -42,11 +42,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writable</name>
+    <name>Borhan_Writable</name>
     <server>${OpWriteableDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpWriteableDbUser}</username>
     <password>${OpWriteableDbPassword}</password>
@@ -67,11 +67,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -91,11 +91,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_bisources</name>
+    <name>borhandw_bisources</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_bisources</database>
+    <database>borhandw_bisources</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -114,11 +114,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
+    <database>borhandw_ds</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -139,11 +139,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaLogs</name>
+    <name>BorhanLogs</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>borhanLog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -165,7 +165,7 @@
   </connection>
     <slaveservers>
     </slaveservers>
-  <logconnection>KalturaLogs</logconnection>
+  <logconnection>BorhanLogs</logconnection>
   <logtable>etl_log</logtable>
   <size_limit_lines/>
    <use_batchid>Y</use_batchid>
@@ -194,14 +194,14 @@
       <yloc>57</yloc>
       </entry>
     <entry>
-      <name>call update_entries (kaltura_writable)</name>
+      <name>call update_entries (borhan_writable)</name>
       <description>SQL</description>
       <type>SQL</type>
       <sql>call update_entries</sql>
       <useVariableSubstitution>F</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
-      <connection>Kaltura_Writable</connection>
+      <connection>Borhan_Writable</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -209,14 +209,14 @@
       <yloc>471</yloc>
       </entry>
     <entry>
-      <name>call create_updated_entries_by_partner_id (kalturadw_ds)</name>
+      <name>call create_updated_entries_by_partner_id (borhandw_ds)</name>
       <description>SQL</description>
       <type>SQL</type>
       <sql>call create_updated_entries_by_partner_id( (&apos;${partner_id}&apos;) )</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
-      <connection>kalturadw_ds</connection>
+      <connection>borhandw_ds</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -309,7 +309,7 @@
   <hops>
     <hop>
       <from>Begin Plays&#47;Views Transfer</from>
-      <to>call create_updated_entries_by_partner_id (kalturadw_ds)</to>
+      <to>call create_updated_entries_by_partner_id (borhandw_ds)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -317,7 +317,7 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>call create_updated_entries_by_partner_id (kalturadw_ds)</from>
+      <from>call create_updated_entries_by_partner_id (borhandw_ds)</from>
       <to>plays_views_export_from_dw</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -336,7 +336,7 @@
     </hop>
     <hop>
       <from>plays_views_import_to_op</from>
-      <to>call update_entries (kaltura_writable)</to>
+      <to>call update_entries (borhan_writable)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -353,7 +353,7 @@
       <unconditional>Y</unconditional>
     </hop>
     <hop>
-      <from>call update_entries (kaltura_writable)</from>
+      <from>call update_entries (borhan_writable)</from>
       <to>Finished Event Plays&#47;Views Transfer</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>

@@ -9,7 +9,7 @@ function filter_file_list($file_list, $processid, $dbhost, $dbport, $dbuser, $db
 {
 	// Get files from MySQL
 	echo "Getting registered files from mysql for process_id ".$processid.".\n";
-	$dsn = 'mysql:host='.$dbhost.';dbname=kalturadw_ds;port='.$dbport;
+	$dsn = 'mysql:host='.$dbhost.';dbname=borhandw_ds;port='.$dbport;
         echo "Connecting to database...";
         try {
 	        $dbcon = new PDO($dsn, $dbuser,$dbpass);
@@ -23,7 +23,7 @@ function filter_file_list($file_list, $processid, $dbhost, $dbport, $dbuser, $db
 	$query=	"SELECT DISTINCT IF(SUBSTR(file_name,1,6)='split_'," 
 						."SUBSTR(file_name, 7,LENGTH(file_name)-9),"
 						."file_name) file_name "
-			."FROM kalturadw_ds.files WHERE process_id = ".$processid;
+			."FROM borhandw_ds.files WHERE process_id = ".$processid;
         try {
               	foreach ($dbcon->query($query) as $line)
                	{

@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_editor_type`;
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_editor_type`;
 
-CREATE TABLE `kalturadw`.`dwh_dim_editor_type` (
+CREATE TABLE `borhandw`.`dwh_dim_editor_type` (
   `editor_type_id` smallint(6) auto_increment not null ,
   `editor_type_name` VARCHAR(50) DEFAULT 'missing value',
    dwh_creation_date TIMESTAMP NOT NULL DEFAULT 0,
@@ -10,8 +10,8 @@ CREATE TABLE `kalturadw`.`dwh_dim_editor_type` (
   UNIQUE KEY (`editor_type_name`)
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
 
-CREATE TRIGGER `kalturadw`.`dwh_dim_editor_type_setcreationtime_oninsert` BEFORE INSERT
-    ON `kalturadw`.`dwh_dim_editor_type`
+CREATE TRIGGER `borhandw`.`dwh_dim_editor_type_setcreationtime_oninsert` BEFORE INSERT
+    ON `borhandw`.`dwh_dim_editor_type`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();
 	

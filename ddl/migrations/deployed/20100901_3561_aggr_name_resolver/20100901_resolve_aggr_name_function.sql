@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP FUNCTION IF EXISTS `resolve_aggr_name`$$
 
@@ -12,7 +12,7 @@ BEGIN
 
 	SELECT aggr_table, aggr_id_field
 	INTO  v_aggr_table, v_aggr_id_field
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;
 	
 	IF p_field_name = 'aggr_table' THEN RETURN v_aggr_table;

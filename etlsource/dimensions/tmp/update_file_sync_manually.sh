@@ -1,5 +1,5 @@
 #!/bin/bash
-. /etc/kaltura.d/system.ini
+. /etc/borhan.d/system.ini
 
 $BASE_DIR/bin/pentaho/pan.sh /file $BASE_DIR/dwh/etlsource/dimensions/tmp/update_file_sync_manually.kjb -param:ManualStartUpdateDaysInterval=62 -param:ManualEndUpdateDaysInterval=52 >> /tmp/file_sync_sync_log.log 2>&1
 $BASE_DIR/bin/pentaho/pan.sh /file $BASE_DIR/dwh/etlsource/dimensions/tmp/update_file_sync_manually.kjb -param:ManualStartUpdateDaysInterval=53 -param:ManualEndUpdateDaysInterval=43 >> /tmp/file_sync_sync_log.log 2>&1

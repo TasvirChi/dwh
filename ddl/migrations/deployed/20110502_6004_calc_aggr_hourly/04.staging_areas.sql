@@ -1,4 +1,4 @@
-USE `kalturadw_ds`;
+USE `borhandw_ds`;
 
 ALTER TABLE `staging_areas` ADD COLUMN hour_id_field VARCHAR(45);
 

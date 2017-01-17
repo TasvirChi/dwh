@@ -1,5 +1,5 @@
 #!/bin/bash
-. /etc/kaltura.d/system.ini
+. /etc/borhan.d/system.ini
 
 ROOT_DIR=/home/etl/
 WHEN=$(date +%Y%m%d)
@@ -23,17 +23,17 @@ ETLHOME=${ROOT_DIR}
 ETLOGS=${ETLHOME}/logs
 JOBLOG=${ETLOGS}/etl_job-$WHEN.log
 
-if [ -s ${LOG_DIR}/kaltura_apache_access.log-$WHEN.gz ] ; then
+if [ -s ${LOG_DIR}/borhan_apache_access.log-$WHEN.gz ] ; then
     echo -e "\n"
     echo "-----------------------------" >>$JOBLOG
-    echo "kaltura access log is processed" >>$JOBLOG
+    echo "borhan access log is processed" >>$JOBLOG
     echo "-----------------------------" >>$JOBLOG
-    zcat ${LOG_DIR}/kaltura_apache_access.log-$WHEN.gz |php ${APP_DIR}/alpha/scripts/create_event_log_from_apache_access_log.php  2>>$JOBLOG > ${ETLHOME}/events/_events_log_combined_kaltura-${WHEN}
-    mv ${ETLHOME}/events/_events_log_combined_kaltura-${WHEN} ${ETLHOME}/events/events_log_combined_kaltura-${WHEN}
+    zcat ${LOG_DIR}/borhan_apache_access.log-$WHEN.gz |php ${APP_DIR}/alpha/scripts/create_event_log_from_apache_access_log.php  2>>$JOBLOG > ${ETLHOME}/events/_events_log_combined_borhan-${WHEN}
+    mv ${ETLHOME}/events/_events_log_combined_borhan-${WHEN} ${ETLHOME}/events/events_log_combined_borhan-${WHEN}
 else
     echo -e "\n"
     echo "-----------------------------" >>$JOBLOG
-    echo "kaltura access log couldnt be  processed" >>$JOBLOG
+    echo "borhan access log couldnt be  processed" >>$JOBLOG
     echo "-----------------------------" >>$JOBLOG
-    echo "kaltura access log couldnt be  processed" | mail -s "etljob file failed : `date`" ${MAILUSERS}
+    echo "borhan access log couldnt be  processed" | mail -s "etljob file failed : `date`" ${MAILUSERS}
 fi

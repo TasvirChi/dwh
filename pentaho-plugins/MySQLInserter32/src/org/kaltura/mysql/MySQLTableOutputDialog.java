@@ -14,7 +14,7 @@
  *
  */
 
-package org.kaltura.mysql;
+package org.borhan.mysql;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

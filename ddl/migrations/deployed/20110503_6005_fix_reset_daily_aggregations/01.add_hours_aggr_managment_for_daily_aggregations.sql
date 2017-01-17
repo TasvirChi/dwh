@@ -1,6 +1,6 @@
-INSERT INTO kalturadw.aggr_managment (aggr_name, aggr_day_int, aggr_day, is_calculated, start_time, end_time, hour_id)
+INSERT INTO borhandw.aggr_managment (aggr_name, aggr_day_int, aggr_day, is_calculated, start_time, end_time, hour_id)
 SELECT aggr_name, aggr_day_int, aggr_day, is_calculated, start_time, end_time, hours.hour_id
-FROM kalturadw.aggr_managment aggr, 
+FROM borhandw.aggr_managment aggr, 
 (SELECT 1 hour_id UNION 
 SELECT 2 UNION
 SELECT 3 UNION

@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_storage`$$
 
@@ -28,7 +28,7 @@ BEGIN
 		partner_id;
 	
 	INSERT INTO 
-		kalturadw.dwh_hourly_partner_usage
+		borhandw.dwh_hourly_partner_usage
 		(partner_id, date_id, hour_id, bandwidth_source_id, count_storage_mb)
 	SELECT
 		partner_id, date_id, hour_id, 1 /*www bandwidth_source_id*/, count_storage_mb
@@ -39,7 +39,7 @@ BEGIN
 	
 	/*Temporary until dwh_hourly_partner's usage columns are dropped - we use to store data which is loaded to two different tables instead of one.*/
 	INSERT INTO 
-		kalturadw.dwh_hourly_partner
+		borhandw.dwh_hourly_partner
 		(partner_id, date_id, hour_id, count_storage)
 	SELECT
 		partner_id, date_id, hour_id, count_storage_mb

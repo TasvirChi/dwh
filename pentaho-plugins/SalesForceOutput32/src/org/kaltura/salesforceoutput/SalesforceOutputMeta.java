@@ -20,7 +20,7 @@
  * 
  */
 
-package org.kaltura.salesforceoutput;
+package org.borhan.salesforceoutput;
 
 import java.util.List;
 import java.util.Map;

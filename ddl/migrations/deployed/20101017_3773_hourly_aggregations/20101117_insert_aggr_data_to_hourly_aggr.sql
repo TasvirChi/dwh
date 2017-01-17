@@ -46,8 +46,8 @@ SELECT 	partner_id,
 	count_postroll_75	 
 	FROM 
 	(SELECT a.* FROM 
-	kalturadw.dwh_aggr_events_entry a LEFT OUTER JOIN
-	(SELECT DISTINCT date_id FROM kalturadw.dwh_hourly_events_entry) z
+	borhandw.dwh_aggr_events_entry a LEFT OUTER JOIN
+	(SELECT DISTINCT date_id FROM borhandw.dwh_hourly_events_entry) z
 	ON (a.date_id = z.date_id)
 	WHERE z.date_id IS NULL ) a
     ;
@@ -100,8 +100,8 @@ SELECT 	partner_id,
 	count_postroll_75	 
 	FROM 
 	(SELECT a.* FROM 
-	kalturadw.dwh_aggr_events_uid a LEFT OUTER JOIN
-	(SELECT DISTINCT date_id FROM kalturadw.dwh_hourly_events_uid) z
+	borhandw.dwh_aggr_events_uid a LEFT OUTER JOIN
+	(SELECT DISTINCT date_id FROM borhandw.dwh_hourly_events_uid) z
 	ON (a.date_id = z.date_id)
 	WHERE z.date_id IS NULL ) a
     ;
@@ -155,8 +155,8 @@ SELECT 	partner_id,
 	count_postroll_75	 
 	FROM 
 	(SELECT a.* FROM 
-	kalturadw.dwh_aggr_events_widget a LEFT OUTER JOIN
-	(SELECT DISTINCT date_id FROM kalturadw.dwh_hourly_events_widget) z
+	borhandw.dwh_aggr_events_widget a LEFT OUTER JOIN
+	(SELECT DISTINCT date_id FROM borhandw.dwh_hourly_events_widget) z
 	ON (a.date_id = z.date_id)
 	WHERE z.date_id IS NULL ) a
     ;
@@ -225,8 +225,8 @@ SELECT 	partner_id,
 	aggr_streaming
 	FROM 
 	(SELECT a.* FROM 
-	kalturadw.dwh_aggr_partner a LEFT OUTER JOIN
-	(SELECT DISTINCT date_id FROM kalturadw.dwh_hourly_partner) z
+	borhandw.dwh_aggr_partner a LEFT OUTER JOIN
+	(SELECT DISTINCT date_id FROM borhandw.dwh_hourly_partner) z
 	ON (a.date_id = z.date_id)
 	WHERE z.date_id IS NULL ) a
     ;   

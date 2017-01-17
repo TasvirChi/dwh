@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw_ds`$$
+USE `borhandw_ds`$$
 
 DROP PROCEDURE IF EXISTS `fms_sessionize`$$
 
@@ -52,9 +52,9 @@ SELECT session_id, MAX(event_time), MAX(event_date_id), MAX(client_ip), MAX(clie
     SUM(IF(t.event_type='disconnect',server_to_client_bytes,0)) dis_sc_bytes,
     MAX(partner_id) partner_id, MAX(bandwidth_source_id)
   FROM ds_fms_session_events e 
- INNER JOIN kalturadw.dwh_dim_fms_event_type t ON e.event_type_id = t.event_type_id
+ INNER JOIN borhandw.dwh_dim_fms_event_type t ON e.event_type_id = t.event_type_id
  INNER JOIN cycles c ON e.cycle_id = c.cycle_id
- LEFT OUTER JOIN kalturadw.dwh_dim_fms_bandwidth_source fbs ON (e.fms_app_id = fbs.fms_app_id AND c.process_id = fbs.process_id)
+ LEFT OUTER JOIN borhandw.dwh_dim_fms_bandwidth_source fbs ON (e.fms_app_id = fbs.fms_app_id AND c.process_id = fbs.process_id)
   WHERE e.cycle_id = partition_id
   GROUP BY session_id
  HAVING MAX(bandwidth_source_id) IS NOT NULL;
@@ -101,7 +101,7 @@ SELECT session_id, MAX(event_time), MAX(event_date_id), MAX(client_ip), MAX(clie
   WHERE (partner_id IS NOT NULL AND dis_cs_bytes >0 AND con_cs_bytes > 0) OR
         GREATEST(session_time,updated_time) < FMS_STALE_SESSION_PURGE;
   
-  INSERT INTO kalturadw.dwh_fact_fms_sessions (session_id,session_time,session_date_id,session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id,session_partner_id,bandwidth_source_id,total_bytes)
+  INSERT INTO borhandw.dwh_fact_fms_sessions (session_id,session_time,session_date_id,session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id,session_partner_id,bandwidth_source_id,total_bytes)
   SELECT session_id,session_time,session_date_id,session_client_ip, session_client_ip_number, session_client_country_id, session_client_location_id,session_partner_id,bandwidth_source_id,total_bytes
   FROM ds_temp_fms_sessions
   ON DUPLICATE KEY UPDATE

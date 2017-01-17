@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS `kalturadw_ds`.`ods_fms_session_events`;
+DROP TABLE IF EXISTS `borhandw_ds`.`ods_fms_session_events`;
 CREATE TABLE `ods_fms_session_events` (
   `file_id` int(11) unsigned NOT NULL,
   `event_type_id` tinyint(3) unsigned NOT NULL,
@@ -65,50 +65,50 @@ CREATE TABLE `invalid_fms_event_lines` (
   KEY `file_reason_code` (`file_id`,`error_reason_code`)
 ) ENGINE=MyISAM AUTO_INCREMENT=369 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_fms_adaptor`;
-CREATE TABLE  `kalturadw`.`dwh_dim_fms_adaptor` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_fms_adaptor`;
+CREATE TABLE  `borhandw`.`dwh_dim_fms_adaptor` (
   `adaptor_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `adaptor` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`adaptor_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_fms_app`;
-CREATE TABLE  `kalturadw`.`dwh_dim_fms_app` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_fms_app`;
+CREATE TABLE  `borhandw`.`dwh_dim_fms_app` (
   `app_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `app` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`app_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_fms_app_instance`;
-CREATE TABLE  `kalturadw`.`dwh_dim_fms_app_instance` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_fms_app_instance`;
+CREATE TABLE  `borhandw`.`dwh_dim_fms_app_instance` (
   `app_instance_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `app_instance` VARCHAR(500) NOT NULL,
   PRIMARY KEY (`app_instance_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_fms_client_protocol`;
-CREATE TABLE  `kalturadw`.`dwh_dim_fms_client_protocol` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_fms_client_protocol`;
+CREATE TABLE  `borhandw`.`dwh_dim_fms_client_protocol` (
   `client_protocol_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `client_protocol` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`client_protocol_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_fms_event_category`;
-CREATE TABLE  `kalturadw`.`dwh_dim_fms_event_category` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_fms_event_category`;
+CREATE TABLE  `borhandw`.`dwh_dim_fms_event_category` (
   `event_category_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `event_category` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`event_category_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_fms_event_type`;
-CREATE TABLE  `kalturadw`.`dwh_dim_fms_event_type` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_fms_event_type`;
+CREATE TABLE  `borhandw`.`dwh_dim_fms_event_type` (
   `event_type_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `event_type` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`event_type_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_fms_status_description`;
-CREATE TABLE  `kalturadw`.`dwh_dim_fms_status_description` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_fms_status_description`;
+CREATE TABLE  `borhandw`.`dwh_dim_fms_status_description` (
   `status_description_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `status_description` VARCHAR(300) DEFAULT '<unset status>',
   `status_number` SMALLINT(3) UNSIGNED DEFAULT NULL,
@@ -116,15 +116,15 @@ CREATE TABLE  `kalturadw`.`dwh_dim_fms_status_description` (
   PRIMARY KEY (`status_description_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=97 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_fms_stream_type`;
-CREATE TABLE  `kalturadw`.`dwh_dim_fms_stream_type` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_fms_stream_type`;
+CREATE TABLE  `borhandw`.`dwh_dim_fms_stream_type` (
   `stream_type_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `stream_type` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`stream_type_id`)
 ) ENGINE=MYISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_fms_virtual_host`;
-CREATE TABLE  `kalturadw`.`dwh_dim_fms_virtual_host` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_fms_virtual_host`;
+CREATE TABLE  `borhandw`.`dwh_dim_fms_virtual_host` (
   `virtual_host_id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   `virtual_host` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`virtual_host_id`)
@@ -132,8 +132,8 @@ CREATE TABLE  `kalturadw`.`dwh_dim_fms_virtual_host` (
 
 
 
-DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_fms_session_events`;
-CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_fact_fms_session_events`;
+CREATE TABLE  `borhandw`.`dwh_fact_fms_session_events` (
   `file_id` INT(11) UNSIGNED NOT NULL,
   `event_type_id` TINYINT(3) UNSIGNED NOT NULL,
   `event_category_id` TINYINT(3) UNSIGNED NOT NULL,
@@ -188,8 +188,8 @@ CREATE TABLE  `kalturadw`.`dwh_fact_fms_session_events` (
  PARTITION p_201004 VALUES LESS THAN (734258) ENGINE = MyISAM,
  PARTITION p_201005 VALUES LESS THAN (734289) ENGINE = MyISAM) */;
  
-DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_fms_sessions`;
-CREATE TABLE `kalturadw`.`dwh_fact_fms_sessions` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_fact_fms_sessions`;
+CREATE TABLE `borhandw`.`dwh_fact_fms_sessions` (
   `session_id` varchar(20) NOT NULL,
   `session_time` datetime NOT NULL,
   `session_date_id` int(11) unsigned DEFAULT NULL,
@@ -197,9 +197,9 @@ CREATE TABLE `kalturadw`.`dwh_fact_fms_sessions` (
   `total_bytes` bigint(20) unsigned DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
  
- DROP PROCEDURE IF EXISTS  `kalturadw_ds`.`agg_new_fms_to_partner_activity`;
+ DROP PROCEDURE IF EXISTS  `borhandw_ds`.`agg_new_fms_to_partner_activity`;
 DELIMITER $$
-CREATE PROCEDURE `kalturadw_ds`.`agg_new_fms_to_partner_activity`()
+CREATE PROCEDURE `borhandw_ds`.`agg_new_fms_to_partner_activity`()
 BEGIN
   DECLARE DEFAULT_ACTIVITY_ID INTEGER;
   DECLARE STREAMING_ACTIVITY_ID INTEGER;
@@ -208,37 +208,37 @@ BEGIN
   SET STREAMING_ACTIVITY_ID = 7;
   SET STREAMING_SUB_ACTIVITY = 700;
 
-  INSERT INTO kalturadw.dwh_fact_partner_activities
+  INSERT INTO borhandw.dwh_fact_partner_activities
   (activity_id,partner_id,activity_date,activity_date_id,activity_hour_id,partner_activity_id,partner_sub_activity_id,amount)
   SELECT DEFAULT_ACTIVITY_ID,session_partner_id,DATE(session_time),session_date_id,0 hour_id,STREAMING_ACTIVITY_ID,STREAMING_SUB_ACTIVITY,SUM(total_bytes)
-  FROM kalturadw.dwh_fact_fms_sessions
+  FROM borhandw.dwh_fact_fms_sessions
   WHERE session_date_id IN (
     SELECT DISTINCT aggr_day_int
-    FROM kalturadw.aggr_managment
+    FROM borhandw.aggr_managment
     WHERE aggr_name = 'fms_sessions' AND is_calculated = 0 AND aggr_day <= NOW())
   GROUP BY session_partner_id,DATE(session_time),session_date_id
   ON DUPLICATE KEY UPDATE
     amount=VALUES(amount);
 
-  UPDATE kalturadw.aggr_managment
+  UPDATE borhandw.aggr_managment
   SET is_calculated = 1
   WHERE aggr_name = 'fms_sessions' AND aggr_day <= NOW();
 END $$
 DELIMITER ;
   
 DELIMITER $$
-DROP PROCEDURE IF EXISTS `kalturadw`.`add_partition_for_fact_event` $$
-DROP PROCEDURE IF EXISTS `kalturadw`.`add_partitions` $$
-CREATE PROCEDURE `kalturadw`.`add_partitions`()
+DROP PROCEDURE IF EXISTS `borhandw`.`add_partition_for_fact_event` $$
+DROP PROCEDURE IF EXISTS `borhandw`.`add_partitions` $$
+CREATE PROCEDURE `borhandw`.`add_partitions`()
 BEGIN
-	CALL kalturadw.add_partition_for_fact_table('dwh_fact_events');
-	CALL kalturadw.add_partition_for_fact_table('dwh_fact_fms_session_events');
-	CALL kalturadw.add_partition_for_table('dwh_aggr_events_entry');
-	CALL kalturadw.add_partition_for_table('dwh_aggr_events_domain');
-	CALL kalturadw.add_partition_for_table('dwh_aggr_events_country');
-	CALL kalturadw.add_partition_for_table('dwh_aggr_events_widget');
-	CALL kalturadw.add_partition_for_table('dwh_aggr_partner');
-	CALL kalturadw.add_partition_for_table('dwh_aggr_partner_daily_usage');
+	CALL borhandw.add_partition_for_fact_table('dwh_fact_events');
+	CALL borhandw.add_partition_for_fact_table('dwh_fact_fms_session_events');
+	CALL borhandw.add_partition_for_table('dwh_aggr_events_entry');
+	CALL borhandw.add_partition_for_table('dwh_aggr_events_domain');
+	CALL borhandw.add_partition_for_table('dwh_aggr_events_country');
+	CALL borhandw.add_partition_for_table('dwh_aggr_events_widget');
+	CALL borhandw.add_partition_for_table('dwh_aggr_partner');
+	CALL borhandw.add_partition_for_table('dwh_aggr_partner_daily_usage');
 END $$
 
 

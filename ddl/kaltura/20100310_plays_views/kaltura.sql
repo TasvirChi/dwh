@@ -1,4 +1,4 @@
-USE `kaltura`;
+USE `borhan`;
 
 CREATE TABLE `temp_entry_update` (
   `id` varchar(20) NOT NULL DEFAULT '',

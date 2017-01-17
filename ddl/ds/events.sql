@@ -1,4 +1,4 @@
-CREATE TABLE kalturadw_ds.ds_events
+CREATE TABLE borhandw_ds.ds_events
      (
 	 `cycle_id` int(11) NOT NULL
 	, file_id INT NOT NULL

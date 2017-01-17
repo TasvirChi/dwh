@@ -1,10 +1,10 @@
 /*
 SQLyog Community v8.7 
-MySQL - 5.1.47 : Database - kalturadw
+MySQL - 5.1.47 : Database - borhandw
 *********************************************************************
 */
 
-USE `kalturadw`;
+USE `borhandw`;
 
 DROP TABLE IF EXISTS `dwh_dim_file_sync_object_type`;
 

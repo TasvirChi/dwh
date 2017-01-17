@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `daily_procedure_dwh_hourly_events_widget`$$
 
@@ -12,7 +12,7 @@ BEGIN
 
     SELECT hourly_aggr_table, aggr_id_field
 	INTO  v_aggr_table, v_aggr_id_field
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;
 	
 	IF ( v_aggr_id_field <> "" ) THEN

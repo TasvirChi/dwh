@@ -16,7 +16,7 @@
  *
  */
 
-package org.kaltura.getftpfilenames;
+package org.borhan.getftpfilenames;
 
 import java.util.ArrayList;
 import java.util.List;

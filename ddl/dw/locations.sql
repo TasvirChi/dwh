@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw`.`dwh_dim_locations`;
+DROP TABLE IF EXISTS `borhandw`.`dwh_dim_locations`;
 
-CREATE TABLE `kalturadw`.`dwh_dim_locations` (                               
+CREATE TABLE `borhandw`.`dwh_dim_locations` (                               
      `location_id` INT NOT NULL AUTO_INCREMENT,              
       location_type_name VARCHAR(8) DEFAULT NULL,                  
      `location_name` VARCHAR(50) DEFAULT NULL,     
@@ -22,7 +22,7 @@ CREATE TABLE `kalturadw`.`dwh_dim_locations` (
 	 UNIQUE KEY (`location_name`, `location_type_name`, `country`, `state`, `city`)
    ) ENGINE=MYISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ; 
    
-CREATE TRIGGER `kalturadw`.`dwh_dim_locations_setcreationtime_oninsert` BEFORE INSERT
-    ON `kalturadw`.`dwh_dim_locations`
+CREATE TRIGGER `borhandw`.`dwh_dim_locations_setcreationtime_oninsert` BEFORE INSERT
+    ON `borhandw`.`dwh_dim_locations`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();

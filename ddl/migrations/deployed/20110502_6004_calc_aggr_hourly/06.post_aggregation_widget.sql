@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `post_aggregation_widget`$$
 
@@ -8,7 +8,7 @@ CREATE PROCEDURE `post_aggregation_widget`(date_val DATE, p_hour_id INT(11))
 BEGIN
 	DECLARE v_aggr_table VARCHAR(100);
     SELECT aggr_table INTO  v_aggr_table
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = 'widget';
 	
 	SET @s = CONCAT('

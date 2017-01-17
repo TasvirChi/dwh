@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw_bisources`.`bisources_gender`;
+DROP TABLE IF EXISTS `borhandw_bisources`.`bisources_gender`;
 
-CREATE TABLE `kalturadw_bisources`.`bisources_gender` (
+CREATE TABLE `borhandw_bisources`.`bisources_gender` (
   `gender_id` SMALLINT NOT NULL ,
   `gender_name` VARCHAR(50),
   PRIMARY KEY (`gender_id`)
@@ -8,5 +8,5 @@ CREATE TABLE `kalturadw_bisources`.`bisources_gender` (
 ) ENGINE=MYISAM  DEFAULT CHARSET=utf8;
 
 
-INSERT INTO `kalturadw_bisources`.`bisources_gender`  VALUES(1,'MALE');
-INSERT INTO `kalturadw_bisources`.`bisources_gender`  VALUES(2,'FEMALE');
+INSERT INTO `borhandw_bisources`.`bisources_gender`  VALUES(1,'MALE');
+INSERT INTO `borhandw_bisources`.`bisources_gender`  VALUES(2,'FEMALE');

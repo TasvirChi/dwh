@@ -48,9 +48,9 @@ SELECT 	partner_id,
 	count_postroll_50, 
 	count_postroll_75
     FROM 
-	kalturadw.dwh_aggr_events_country
+	borhandw.dwh_aggr_events_country
     WHERE 
-    date_id IN (SELECT DISTINCT aggr_day_int FROM kalturadw.aggr_managment 
+    date_id IN (SELECT DISTINCT aggr_day_int FROM borhandw.aggr_managment 
     WHERE is_calculated = 1
     AND aggr_name = 'country')
     ;
@@ -103,9 +103,9 @@ SELECT 	partner_id,
 	count_postroll_50, 
 	count_postroll_75 
 	FROM 
-	kalturadw.dwh_aggr_events_domain
+	borhandw.dwh_aggr_events_domain
     WHERE 
-    date_id IN (SELECT DISTINCT aggr_day_int FROM kalturadw.aggr_managment 
+    date_id IN (SELECT DISTINCT aggr_day_int FROM borhandw.aggr_managment 
     WHERE is_calculated = 1
     AND aggr_name = 'domain');
     
@@ -158,9 +158,9 @@ SELECT 	partner_id,
 	count_postroll_50, 
 	count_postroll_75	 
 	FROM 
-	kalturadw.dwh_aggr_events_entry 
+	borhandw.dwh_aggr_events_entry 
      WHERE 
-    date_id IN (SELECT DISTINCT aggr_day_int FROM kalturadw.aggr_managment 
+    date_id IN (SELECT DISTINCT aggr_day_int FROM borhandw.aggr_managment 
     WHERE is_calculated = 1
     AND aggr_name = 'entry')
     ;
@@ -213,9 +213,9 @@ SELECT 	partner_id,
 	count_postroll_50, 
 	count_postroll_75	 
 	FROM 
-	kalturadw.dwh_aggr_events_uid
+	borhandw.dwh_aggr_events_uid
   WHERE 
-    date_id IN (SELECT DISTINCT aggr_day_int FROM kalturadw.aggr_managment 
+    date_id IN (SELECT DISTINCT aggr_day_int FROM borhandw.aggr_managment 
     WHERE is_calculated = 1
     AND aggr_name = 'uid')
     ;
@@ -269,9 +269,9 @@ SELECT 	partner_id,
 	count_postroll_50, 
 	count_postroll_75	 
 	FROM 
-	kalturadw.dwh_aggr_events_widget
+	borhandw.dwh_aggr_events_widget
    WHERE 
-    date_id IN (SELECT DISTINCT aggr_day_int FROM kalturadw.aggr_managment 
+    date_id IN (SELECT DISTINCT aggr_day_int FROM borhandw.aggr_managment 
     WHERE is_calculated = 1
     AND aggr_name = 'widget')
     ;
@@ -340,9 +340,9 @@ SELECT 	partner_id,
 	count_streaming, 
 	aggr_streaming
 	FROM 
-	kalturadw.dwh_aggr_partner 
+	borhandw.dwh_aggr_partner 
     WHERE 
-    date_id IN (SELECT DISTINCT aggr_day_int FROM kalturadw.aggr_managment 
+    date_id IN (SELECT DISTINCT aggr_day_int FROM borhandw.aggr_managment 
     WHERE is_calculated = 1
     AND aggr_name = 'partner')
     ;   

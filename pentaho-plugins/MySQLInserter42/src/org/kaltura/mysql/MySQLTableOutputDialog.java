@@ -14,7 +14,7 @@
  *
  */
 
-package org.kaltura.mysql;
+package org.borhan.mysql;
 
 import java.util.ArrayList;
 import java.util.HashMap;

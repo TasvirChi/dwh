@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP FUNCTION IF EXISTS `calc_partner_storage_data_last_month`$$
 
@@ -25,12 +25,12 @@ BEGIN
 				dwh_dim_time all_times
 				ON (all_times.day_id=aggr_p.date_id 
 					AND all_times.day_id>=20081230
-					AND kalturadw.calc_month_id(all_times.day_id) <= @current_month_id 
+					AND borhandw.calc_month_id(all_times.day_id) <= @current_month_id 
 					AND aggr_p.partner_id=@current_partner_id)
-			WHERE 	all_times.day_id>=20081230 AND kalturadw.calc_month_id(all_times.day_id) <= @current_month_id AND aggr_p.hour_id = 0
+			WHERE 	all_times.day_id>=20081230 AND borhandw.calc_month_id(all_times.day_id) <= @current_month_id AND aggr_p.hour_id = 0
 		) continuous_partner_storage
-	WHERE 	kalturadw.calc_month_id(continuous_partner_storage.date_id)=@current_month_id
-	GROUP BY kalturadw.calc_month_id(continuous_partner_storage.date_id);
+	WHERE 	borhandw.calc_month_id(continuous_partner_storage.date_id)=@current_month_id
+	GROUP BY borhandw.calc_month_id(continuous_partner_storage.date_id);
 
 	RETURN avg_cont_aggr_storage;
 END$$

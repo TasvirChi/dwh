@@ -1,4 +1,4 @@
-USE kalturadw_ds;
+USE borhandw_ds;
 
 DROP TABLE IF EXISTS retention_policy;
 CREATE TABLE retention_policy (

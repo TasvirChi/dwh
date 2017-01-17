@@ -17,6 +17,6 @@ do      case "$o" in
 done
 
 
-mysql -u$USER -p$PW -h$HOST -P$PORT -e "update kalturadw_ds.locks set lock_state=0"
+mysql -u$USER -p$PW -h$HOST -P$PORT -e "update borhandw_ds.locks set lock_state=0"
 echo "Locks released, Output of locks table:"
-mysql -u$USER -p$PW -h$HOST -P$PORT -e "select * from kalturadw_ds.locks"
+mysql -u$USER -p$PW -h$HOST -P$PORT -e "select * from borhandw_ds.locks"

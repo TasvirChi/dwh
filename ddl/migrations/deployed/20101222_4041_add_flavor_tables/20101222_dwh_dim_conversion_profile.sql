@@ -4,7 +4,7 @@ MySQL - 5.1.37-log
 *********************************************************************
 */
 
-use `kalturadw`;
+use `borhandw`;
 
 DROP TABLE IF EXISTS `dwh_dim_conversion_profile`;
 

@@ -4,7 +4,7 @@ MySQL - 5.1.37-log
 *********************************************************************
 */
 
-USE kalturadw;
+USE borhandw;
 
 DROP TABLE IF EXISTS `dwh_dim_flavor_params`;
 

@@ -1,13 +1,13 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_totals`$$
 
 CREATE PROCEDURE `calc_aggr_day_partner_totals`(calc_date_id INT)
 BEGIN
 	UPDATE aggr_managment SET start_time = NOW() WHERE aggr_name = 'totals' AND date_id = calc_date_id;
-	DELETE FROM kalturadw.dwh_daily_partner_totals WHERE date_id = calc_date_id;
+	DELETE FROM borhandw.dwh_daily_partner_totals WHERE date_id = calc_date_id;
 	
 	DROP TABLE IF EXISTS temp_totals;
 	CREATE TEMPORARY TABLE temp_totals(
@@ -51,15 +51,15 @@ BEGIN
 	GROUP BY 	partner_id
 	ON DUPLICATE KEY UPDATE deleted_users=VALUES(deleted_users);
 	
-	INSERT INTO 	kalturadw.dwh_daily_partner_totals (partner_id, date_id, added_entries, deleted_entries, total_entries, added_users, deleted_users, total_users)
+	INSERT INTO 	borhandw.dwh_daily_partner_totals (partner_id, date_id, added_entries, deleted_entries, total_entries, added_users, deleted_users, total_users)
 	SELECT		partner_id, calc_date_id, 0, 0, total_entries, 0, 0, total_users
-	FROM            kalturadw.dwh_daily_partner_totals
+	FROM            borhandw.dwh_daily_partner_totals
 	WHERE           date_id = (DATE(calc_date_id) - INTERVAL 1 DAY)*1
 	ON DUPLICATE KEY UPDATE added_entries=VALUES(added_entries), deleted_entries=VALUES(deleted_entries), total_entries=VALUES(total_entries),
 				added_users=VALUES(added_users), deleted_users=VALUES(deleted_users), total_users = VALUES(total_users);
 	
 	
-	INSERT INTO 	kalturadw.dwh_daily_partner_totals (partner_id, date_id, added_entries, deleted_entries, total_entries, added_users, deleted_users, total_users)
+	INSERT INTO 	borhandw.dwh_daily_partner_totals (partner_id, date_id, added_entries, deleted_entries, total_entries, added_users, deleted_users, total_users)
 	SELECT		aggr.partner_id, calc_date_id, aggr.added_entries, aggr.deleted_entries, aggr.added_entries - aggr.deleted_entries,
 			aggr.added_users, aggr.deleted_users, aggr.added_users - aggr.deleted_users
 	FROM		temp_totals aggr 

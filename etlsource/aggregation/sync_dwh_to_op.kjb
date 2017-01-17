@@ -13,11 +13,11 @@
     <parameters>
     </parameters>
   <connection>
-    <name>Kaltura</name>
+    <name>Borhan</name>
     <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -37,11 +37,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writable</name>
+    <name>Borhan_Writable</name>
     <server>${OpWritableDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
@@ -62,11 +62,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -86,11 +86,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_bisources</name>
+    <name>borhandw_bisources</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_bisources</database>
+    <database>borhandw_bisources</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -109,11 +109,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
+    <database>borhandw_ds</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -134,11 +134,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaLogs</name>
+    <name>BorhanLogs</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturaLog</database>
+    <database>borhanLog</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -189,14 +189,14 @@
       <yloc>55</yloc>
       </entry>
     <entry>
-      <name>call import_stored_procedure (kaltura_writable)</name>
+      <name>call import_stored_procedure (borhan_writable)</name>
       <description>SQL</description>
       <type>SQL</type>
       <sql>call ${ImportStoredProcedure}</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
-      <connection>Kaltura_Writable</connection>
+      <connection>Borhan_Writable</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -204,17 +204,17 @@
       <yloc>421</yloc>
       </entry>
     <entry>
-      <name>call mark_as_aggregated (kalturadw_ds)</name>
+      <name>call mark_as_aggregated (borhandw_ds)</name>
       <description>SQL</description>
       <type>SQL</type>
-      <sql>update kalturadw.aggr_managment set is_calculated=1, end_time=now()
+      <sql>update borhandw.aggr_managment set is_calculated=1, end_time=now()
 where aggr_day &lt; date(&apos;${MaxDate}&apos;)
 and is_calculated = 0
 and (aggr_name = &apos;${AggrName}&apos;);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
-      <connection>kalturadw_ds</connection>
+      <connection>borhandw_ds</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -257,7 +257,7 @@ and (aggr_name = &apos;${AggrName}&apos;);</sql>
       <useVariableSubstitution>T</useVariableSubstitution>
       <sqlfromfile>F</sqlfromfile>
       <sqlfilename/>
-      <connection>kalturadw_ds</connection>
+      <connection>borhandw_ds</connection>
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
@@ -349,8 +349,8 @@ and (aggr_name = &apos;${AggrName}&apos;);</sql>
   </entries>
   <hops>
     <hop>
-      <from>call import_stored_procedure (kaltura_writable)</from>
-      <to>call mark_as_aggregated (kalturadw_ds)</to>
+      <from>call import_stored_procedure (borhan_writable)</from>
+      <to>call mark_as_aggregated (borhandw_ds)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
@@ -385,7 +385,7 @@ and (aggr_name = &apos;${AggrName}&apos;);</sql>
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>call mark_as_aggregated (kalturadw_ds)</from>
+      <from>call mark_as_aggregated (borhandw_ds)</from>
       <to>Finished Transfer</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
@@ -413,7 +413,7 @@ and (aggr_name = &apos;${AggrName}&apos;);</sql>
     </hop>
     <hop>
       <from>Import From File</from>
-      <to>call import_stored_procedure (kaltura_writable)</to>
+      <to>call import_stored_procedure (borhan_writable)</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>

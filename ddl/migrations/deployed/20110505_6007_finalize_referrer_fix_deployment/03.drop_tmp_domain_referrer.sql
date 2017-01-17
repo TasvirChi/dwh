@@ -1,1 +1,1 @@
-DROP TABLE kalturadw.tmp_domain_referrer;
+DROP TABLE borhandw.tmp_domain_referrer;

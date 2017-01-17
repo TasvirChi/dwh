@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS `kalturadw`.dwh_dim_partners_billing;
+DROP TABLE IF EXISTS `borhandw`.dwh_dim_partners_billing;
 
-CREATE TABLE `kalturadw`.`dwh_dim_partners_billing` (
+CREATE TABLE `borhandw`.`dwh_dim_partners_billing` (
     `partner_id` INT NOT NULL ,
     `partner_group_type_id` SMALLINT default 1,
     updated_at timestamp not null default 0,
@@ -37,7 +37,7 @@ CREATE TABLE `kalturadw`.`dwh_dim_partners_billing` (
     PRIMARY KEY (`partner_id`, updated_at)
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
-CREATE TRIGGER `kalturadw`.`dwh_dim_partners_billing_setcreationtime_oninsert` BEFORE INSERT
-    ON `kalturadw`.`dwh_dim_partners_billing`
+CREATE TRIGGER `borhandw`.`dwh_dim_partners_billing_setcreationtime_oninsert` BEFORE INSERT
+    ON `borhandw`.`dwh_dim_partners_billing`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();

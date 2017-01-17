@@ -3,9 +3,9 @@ require_once 'Configuration.php';
 require_once 'KettleRunner.php';
 require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
-require_once 'KalturaTestCase.php';
+require_once 'BorhanTestCase.php';
 
-class DimensionsTest extends KalturaTestCase
+class DimensionsTest extends BorhanTestCase
 {
     public function testUpdatePartners()
     {
@@ -79,10 +79,10 @@ class DimensionsTest extends KalturaTestCase
 		KettleRunner::execute('/../tests/execute_dim.ktr', array('TransformationName'=>$CONF->EtlBasePath.$job,'LastUpdatedAt'=>$start->format('Y/m/d')." 00:00:00", 'OperationalReplicationSyncedAt'=>$end->format('Y/m/d')." 00:00:00"));
 		
 		$sourceDB = new MySQLRunner($CONF->OpDbHostName,$CONF->OpDbPort, $CONF->OpDbUser, $CONF->OpDbPassword);		
-		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM kaltura.".$source." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'".$additional_where);
+		$sourceRows = $sourceDB ->run("SELECT count(*) amount FROM borhan.".$source." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'".$additional_where);
 		
 		$targetDB = new MySQLRunner($CONF->DbHostName,$CONF->DbPort, $CONF->DbUser, $CONF->DbPassword);
-		$targetRows = $targetDB->run("SELECT count(*) amount FROM kalturadw.".$target." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'".$additional_where);		
+		$targetRows = $targetDB->run("SELECT count(*) amount FROM borhandw.".$target." where updated_at>='".$start->format('Y-m-d')."' and created_at<='".$before->format('Y-m-d')."'".$additional_where);		
 		
 		#$this->assertGreaterThan(0, $targetRows[0]['amount']);
 		$this->assertEquals($sourceRows[0]['amount'], $targetRows[0]['amount']);

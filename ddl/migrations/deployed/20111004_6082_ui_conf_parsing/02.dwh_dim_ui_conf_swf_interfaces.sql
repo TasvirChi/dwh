@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS kalturadw.dwh_dim_ui_conf_swf_interfaces;
-CREATE TABLE kalturadw.dwh_dim_ui_conf_swf_interfaces (
+DROP TABLE IF EXISTS borhandw.dwh_dim_ui_conf_swf_interfaces;
+CREATE TABLE borhandw.dwh_dim_ui_conf_swf_interfaces (
 	id INT NOT NULL AUTO_INCREMENT,
 	swf_file varchar(255) NOT NULL,
 	tags_search_string varchar(255) NOT NULL DEFAULT '',

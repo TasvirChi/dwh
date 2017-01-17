@@ -1,4 +1,4 @@
-USE kalturadw;
+USE borhandw;
 
 DROP TABLE IF EXISTS dwh_dim_flavor_asset_sorted;
 
@@ -29,7 +29,7 @@ CREATE TABLE `dwh_dim_flavor_asset_sorted` (
 ) ENGINE=MYISAM DEFAULT CHARSET=utf8;
 
 
-INSERT INTO kalturadw.dwh_dim_flavor_asset_sorted (`id` ,
+INSERT INTO borhandw.dwh_dim_flavor_asset_sorted (`id` ,
   `int_id` ,
   `partner_id` ,
   `created_at` ,

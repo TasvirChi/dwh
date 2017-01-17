@@ -1,10 +1,10 @@
 # add the implementation function first
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
-DROP PROCEDURE IF EXISTS `kalturadw`.`add_partition_for_fact_table`$$
-CREATE PROCEDURE  `kalturadw`.`add_partition_for_fact_table`(table_name varchar(100))
+DROP PROCEDURE IF EXISTS `borhandw`.`add_partition_for_fact_table`$$
+CREATE PROCEDURE  `borhandw`.`add_partition_for_fact_table`(table_name varchar(100))
 BEGIN
 	DECLARE p_name,p_value VARCHAR(100);
 	DECLARE p_date,_current_date DATETIME;
@@ -23,7 +23,7 @@ BEGIN
 		FROM `information_schema`.`partitions`
 		WHERE `partitions`.`TABLE_NAME` = table_name;
 		IF (_current_date > p_date - INTERVAL 1 MONTH AND p_name is not null) THEN
-			SET @s = CONCAT('alter table kalturadw.',table_name,' ADD PARTITION (partition p_' ,p_name ,' values less than (', p_value ,'))');
+			SET @s = CONCAT('alter table borhandw.',table_name,' ADD PARTITION (partition p_' ,p_name ,' values less than (', p_value ,'))');
 			PREPARE stmt FROM  @s;
 			EXECUTE stmt;
 			DEALLOCATE PREPARE stmt;
@@ -34,9 +34,9 @@ BEGIN
 END $$
 
 
-DROP PROCEDURE IF EXISTS `kalturadw`.`add_partition_for_table`$$
+DROP PROCEDURE IF EXISTS `borhandw`.`add_partition_for_table`$$
 
-CREATE PROCEDURE `kalturadw`.`add_partition_for_table`(table_name VARCHAR(40))
+CREATE PROCEDURE `borhandw`.`add_partition_for_table`(table_name VARCHAR(40))
 BEGIN
 	DECLARE p_name,p_value VARCHAR(100);
 	DECLARE p_date,_current_date DATETIME;
@@ -56,7 +56,7 @@ BEGIN
 		WHERE `partitions`.`TABLE_NAME` = table_name;
 
 		IF (_current_date > p_date - INTERVAL 1 MONTH AND p_name is not null) THEN
-			SET @s = CONCAT('alter table kalturadw.' , table_name , ' ADD PARTITION (partition p_' ,p_name ,' values less than (', p_value ,'))');
+			SET @s = CONCAT('alter table borhandw.' , table_name , ' ADD PARTITION (partition p_' ,p_name ,' values less than (', p_value ,'))');
 			PREPARE stmt FROM  @s;
 			EXECUTE stmt;
 			DEALLOCATE PREPARE stmt;
@@ -67,26 +67,26 @@ BEGIN
 END$$
 
 
-DROP PROCEDURE IF EXISTS `kalturadw`.`add_partitions`$$
+DROP PROCEDURE IF EXISTS `borhandw`.`add_partitions`$$
 
-CREATE PROCEDURE  `kalturadw`.`add_partitions`()
+CREATE PROCEDURE  `borhandw`.`add_partitions`()
 BEGIN
-  CALL kalturadw.add_partition_for_fact_table('dwh_fact_events');
-  CALL kalturadw.add_partition_for_fact_table('dwh_fact_fms_session_events');
-  CALL kalturadw.add_partition_for_fact_table('dwh_fact_fms_sessions');
+  CALL borhandw.add_partition_for_fact_table('dwh_fact_events');
+  CALL borhandw.add_partition_for_fact_table('dwh_fact_fms_session_events');
+  CALL borhandw.add_partition_for_fact_table('dwh_fact_fms_sessions');
   
-	CALL kalturadw.add_partition_for_table('dwh_aggr_events_entry');
-	CALL kalturadw.add_partition_for_table('dwh_aggr_events_domain');
-	CALL kalturadw.add_partition_for_table('dwh_aggr_events_country');
-	CALL kalturadw.add_partition_for_table('dwh_aggr_events_widget');
-    CALL kalturadw.add_partition_for_table('dwh_aggr_events_uid');		
-	CALL kalturadw.add_partition_for_table('dwh_aggr_partner');		
+	CALL borhandw.add_partition_for_table('dwh_aggr_events_entry');
+	CALL borhandw.add_partition_for_table('dwh_aggr_events_domain');
+	CALL borhandw.add_partition_for_table('dwh_aggr_events_country');
+	CALL borhandw.add_partition_for_table('dwh_aggr_events_widget');
+    CALL borhandw.add_partition_for_table('dwh_aggr_events_uid');		
+	CALL borhandw.add_partition_for_table('dwh_aggr_partner');		
 
-	CALL kalturadw.add_partition_for_table('dwh_aggr_partner_daily_usage');
+	CALL borhandw.add_partition_for_table('dwh_aggr_partner_daily_usage');
 END $$
 
 
 DELIMITER ;
 
-# call the CALL kalturadw.add_partitions() for the first time
-CALL kalturadw.add_partitions();
+# call the CALL borhandw.add_partitions() for the first time
+CALL borhandw.add_partitions();

@@ -1,10 +1,10 @@
 /*
 SQLyog Community v8.7 
-MySQL - 5.1.47 : Database - kalturadw_bisources
+MySQL - 5.1.47 : Database - borhandw_bisources
 *********************************************************************
 */
 
-USE `kalturadw`;
+USE `borhandw`;
 
 DROP TABLE IF EXISTS `dwh_dim_fms_bandwidth_source`;
 

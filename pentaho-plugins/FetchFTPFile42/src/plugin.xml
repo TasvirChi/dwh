@@ -5,7 +5,7 @@
    description="Fetch FTP file"
    tooltip="This is input plugin that fetches file over FTP"
    category="Input"
-   classname="org.kaltura.fetchftpfile.FetchFTPFileMeta">
+   classname="org.borhan.fetchftpfile.FetchFTPFileMeta">
    <libraries>
     <library name="fetchftpfile.jar"/>
     </libraries>

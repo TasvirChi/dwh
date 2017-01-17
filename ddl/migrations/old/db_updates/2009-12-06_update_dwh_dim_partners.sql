@@ -1,4 +1,4 @@
-alter table `kalturadw`.`dwh_dim_partners`
+alter table `borhandw`.`dwh_dim_partners`
 	ADD  `priority_group_id` INTEGER ,
 	ADD  `work_group_id` INTEGER ,
 	ADD `partner_group_type_id` SMALLINT default 1,

@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `kalturadw`.`dwh_fact_events_innodb`;
-CREATE TABLE `kalturadw`.`dwh_fact_events_innodb` (
+DROP TABLE IF EXISTS `borhandw`.`dwh_fact_events_innodb`;
+CREATE TABLE `borhandw`.`dwh_fact_events_innodb` (
   `file_id` INT(11) NOT NULL,
   `event_id` INT(11) NOT NULL,
   `event_type_id` SMALLINT(6) NOT NULL,
@@ -48,4 +48,4 @@ CREATE TABLE `kalturadw`.`dwh_fact_events_innodb` (
  PARTITION p_20101031 VALUES LESS THAN (20101101) ENGINE = INNODB,
  PARTITION p_20101130 VALUES LESS THAN (20101201) ENGINE = INNODB,
  PARTITION p_20101231 VALUES LESS THAN (20110101) ENGINE = INNODB);
-call kalturadw.add_daily_partition_for_table('dwh_fact_events_innodb');
+call borhandw.add_daily_partition_for_table('dwh_fact_events_innodb');

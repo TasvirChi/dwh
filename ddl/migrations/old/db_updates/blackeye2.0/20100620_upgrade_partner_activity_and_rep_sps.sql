@@ -6,20 +6,20 @@
 ####################
 
 # create new tables
-DROP TABLE IF EXISTS `kalturadw_ds`.`processes`;
-CREATE TABLE  `kalturadw_ds`.`processes` (
+DROP TABLE IF EXISTS `borhandw_ds`.`processes`;
+CREATE TABLE  `borhandw_ds`.`processes` (
 `id` int(10) unsigned NOT NULL,
 `process_name` varchar(45) NOT NULL,
 PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
-insert into kalturadw_ds.processes (id,process_name) values
+insert into borhandw_ds.processes (id,process_name) values
 (1,'events'),
 (2,'fms_streaming'),
 (3,'partner_activity');
 
-DROP TABLE IF EXISTS `kalturadw_ds`.`staging_areas`;
-CREATE TABLE  `kalturadw_ds`.`staging_areas` (
+DROP TABLE IF EXISTS `borhandw_ds`.`staging_areas`;
+CREATE TABLE  `borhandw_ds`.`staging_areas` (
 `id` int(10) unsigned NOT NULL,
 `process_id` int(10) unsigned NOT NULL,
 `source_table` varchar(45) NOT NULL,
@@ -32,14 +32,14 @@ PRIMARY KEY (`id`)
 
 # *Note that the staging area ods_fms_session_events DOES NOT have a post_transfer_sp value.
 # When the aggregate from fms to partner activity will move to production, staging_areas will be updated
-insert into kalturadw_ds.staging_areas (id,process_id,source_table,target_table,on_duplicate_clause,staging_partition_field)
+insert into borhandw_ds.staging_areas (id,process_id,source_table,target_table,on_duplicate_clause,staging_partition_field)
 values
-(1,1,'ds_events','kalturadw.dwh_fact_events','ON DUPLICATE KEY UPDATE kalturadw.dwh_fact_events.file_id = kalturadw.dwh_fact_events.file_id','file_id'),
-(2,2,'ods_fms_session_events','kalturadw.dwh_fact_session_events','ON DUPLICATE KEY UPDATE kalturadw.dwh_fact_fms_session_events.file_id = kalturadw.dwh_fact_fms_session_events.file_id','file_id');
+(1,1,'ds_events','borhandw.dwh_fact_events','ON DUPLICATE KEY UPDATE borhandw.dwh_fact_events.file_id = borhandw.dwh_fact_events.file_id','file_id'),
+(2,2,'ods_fms_session_events','borhandw.dwh_fact_session_events','ON DUPLICATE KEY UPDATE borhandw.dwh_fact_fms_session_events.file_id = borhandw.dwh_fact_fms_session_events.file_id','file_id');
 
 # partner activity parameter insert is in the partner activity section
-DROP TABLE IF EXISTS `kalturadw_ds`.`parameters`;
-CREATE TABLE  `kalturadw_ds`.`parameters` (
+DROP TABLE IF EXISTS `borhandw_ds`.`parameters`;
+CREATE TABLE  `borhandw_ds`.`parameters` (
 `id` int(11) unsigned NOT NULL,
 `process_id` int(11) unsigned NOT NULL,
 `parameter_name` varchar(100) NOT NULL,
@@ -49,7 +49,7 @@ PRIMARY KEY (`id`)
 
 
 # note default 1 - all existing files are process_id 1
-alter table kalturadw_ds.files add (process_id integer default 1);
+alter table borhandw_ds.files add (process_id integer default 1);
 
 ###################
 # STOP ETL TABLES #
@@ -63,13 +63,13 @@ DELIMITER $$
 
 # new management procedures
 # add_ods_partition
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`add_ods_partition` $$
-CREATE PROCEDURE  `kalturadw_ds`.`add_ods_partition`(
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`add_ods_partition` $$
+CREATE PROCEDURE  `borhandw_ds`.`add_ods_partition`(
 	partition_number VARCHAR(10),
 table_name VARCHAR(32)
 )
 BEGIN
-	SET @s = CONCAT('alter table kalturadw_ds.',table_name,' ADD PARTITION (partition p_' ,
+	SET @s = CONCAT('alter table borhandw_ds.',table_name,' ADD PARTITION (partition p_' ,
 			partition_number ,' values in (', partition_number ,'))');
 	PREPARE stmt FROM  @s;
 	EXECUTE stmt;
@@ -77,13 +77,13 @@ BEGIN
 END $$
 
 # drop_ods_partition
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`drop_ods_partition` $$
-CREATE  PROCEDURE  `kalturadw_ds`.`drop_ods_partition`(
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`drop_ods_partition` $$
+CREATE  PROCEDURE  `borhandw_ds`.`drop_ods_partition`(
 	partition_number VARCHAR(10),
 table_name VARCHAR(32)
 	)
 BEGIN
-	SET @s = CONCAT('alter table kalturadw_ds.',table_name,' drop PARTITION  p_' ,
+	SET @s = CONCAT('alter table borhandw_ds.',table_name,' drop PARTITION  p_' ,
 			partition_number );
 	PREPARE stmt FROM  @s;
 	EXECUTE stmt;
@@ -91,8 +91,8 @@ BEGIN
 END $$
 
 # empty_ods_partition
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`empty_ods_partition` $$
-CREATE PROCEDURE  `kalturadw_ds`.`empty_ods_partition`(
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`empty_ods_partition` $$
+CREATE PROCEDURE  `borhandw_ds`.`empty_ods_partition`(
 	partition_number VARCHAR(10),
 table_name VARCHAR(32)
 )
@@ -101,8 +101,8 @@ BEGIN
 	CALL add_ods_partition(partition_number,table_name);
 END $$
 
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`transfer_ods_partition` $$
-CREATE PROCEDURE  `kalturadw_ds`.`transfer_ods_partition`(
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`transfer_ods_partition` $$
+CREATE PROCEDURE  `borhandw_ds`.`transfer_ods_partition`(
 	staging_area_id INTEGER, partition_number VARCHAR(10)
 )
 BEGIN
@@ -145,24 +145,24 @@ END $$
 
 # change existing management procs
 
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`add_file_partition` $$
-CREATE PROCEDURE  `kalturadw_ds`.`add_file_partition`(
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`add_file_partition` $$
+CREATE PROCEDURE  `borhandw_ds`.`add_file_partition`(
 	partition_number VARCHAR(10)
 )
 BEGIN
-CALL kalturadw_ds.add_ods_partition(partition_number,'ds_events');
+CALL borhandw_ds.add_ods_partition(partition_number,'ds_events');
 END $$
 
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`drop_file_partition` $$
-CREATE PROCEDURE  `kalturadw_ds`.`drop_file_partition`(
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`drop_file_partition` $$
+CREATE PROCEDURE  `borhandw_ds`.`drop_file_partition`(
 	partition_number VARCHAR(10)
 	)
 BEGIN
-CALL kalturadw_ds.drop_ods_partition(partition_number,'ds_events');
+CALL borhandw_ds.drop_ods_partition(partition_number,'ds_events');
 END $$
 
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`empty_file_partition` $$
-CREATE PROCEDURE  `kalturadw_ds`.`empty_file_partition`(
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`empty_file_partition` $$
+CREATE PROCEDURE  `borhandw_ds`.`empty_file_partition`(
 	partition_number VARCHAR(10)
 )
 BEGIN
@@ -170,8 +170,8 @@ BEGIN
 	CALL add_file_partition(partition_number);
 END $$
 
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`transfer_file_partition` $$
-CREATE PROCEDURE  `kalturadw_ds`.`transfer_file_partition`(
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`transfer_file_partition` $$
+CREATE PROCEDURE  `borhandw_ds`.`transfer_file_partition`(
 	partition_number VARCHAR(10)
 )
 BEGIN
@@ -188,11 +188,11 @@ DELIMITER ;
 # START PARTNER ACTIVITY #
 ##########################
 
-insert into kalturadw_ds.parameters (id,process_id,parameter_name,int_value)
+insert into borhandw_ds.parameters (id,process_id,parameter_name,int_value)
 select 1,3,'max_operational_partner_activity',max(activity_id)
-from kalturadw.dwh_fact_partner_activities;
+from borhandw.dwh_fact_partner_activities;
 
-alter table kalturadw.dwh_fact_partner_activities drop primary key;
+alter table borhandw.dwh_fact_partner_activities drop primary key;
 
 ########################
 # END PARTNER ACTIVITY #

@@ -1,5 +1,5 @@
 SELECT c.* FROM (SELECT *
-FROM kalturadw_ds.cycles c
+FROM borhandw_ds.cycles c
 WHERE
 (STATUS IN ('GENERATED','PROCESSED','LOADED') AND c.insert_time < NOW() - INTERVAL 1.5 DAY)
   OR 
@@ -14,6 +14,6 @@ WHERE
  (STATUS IN ('GENERATING', 'REGISTERED') AND c.insert_time < NOW() - INTERVAL 12 HOUR AND DATE(c.insert_time) > 20130101)
  OR
  STATUS NOT IN ('DONE', 'GENERATED', 'GENERATING', 'REGISTERED', 'PROCESSED', 'LOADED', 'RUNNING', 'LOADING','TRANSFERING', 'DELETED', 'SPOOF_CYCLE')) c,
- kalturadw_ds.files f
+ borhandw_ds.files f
  WHERE c.cycle_id = f.cycle_id
 ;

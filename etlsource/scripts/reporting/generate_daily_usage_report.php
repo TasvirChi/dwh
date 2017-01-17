@@ -24,7 +24,7 @@ exec('echo ' . date("Y-M-d H:i:s") . ' Starting >> ' . $logFileName);
 $tmpFileName = "/tmp/daily_usage_report.xml";
 
 exec('echo ' . date("Y-M-d H:i:s") . ' Executing daily usage stored_procedure >> ' . $logFileName); 
-$sqlOSCommand = "/usr/bin/mysql --xml -u". $dbuser ." -p". $dbpass ." -h". $dbhost. " -P". $dbport ." -e \"CALL kalturadw.generate_daily_usage_report(". $date_id .")\"";
+$sqlOSCommand = "/usr/bin/mysql --xml -u". $dbuser ." -p". $dbpass ." -h". $dbhost. " -P". $dbport ." -e \"CALL borhandw.generate_daily_usage_report(". $date_id .")\"";
 exec('echo ' . date("Y-M-d H:i:s") . ' ' . $sqlOSCommand . ' >> ' . $logFileName); 
 exec($sqlOSCommand . ' 1> ' . $tmpFileName . ' 2>>' . $logFileName);
 exec('echo >> ' . $logFileName);                       
@@ -41,9 +41,9 @@ exec('echo >> ' . $logFileName);
 exec('echo ' . date("Y-M-d H:i:s") . ' Finished parsing >> ' . $logFileName); 
 
 $mailSubject = "\"Daily usage report\"";
-$sender = "dwh@kaltura.com";
-#$recipients = "dor.porat@kaltura.com,alex.bandel@kaltura.com,yuval.shemesh@kaltura.com,eran.etam@kaltura.com,tomer.wolff@kaltura.com,Anatol.Schwartz@kaltura.com";
-$recipients = "dor.porat@kaltura.com";
+$sender = "dwh@borhan.com";
+#$recipients = "dor.porat@borhan.com,alex.bandel@borhan.com,yuval.shemesh@borhan.com,eran.etam@borhan.com,tomer.wolff@borhan.com,Anatol.Schwartz@borhan.com";
+$recipients = "dor.porat@borhan.com";
 $attachment = $tmpOutputFileName;
 
 exec('echo ' . date("Y-M-d H:i:s") . ' Sending mail to ' . $recipients . ' >> ' . $logFileName); 

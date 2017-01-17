@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw_ds`$$
+USE `borhandw_ds`$$
 
 DROP PROCEDURE IF EXISTS `transfer_ods_partition`$$
 
@@ -22,7 +22,7 @@ FROM staging_areas
 WHERE id=staging_area_id;
 
 IF LENGTH(AGGR_DATE) > 0 THEN
-SELECT CONCAT('update kalturadw.aggr_managment set is_calculated=0 where aggr_day_int in ',
+SELECT CONCAT('update borhandw.aggr_managment set is_calculated=0 where aggr_day_int in ',
 	      '(select distinct ',aggr_date,
 	        ' from ',src_table,
 	        ' where ',partition_field,' = ',partition_number,')') INTO s;

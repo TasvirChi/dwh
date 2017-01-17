@@ -1,4 +1,4 @@
-package org.kaltura.getftpfilenames;
+package org.borhan.getftpfilenames;
 
 import java.io.IOException;
 import java.text.ParseException;

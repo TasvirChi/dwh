@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP FUNCTION IF EXISTS `calc_partner_storage_data_last_month`$$
 
@@ -30,8 +30,8 @@ BEGIN
 			WHERE 	all_times.day_id BETWEEN 20081230 AND LAST_DAY(@current_month_id*100+1)*1
 			GROUP BY day_id
 		) continuous_partner_storage
-	WHERE kalturadw.calc_month_id(continuous_partner_storage.date_id)=@current_month_id
-	GROUP BY kalturadw.calc_month_id(continuous_partner_storage.date_id);
+	WHERE borhandw.calc_month_id(continuous_partner_storage.date_id)=@current_month_id
+	GROUP BY borhandw.calc_month_id(continuous_partner_storage.date_id);
 	RETURN avg_cont_aggr_storage;
 END$$
 

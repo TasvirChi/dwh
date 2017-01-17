@@ -1,5 +1,5 @@
-﻿DROP TABLE IF EXISTS `kalturadw_ds`.`ds_fms_session_events`;
-CREATE TABLE `kalturadw_ds`.`ds_fms_session_events` (
+﻿DROP TABLE IF EXISTS `borhandw_ds`.`ds_fms_session_events`;
+CREATE TABLE `borhandw_ds`.`ds_fms_session_events` (
   `line_number` INT (10) DEFAULT NULL,
   `cycle_id` INT(11) NOT NULL,
   `file_id` int(11) unsigned NOT NULL,

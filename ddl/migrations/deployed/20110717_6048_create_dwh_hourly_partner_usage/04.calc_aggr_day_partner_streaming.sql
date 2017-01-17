@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_streaming`$$
 
@@ -23,7 +23,7 @@ BEGIN
    	SELECT 	
 		session_partner_id, session_date_id, 0 hour_id, f.bandwidth_source_id, SUM(total_bytes) /* Bytes */
 	FROM 
-		kalturadw.dwh_fact_fms_sessions f, kalturadw.dwh_dim_bandwidth_source d
+		borhandw.dwh_fact_fms_sessions f, borhandw.dwh_dim_bandwidth_source d
 	WHERE 	
 		f.bandwidth_source_id = d.bandwidth_source_id
 		AND session_date_id=DATE(date_val)*1
@@ -32,7 +32,7 @@ BEGIN
 		session_partner_id, session_date_id, bandwidth_source_id;
 	
 	INSERT INTO 
-		kalturadw.dwh_hourly_partner_usage
+		borhandw.dwh_hourly_partner_usage
     		(partner_id, date_id, hour_id, bandwidth_source_id, count_bandwidth_kb)
    	SELECT 	
 		partner_id, date_id, hour_id, bandwidth_source_id, count_bandwidth_bytes/1024
@@ -43,7 +43,7 @@ BEGIN
     	
 	/*Temporary until dwh_hourly_partner's usage columns are dropped - we use to store data which is loaded to two different tables instead of one.*/
  	INSERT INTO 
-		kalturadw.dwh_hourly_partner
+		borhandw.dwh_hourly_partner
     		(partner_id, date_id, hour_id, count_streaming)
    	SELECT 	
 		partner_id, date_id, hour_id, SUM(count_bandwidth_bytes)

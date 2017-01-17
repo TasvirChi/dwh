@@ -1,8 +1,8 @@
-ALTER TABLE kalturadw.ri_mapping ADD COLUMN date_column_name VARCHAR(50) AFTER date_id_column_name;
+ALTER TABLE borhandw.ri_mapping ADD COLUMN date_column_name VARCHAR(50) AFTER date_id_column_name;
 
-TRUNCATE TABLE kalturadw.ri_mapping;
+TRUNCATE TABLE borhandw.ri_mapping;
 
-INSERT INTO kalturadw.`ri_mapping` (`table_name`, `column_name`, `date_id_column_name`, `date_column_name`, `reference_table`, `reference_column`, `perform_check`) 
+INSERT INTO borhandw.`ri_mapping` (`table_name`, `column_name`, `date_id_column_name`, `date_column_name`, `reference_table`, `reference_column`, `perform_check`) 
 	VALUES
 	('dwh_dim_kusers','partner_id', '', 'dwh_update_date', 'dwh_dim_partners','partner_id','1'),
 	('dwh_dim_ui_conf','partner_id', '', 'dwh_update_date','dwh_dim_partners','partner_id','1'),

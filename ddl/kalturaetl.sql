@@ -1,6 +1,6 @@
 /*
 SQLyog Community Edition- MySQL GUI v8.05 
-MySQL - 5.1.35 : Database - kalturaetl
+MySQL - 5.1.35 : Database - borhanetl
 *********************************************************************
 */
 
@@ -11,9 +11,9 @@ MySQL - 5.1.35 : Database - kalturaetl
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-CREATE DATABASE /*!32312 IF NOT EXISTS*/`kalturaetl` /*!40100 DEFAULT CHARACTER SET latin1 */;
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`borhanetl` /*!40100 DEFAULT CHARACTER SET latin1 */;
 
-USE `kalturaetl`;
+USE `borhanetl`;
 
 /*Table structure for table `r_cluster` */
 

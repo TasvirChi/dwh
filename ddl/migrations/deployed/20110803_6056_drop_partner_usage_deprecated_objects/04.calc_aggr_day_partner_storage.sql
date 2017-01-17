@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day_partner_storage`$$
 
@@ -21,12 +21,12 @@ BEGIN
 	WHERE		entry_size_date_id=DATE(date_val)*1
 	GROUP BY 	partner_id;
 	
-	INSERT INTO 	kalturadw.dwh_hourly_partner_usage (partner_id, date_id, hour_id, bandwidth_source_id, count_storage_mb)
+	INSERT INTO 	borhandw.dwh_hourly_partner_usage (partner_id, date_id, hour_id, bandwidth_source_id, count_storage_mb)
 	SELECT		partner_id, date_id, hour_id, 1, count_storage_mb
 	FROM		temp_aggr_storage
 	ON DUPLICATE KEY UPDATE count_storage_mb=VALUES(count_storage_mb);
 	
-	INSERT INTO 	kalturadw.dwh_hourly_partner_usage (partner_id, date_id, hour_id, bandwidth_source_id, aggr_storage_mb)
+	INSERT INTO 	borhandw.dwh_hourly_partner_usage (partner_id, date_id, hour_id, bandwidth_source_id, aggr_storage_mb)
 	SELECT 		a.partner_id, a.date_id, a.hour_id, 1, SUM(b.count_storage_mb)
 	FROM 		temp_aggr_storage a, dwh_hourly_partner_usage b 
 	WHERE 		a.partner_id=b.partner_id AND DATE(date_val)*1 >=b.date_id AND b.hour_id = 0 AND b.bandwidth_source_id = 1 AND b.count_storage_mb<>0

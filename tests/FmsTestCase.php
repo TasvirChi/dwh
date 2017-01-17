@@ -3,7 +3,7 @@ require_once 'Configuration.php';
 require_once 'KettleRunner.php';
 require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
-require_once 'KalturaTestCase.php';
+require_once 'BorhanTestCase.php';
 require_once 'CycleProcessTestCase.php';
 require_once 'ComparedTable.php';
 
@@ -44,7 +44,7 @@ abstract class FMSTestCase extends CycleProcessTestCase
 			$filename =  $CONF->ProcessPath."/".$cycleID.'/'.DWHInspector::getFileName($fileID);
 		
 			// compare rows in ds_fms_session_events to rows in file
-                        $this->assertEquals(DWHInspector::countRows('kalturadw_ds.ds_fms_session_events',$fileID),$this->countRows($filename, array($this, 'validFMSLine')));
+                        $this->assertEquals(DWHInspector::countRows('borhandw_ds.ds_fms_session_events',$fileID),$this->countRows($filename, array($this, 'validFMSLine')));
 		
 			// compare number of entries and number of rows per entry
 			$this->AssertFMSEntity(array($this, 'countPerEntry'), $filename, $fileID, 'entry_id');
@@ -61,7 +61,7 @@ abstract class FMSTestCase extends CycleProcessTestCase
 			$this->assertEquals(count(array_intersect($fullFileSessions, $fullDBSessions)), count($fullFileSessions));
 			
 			// make sure there are very little invalid lines
-                        $this->assertEquals($this->countInvalidLines($filename, array($this, 'validFMSLine'), array($this, 'ignoredInvalidFMSLine')), DWHInspector::countRows('kalturadw_ds.invalid_ds_lines',$fileID));
+                        $this->assertEquals($this->countInvalidLines($filename, array($this, 'validFMSLine'), array($this, 'ignoredInvalidFMSLine')), DWHInspector::countRows('borhandw_ds.invalid_ds_lines',$fileID));
 		}
 	}
 	
@@ -91,16 +91,16 @@ abstract class FMSTestCase extends CycleProcessTestCase
 	public function testAggregation()
 	{
 		parent::testAggregation();
-                $this->compareAggregation(array(new ComparedTable('bandwidth_source_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')), 
-					  array(new ComparedTable('bandwidth_source_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)')), 1);
-                $this->compareAggregation(array(new ComparedTable('session_partner_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
-					  array(new ComparedTable('partner_id', 'kalturadw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)')), 1);
-		$this->compareAggregation(array(new ComparedTable('location_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)'),
-                                                new ComparedTable('location_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
-                                          array(new ComparedTable('location_id', 'kalturadw.dwh_hourly_events_devices', 'ifnull(count_bandwidth_kb, 0)')), 1);
-                $this->compareAggregation(array(new ComparedTable('country_id', 'kalturadw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)'),
-                                                new ComparedTable('country_id', 'kalturadw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
-                                          array(new ComparedTable('country_id', 'kalturadw.dwh_hourly_events_devices', 'ifnull(count_bandwidth_kb, 0)')), 1);
+                $this->compareAggregation(array(new ComparedTable('bandwidth_source_id', 'borhandw.dwh_fact_fms_sessions', '(total_bytes/1024)')), 
+					  array(new ComparedTable('bandwidth_source_id', 'borhandw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)')), 1);
+                $this->compareAggregation(array(new ComparedTable('session_partner_id', 'borhandw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
+					  array(new ComparedTable('partner_id', 'borhandw.dwh_hourly_partner_usage', 'ifnull(count_bandwidth_kb, 0)')), 1);
+		$this->compareAggregation(array(new ComparedTable('location_id', 'borhandw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)'),
+                                                new ComparedTable('location_id', 'borhandw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
+                                          array(new ComparedTable('location_id', 'borhandw.dwh_hourly_events_devices', 'ifnull(count_bandwidth_kb, 0)')), 1);
+                $this->compareAggregation(array(new ComparedTable('country_id', 'borhandw.dwh_fact_bandwidth_usage', '(bandwidth_bytes/1024)'),
+                                                new ComparedTable('country_id', 'borhandw.dwh_fact_fms_sessions', '(total_bytes/1024)')),
+                                          array(new ComparedTable('country_id', 'borhandw.dwh_hourly_events_devices', 'ifnull(count_bandwidth_kb, 0)')), 1);
 
 	}	
 
@@ -131,11 +131,11 @@ abstract class FMSTestCase extends CycleProcessTestCase
 	private function AssertFMSEntity($countPerEntityCallBack, $filename, $fileID, $tableEntityName)
 	{
 		$collection = call_user_func($countPerEntityCallBack, $filename);
-                $this->assertEquals(count($collection), DWHInspector::countDistinct('kalturadw_ds.ds_fms_session_events', $fileID, $tableEntityName), $countPerEntityCallBack[1]);
+                $this->assertEquals(count($collection), DWHInspector::countDistinct('borhandw_ds.ds_fms_session_events', $fileID, $tableEntityName), $countPerEntityCallBack[1]);
 
                 foreach($collection as $objectID=>$val)
                 {
-                	$res = DWHInspector::countRows('kalturadw_ds.ds_fms_session_events',$fileID," and $tableEntityName = '$objectID'");
+                	$res = DWHInspector::countRows('borhandw_ds.ds_fms_session_events',$fileID," and $tableEntityName = '$objectID'");
                         $this->assertEquals($res, $val, "Expected(db): $res, Actual(file): $val $tableEntityName: $objectID");
                 }
 	}

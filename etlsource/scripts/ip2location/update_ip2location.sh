@@ -1,5 +1,5 @@
 #!/bin/bash
-. /etc/kaltura.d/system.ini
+. /etc/borhan.d/system.ini
 
 KITCHEN=$BASE_DIR/bin/pentaho/kitchen.sh
 ROOT_DIR=$BASE_DIR/dwh

@@ -1,4 +1,4 @@
-package org.kaltura.mysql;
+package org.borhan.mysql;
 
 import java.sql.BatchUpdateException;
 import java.sql.PreparedStatement;

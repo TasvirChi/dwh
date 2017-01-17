@@ -13,7 +13,7 @@
  * Created on 2-jul-2003
  */
 
-package org.kaltura.dimensionlookup;
+package org.borhan.dimensionlookup;
 
 import java.util.ArrayList;
 import java.util.HashMap;

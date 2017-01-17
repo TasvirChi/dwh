@@ -68,11 +68,11 @@
   <notepads>
   </notepads>
   <connection>
-    <name>Kaltura</name>
+    <name>Borhan</name>
     <server>${OpDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpDbPort}</port>
     <username>${OpDbUser}</username>
     <password>${OpDbPassword}</password>
@@ -92,11 +92,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>Kaltura_Writable</name>
+    <name>Borhan_Writable</name>
     <server>${OpWritableDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${OpWritableDbPort}</port>
     <username>${OpWritableDbUser}</username>
     <password>${OpWritableDbPassword}</password>
@@ -117,11 +117,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaDW</name>
+    <name>BorhanDW</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -141,11 +141,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_bisources</name>
+    <name>borhandw_bisources</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_bisources</database>
+    <database>borhandw_bisources</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -164,36 +164,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>kalturadw_ds</name>
+    <name>borhandw_ds</name>
     <server>${DbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw_ds</database>
-    <port>${DbPort}</port>
-    <username>${DbUser}</username>
-    <password>${DbPassword}</password>
-    <servername/>
-    <data_tablespace/>
-    <index_tablespace/>
-    <attributes>
-      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
-      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
-      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
-      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
-      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
-      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
-      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
-    </attributes>
-  </connection>
-  <connection>
-    <name>KalturaLogs</name>
-    <server>${DbHostName}</server>
-    <type>MYSQL</type>
-    <access>Native</access>
-    <database>kalturalog</database>
+    <database>borhandw_ds</database>
     <port>${DbPort}</port>
     <username>${DbUser}</username>
     <password>${DbPassword}</password>
@@ -214,11 +189,36 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaMonitoring</name>
+    <name>BorhanLogs</name>
+    <server>${DbHostName}</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>borhanlog</database>
+    <port>${DbPort}</port>
+    <username>${DbUser}</username>
+    <password>${DbPassword}</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>${DbPort}</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>BorhanMonitoring</name>
     <server>${MonitoringDbHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kaltura</database>
+    <database>borhan</database>
     <port>${MonitoringDbPort}</port>
     <username>${MonitoringDbUser}</username>
     <password>${MonitoringDbPassword}</password>
@@ -238,11 +238,11 @@
     </attributes>
   </connection>
   <connection>
-    <name>KalturaReadDW</name>
+    <name>BorhanReadDW</name>
     <server>${DbReadHostName}</server>
     <type>MYSQL</type>
     <access>Native</access>
-    <database>kalturadw</database>
+    <database>borhandw</database>
     <port>${DbReadPort}</port>
     <username>${DbReadUser}</username>
     <password>${DbReadPassword}</password>
@@ -305,7 +305,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -493,7 +493,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -639,7 +639,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -702,7 +702,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
@@ -765,7 +765,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Kaltura</connection>
+    <connection>Borhan</connection>
     <sql>SELECT 	id,
 	int_id,
 	partner_id,
@@ -1008,8 +1008,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
            </partitioning>
       <schema/>
       <table>dwh_dim_asset_status</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
@@ -1048,8 +1048,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
            </partitioning>
       <schema/>
       <table>dwh_dim_container_format</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
@@ -1143,8 +1143,8 @@ and STR_TO_DATE(&apos;${OperationalReplicationSyncedAt}&apos;, &apos;%Y&#47;%m&#
            </partitioning>
       <schema/>
       <table>dwh_dim_file_ext</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
@@ -1313,10 +1313,10 @@ tag = substr(tag,0,49);
            <method>none</method>
            <schema_name/>
            </partitioning>
-      <schema>kalturadw</schema>
+      <schema>borhandw</schema>
       <table>dwh_dim_tags</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>
@@ -1353,11 +1353,11 @@ tag = substr(tag,0,49);
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>KalturaDW</connection>
+    <connection>BorhanDW</connection>
     <commit>100</commit>
     <update_bypassed>N</update_bypassed>
     <lookup>
-      <schema>kalturadw</schema>
+      <schema>borhandw</schema>
       <table>dwh_dim_flavor_asset_tags</table>
       <key>
         <name>tag_id</name>
@@ -1435,8 +1435,8 @@ tag = substr(tag,0,49);
            </partitioning>
       <schema/>
       <table>dwh_dim_video_codec</table>
-      <connectionRead>KalturaReadDW</connectionRead>
-      <connectionWrite>KalturaDW</connectionWrite>
+      <connectionRead>BorhanReadDW</connectionRead>
+      <connectionWrite>BorhanDW</connectionWrite>
       <commit>1</commit>
       <cache_size>9999</cache_size>
       <replace>N</replace>

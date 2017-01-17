@@ -1,4 +1,4 @@
-package org.kaltura.fetchftpfile;
+package org.borhan.fetchftpfile;
 
 import java.io.IOException;
 import java.net.InetAddress;

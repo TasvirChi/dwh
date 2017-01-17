@@ -1,13 +1,13 @@
-use kaltura;
+use borhan;
 
 create index updated_at_index
-on kaltura.media_info(updated_at);
+on borhan.media_info(updated_at);
 
 create index updated_at_index
-on kaltura.flavor_params_conversion_profile(updated_at);
+on borhan.flavor_params_conversion_profile(updated_at);
 
 create index updated_at_index
-on kaltura.conversion_profile_2(updated_at);
+on borhan.conversion_profile_2(updated_at);
 
 create index updated_at_index
-on kaltura.flavor_params_output(updated_at);
+on borhan.flavor_params_output(updated_at);

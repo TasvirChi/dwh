@@ -5,7 +5,7 @@
    description="Get FTP file names"
    tooltip="This is input plugin that print a remote dir content using FTP"
    category="Input"
-   classname="org.kaltura.getftpfilenames.GetFTPFileNamesMeta">
+   classname="org.borhan.getftpfilenames.GetFTPFileNamesMeta">
    <libraries>
     <library name="getftpfilenames.jar"/>
     </libraries>

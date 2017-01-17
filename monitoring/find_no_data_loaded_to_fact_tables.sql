@@ -3,7 +3,7 @@ SELECT 'No new events loaded to dwh_fact_events' stat, (DATE(NOW())-INTERVAL 2 D
 FROM 
 (
 SELECT *
-FROM kalturadw.dwh_fact_events
+FROM borhandw.dwh_fact_events
 WHERE event_date_id = (DATE(NOW())-INTERVAL 2 DAY)*1
 LIMIT 1) a
 HAVING COUNT(*) = 0
@@ -12,7 +12,7 @@ SELECT 'No new sessions loaded to dwh_fact_fms_sessions' stat, (DATE(NOW())-INTE
 FROM 
 (
 SELECT *
-FROM kalturadw.dwh_fact_fms_sessions
+FROM borhandw.dwh_fact_fms_sessions
 WHERE session_date_id = (DATE(NOW())-INTERVAL 2 DAY)*1
 LIMIT 1) a
 HAVING COUNT(*) = 0
@@ -21,7 +21,7 @@ SELECT 'No new data loaded to dwh_fact_bandwidth_usage' stat, (DATE(NOW())-INTER
 FROM 
 (
 SELECT *
-FROM kalturadw.dwh_fact_bandwidth_usage
+FROM borhandw.dwh_fact_bandwidth_usage
 WHERE activity_date_id = (DATE(NOW())-INTERVAL 2 DAY)*1
 LIMIT 1) a
 HAVING COUNT(*) = 0

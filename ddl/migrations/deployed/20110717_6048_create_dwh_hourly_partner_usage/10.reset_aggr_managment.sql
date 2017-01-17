@@ -1,3 +1,3 @@
-UPDATE kalturadw.aggr_managment
+UPDATE borhandw.aggr_managment
 set is_calculated=0
 where aggr_name = 'partner_usage'

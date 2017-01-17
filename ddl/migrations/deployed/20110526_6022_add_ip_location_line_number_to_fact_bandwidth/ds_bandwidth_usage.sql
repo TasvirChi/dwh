@@ -1,4 +1,4 @@
-ALTER TABLE kalturadw_ds.ds_bandwidth_usage  
+ALTER TABLE borhandw_ds.ds_bandwidth_usage  
 	ADD `line_number` INT (10) DEFAULT NULL FIRST,
 	ADD `user_ip` VARCHAR(15) DEFAULT NULL,
   	ADD `user_ip_number` INT(10) UNSIGNED DEFAULT NULL,

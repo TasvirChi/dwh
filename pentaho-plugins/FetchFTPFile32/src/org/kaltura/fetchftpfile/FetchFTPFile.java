@@ -9,7 +9,7 @@
  * basis, WITHOUT WARRANTY OF ANY KIND, either express or  implied. Please refer to 
  * the license for the specific language governing your rights and limitations.*/
 
-package org.kaltura.fetchftpfile;
+package org.borhan.fetchftpfile;
 
 import org.pentaho.di.core.Const;
 import org.pentaho.di.core.exception.KettleException;

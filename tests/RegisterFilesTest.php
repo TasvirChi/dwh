@@ -7,8 +7,8 @@ class RegisterFilesTestCase extends PHPUnit_Framework_TestCase
 	{
 		DWHInspector::purgeCycles(false);
 		DWHInspector::cleanEtlServers();
-		DWHInspector::dropTablePartitions('kalturadw_ds','ds_events');
-		DWHInspector::dropTablePartitions('kalturadw_ds','ds_bandwidth_usage');
+		DWHInspector::dropTablePartitions('borhandw_ds','ds_events');
+		DWHInspector::dropTablePartitions('borhandw_ds','ds_bandwidth_usage');
 	}
 
 	public function testBasicRegister()

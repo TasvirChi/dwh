@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP PROCEDURE IF EXISTS `calc_aggr_day`$$
 
@@ -15,7 +15,7 @@ BEGIN
 	
 	SELECT aggr_table,hourly_aggr_table, aggr_id_field, aggr_join_stmt
 	INTO  v_aggr_table,v_hourly_aggr_table, v_aggr_id_field, v_aggr_join_stmt
-	FROM kalturadw_ds.aggr_name_resolver
+	FROM borhandw_ds.aggr_name_resolver
 	WHERE aggr_name = p_aggr_name;
 	
 	IF ( v_aggr_id_field <> "" ) THEN
@@ -30,7 +30,7 @@ BEGIN
 	EXECUTE stmt;
 	DEALLOCATE PREPARE stmt;
 	
-    # Old aggregate (delete when KMC don't need)
+    # Old aggregate (delete when BMC don't need)
 	SET @s = CONCAT('INSERT INTO ',v_aggr_table,'
 		(partner_id
 		,date_id 

@@ -1,2 +1,2 @@
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`mark_for_reaggregation`;
-DROP PROCEDURE IF EXISTS `kalturadw_ds`.`mark_as_aggregated`;
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`mark_for_reaggregation`;
+DROP PROCEDURE IF EXISTS `borhandw_ds`.`mark_as_aggregated`;

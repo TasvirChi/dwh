@@ -1,5 +1,5 @@
-DROP TABLE IF EXISTS `kalturadw_ds`.`ds_bandwidth_usage`;
-CREATE TABLE `kalturadw_ds`.`ds_bandwidth_usage` (
+DROP TABLE IF EXISTS `borhandw_ds`.`ds_bandwidth_usage`;
+CREATE TABLE `borhandw_ds`.`ds_bandwidth_usage` (
   `cycle_id` INT(11) NOT NULL,
   `file_id` INT(11) NOT NULL,
   `partner_id` INT(11) NOT NULL DEFAULT -1,
@@ -12,8 +12,8 @@ CREATE TABLE `kalturadw_ds`.`ds_bandwidth_usage` (
 PARTITION BY LIST (cycle_id)
 (PARTITION p_0 VALUES IN (0) ENGINE = INNODB);
 
-DROP TABLE IF EXISTS `kalturadw_ds`.`ds_events`;
-CREATE TABLE `kalturadw_ds`.`ds_events`
+DROP TABLE IF EXISTS `borhandw_ds`.`ds_events`;
+CREATE TABLE `borhandw_ds`.`ds_events`
      (   file_id INT NOT NULL
 	, event_id INT  NOT NULL
 	, event_type_id SMALLINT  NOT NULL
@@ -44,8 +44,8 @@ CREATE TABLE `kalturadw_ds`.`ds_events`
 	, referrer_id INT(11)) ENGINE=INNODB  DEFAULT CHARSET=utf8  
      PARTITION BY LIST(file_id) (PARTITION p_0 VALUES IN (0));
 
-DROP TABLE IF EXISTS `kalturadw_ds`.`ods_fms_session_events`;
-CREATE TABLE `kalturadw_ds`.`ods_fms_session_events` (
+DROP TABLE IF EXISTS `borhandw_ds`.`ods_fms_session_events`;
+CREATE TABLE `borhandw_ds`.`ods_fms_session_events` (
   `file_id` INT(11) UNSIGNED NOT NULL,
   `event_type_id` TINYINT(3) UNSIGNED NOT NULL,
   `event_category_id` TINYINT(3) UNSIGNED NOT NULL,
@@ -95,8 +95,8 @@ CREATE TABLE `kalturadw_ds`.`ods_fms_session_events` (
  PARTITION BY LIST (file_id)
 (PARTITION p_0 VALUES IN (0) ENGINE = MYISAM);
 
-ALTER TABLE kalturadw_ds.invalid_ds_lines ENGINE = INNODB;
-ALTER TABLE kalturadw_ds.invalid_ds_lines_error_codes ENGINE = INNODB;
-ALTER TABLE kalturadw_ds.invalid_event_lines ENGINE = INNODB;
-ALTER TABLE kalturadw_ds.invalid_fms_event_lines ENGINE = INNODB;
+ALTER TABLE borhandw_ds.invalid_ds_lines ENGINE = INNODB;
+ALTER TABLE borhandw_ds.invalid_ds_lines_error_codes ENGINE = INNODB;
+ALTER TABLE borhandw_ds.invalid_event_lines ENGINE = INNODB;
+ALTER TABLE borhandw_ds.invalid_fms_event_lines ENGINE = INNODB;
 

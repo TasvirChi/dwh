@@ -3,13 +3,13 @@ require_once 'Configuration.php';
 require_once 'KettleRunner.php';
 require_once 'DWHInspector.php';
 require_once 'MySQLRunner.php';
-require_once 'KalturaTestCase.php';
+require_once 'BorhanTestCase.php';
 require_once 'CycleProcessTestCase.php';
 require_once 'CDNBandwidthHttpTestCase.php';
 
 class AkamaiVodHttpTest extends CDNBandwidthHttpTestCase
 {
-	private $invalidIgnoredStrings = array(".kaltura.com/flash/kae/",".kaltura.com/crossdomain.xml",".kaltura.com/content/uiconf",".kaltura.com/swf/plugins");
+	private $invalidIgnoredStrings = array(".borhan.com/flash/bae/",".borhan.com/crossdomain.xml",".borhan.com/content/uiconf",".borhan.com/swf/plugins");
 
 	public static function setUpBeforeClass()
 	{
@@ -52,7 +52,7 @@ class AkamaiVodHttpTest extends CDNBandwidthHttpTestCase
 
 	protected function getBWRegex()
 	{
-		return '/^.*\t\/[^\.]+\.kaltura\.com.*\/p\/([0-9]+)\/[^\t]*\t\d+\t(\d+)\t.*$/';
+		return '/^.*\t\/[^\.]+\.borhan\.com.*\/p\/([0-9]+)\/[^\t]*\t\d+\t(\d+)\t.*$/';
 	}
 	
         protected function getBandwidthSourceID()

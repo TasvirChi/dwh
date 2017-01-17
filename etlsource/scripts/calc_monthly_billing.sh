@@ -17,4 +17,4 @@ do	case "$o" in
 		exit 1;;
 	esac
 done
-mysql -u$USER -p$PW -h$HOST -P$PORT -e "call kalturadw.calc_monthly_billing($MONTH_ID)"
+mysql -u$USER -p$PW -h$HOST -P$PORT -e "call borhandw.calc_monthly_billing($MONTH_ID)"

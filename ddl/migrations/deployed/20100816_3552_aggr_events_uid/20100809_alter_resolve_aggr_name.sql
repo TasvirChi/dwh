@@ -1,6 +1,6 @@
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP FUNCTION IF EXISTS `resolve_aggr_name`$$
 

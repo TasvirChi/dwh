@@ -1,6 +1,6 @@
-USE `kalturadw_ds`;
+USE `borhandw_ds`;
 
-CREATE TABLE `kalturadw_ds`.`ds_plays`(  
+CREATE TABLE `borhandw_ds`.`ds_plays`(  
   `line_number` INT(10),
   `cycle_id` INT(11) NOT NULL,
   `file_id` INT(11) NOT NULL,

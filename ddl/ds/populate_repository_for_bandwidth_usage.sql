@@ -1,10 +1,10 @@
-﻿INSERT INTO kalturadw_ds.processes (id, process_name, max_files_per_cycle) VALUE (4, 'bandwidth_usage_AKAMAI', 50);
-INSERT INTO kalturadw_ds.processes (id, process_name, max_files_per_cycle) VALUE (5, 'bandwidth_usage_LLN', 50);
-INSERT INTO kalturadw_ds.processes (id, process_name, max_files_per_cycle) VALUE (6, 'bandwidth_usage_LEVEL3', 1000);
-INSERT INTO kalturadw_ds.processes (id, process_name, max_files_per_cycle) VALUE (10, 'bandwidth_usage_AKAMAI_LIVE_URTMP', 50);
-INSERT INTO kalturadw_ds.processes (id, process_name, max_files_per_cycle) VALUE (12, 'kaltura_live_bandwidth', 20);
+﻿INSERT INTO borhandw_ds.processes (id, process_name, max_files_per_cycle) VALUE (4, 'bandwidth_usage_AKAMAI', 50);
+INSERT INTO borhandw_ds.processes (id, process_name, max_files_per_cycle) VALUE (5, 'bandwidth_usage_LLN', 50);
+INSERT INTO borhandw_ds.processes (id, process_name, max_files_per_cycle) VALUE (6, 'bandwidth_usage_LEVEL3', 1000);
+INSERT INTO borhandw_ds.processes (id, process_name, max_files_per_cycle) VALUE (10, 'bandwidth_usage_AKAMAI_LIVE_URTMP', 50);
+INSERT INTO borhandw_ds.processes (id, process_name, max_files_per_cycle) VALUE (12, 'borhan_live_bandwidth', 20);
 
-INSERT INTO `kalturadw_ds`.`staging_areas`
+INSERT INTO `borhandw_ds`.`staging_areas`
         (`id`,
         `process_id`,
         `source_table`,
@@ -29,7 +29,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
         );
 
 
-INSERT INTO `kalturadw_ds`.`staging_areas`
+INSERT INTO `borhandw_ds`.`staging_areas`
         (`id`,
         `process_id`,
         `source_table`,
@@ -53,7 +53,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
 	'activity_hour_id'
         );
 
-INSERT INTO `kalturadw_ds`.`staging_areas`
+INSERT INTO `borhandw_ds`.`staging_areas`
         (`id`,
         `process_id`,
         `source_table`,
@@ -77,7 +77,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
 	'activity_hour_id'
         );
 
-INSERT INTO `kalturadw_ds`.`staging_areas`
+INSERT INTO `borhandw_ds`.`staging_areas`
         (`id`,
         `process_id`,
         `source_table`,
@@ -102,7 +102,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
         );
 
 
-INSERT INTO `kalturadw_ds`.`staging_areas`
+INSERT INTO `borhandw_ds`.`staging_areas`
         (`id`,
         `process_id`,
         `source_table`,
@@ -126,7 +126,7 @@ INSERT INTO `kalturadw_ds`.`staging_areas`
 	'activity_hour_id'
         );
 		
-INSERT INTO kalturadw_ds.staging_areas
+INSERT INTO borhandw_ds.staging_areas
         (id,
         process_id,
         source_table,

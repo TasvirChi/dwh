@@ -1,6 +1,6 @@
-USE `kalturadw`;
+USE `borhandw`;
 
-CREATE TABLE kalturadw.`dwh_hourly_events_live_entry` (
+CREATE TABLE borhandw.`dwh_hourly_events_live_entry` (
   `partner_id` INT DEFAULT NULL,
   `date_id` INT DEFAULT NULL,
   `hour_id` INT DEFAULT NULL,

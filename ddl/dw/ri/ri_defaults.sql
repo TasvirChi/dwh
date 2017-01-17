@@ -5,13 +5,13 @@ MySQL - 5.1.34-community
 */
 /*!40101 SET nameS utf8 */;
 
-create table `kalturadw`.`ri_defaults` (
+create table `borhandw`.`ri_defaults` (
 	`table_name` varchar (300),
 	`default_field` varchar (3000),
 	`default_value` varchar (3000)
 );
 
-insert into `kalturadw`.`ri_defaults` (`table_name`, `default_field`, `default_value`) 
+insert into `borhandw`.`ri_defaults` (`table_name`, `default_field`, `default_value`) 
 	values
 	('dwh_dim_domains','domain_name','CONCAT(a.domain_id, "-Missing Value")'),
 	('dwh_dim_kusers','screen_name','"Missing Value"'),

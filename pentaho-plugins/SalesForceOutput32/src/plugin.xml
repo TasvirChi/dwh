@@ -5,7 +5,7 @@
     description="Salesforce Output"
     tooltip="Insert data into Salesforce"
    category="Output"
-   classname="org.kaltura.salesforceoutput.SalesforceOutputMeta">
+   classname="org.borhan.salesforceoutput.SalesforceOutputMeta">
   
     <libraries>
        <library name="salesforceoutput.jar"/>

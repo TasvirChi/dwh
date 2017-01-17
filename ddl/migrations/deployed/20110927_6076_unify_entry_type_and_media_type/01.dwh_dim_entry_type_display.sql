@@ -1,8 +1,8 @@
-USE `kalturadw`;
+USE `borhandw`;
 
-DROP TABLE IF EXISTS kalturadw.`dwh_dim_entry_type_display`;
+DROP TABLE IF EXISTS borhandw.`dwh_dim_entry_type_display`;
 
-CREATE TABLE kalturadw.`dwh_dim_entry_type_display` 
+CREATE TABLE borhandw.`dwh_dim_entry_type_display` 
 (
     entry_type_id SMALLINT NOT NULL,
     entry_media_type_id SMALLINT NOT NULL,
@@ -12,18 +12,18 @@ CREATE TABLE kalturadw.`dwh_dim_entry_type_display`
     UNIQUE KEY (entry_type_id, entry_media_type_id)
 );
 
-CREATE TRIGGER `kalturadw`.`dwh_dim_entry_type_display_oninsert` BEFORE INSERT
-    ON `kalturadw`.`dwh_dim_entry_type_display`
+CREATE TRIGGER `borhandw`.`dwh_dim_entry_type_display_oninsert` BEFORE INSERT
+    ON `borhandw`.`dwh_dim_entry_type_display`
     FOR EACH ROW 
 	SET new.dwh_creation_date = NOW();
     
 DELIMITER $$
 
-USE `kalturadw`$$
+USE `borhandw`$$
 
 DROP VIEW IF EXISTS `dwh_view_entry_type_display`$$
 
-CREATE VIEW `kalturadw`.`dwh_view_entry_type_display` AS 
+CREATE VIEW `borhandw`.`dwh_view_entry_type_display` AS 
 SELECT
   t.entry_type_id, t.entry_type_name, m.entry_media_type_id, m.entry_media_type_name,
     ifnull(d.display, concat(t.entry_type_name,'-',m.entry_media_type_name)) as display
